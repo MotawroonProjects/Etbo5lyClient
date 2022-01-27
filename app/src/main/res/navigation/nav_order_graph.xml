@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_order"
+    app:startDestination="@id/fragmentOrder">
+
+    <fragment
+        android:id="@+id/fragmentOrder"
+        android:name="com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.order_module.FragmentOrders"
+        android:label="@string/orders"
+        tools:layout="@layout/fragment_orders" />
+
+
+</navigation>

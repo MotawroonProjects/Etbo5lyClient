@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "1016646159807",
+    "project_id": "cooker-d6866",
+    "storage_bucket": "cooker-d6866.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016646159807:android:8fd4b7a4301ba81afe250a",
+        "android_client_info": {
+          "package_name": "com.apps.etbo5ly_client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016646159807-rm69q7njif0s38oog2f5889j7pgh5v7m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apps.etbo5ly_client",
+            "certificate_hash": "6d39e57f3c880ad5ec12fe731d3e4a908fca8758"
+          }
+        },
+        {
+          "client_id": "1016646159807-didcecfg4mdto3kd5j0ojkdloc1en8d5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuD6-YCDQd336GOGPGwsj0CSu0qc7REP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016646159807-didcecfg4mdto3kd5j0ojkdloc1en8d5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1016646159807-odhf7bsmli5s1se0dalqspt1brbh414d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "creativeShare.Etbkhly"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016646159807:android:2a6126ff4c95e939fe250a",
+        "android_client_info": {
+          "package_name": "com.etbakhly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016646159807-ibjckmcnr438vuct8r701e70gb83qh94.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.etbakhly",
+            "certificate_hash": "ba044b357b15948a4405b7ca973962ca23fb7a81"
+          }
+        },
+        {
+          "client_id": "1016646159807-didcecfg4mdto3kd5j0ojkdloc1en8d5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuD6-YCDQd336GOGPGwsj0CSu0qc7REP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016646159807-didcecfg4mdto3kd5j0ojkdloc1en8d5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1016646159807-odhf7bsmli5s1se0dalqspt1brbh414d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "creativeShare.Etbkhly"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2D7330</color>
+    <color name="colorPrimaryDark">#2D7330</color>
+    <color name="colorAccent">#2D7330</color>
+
+    <color name="color1">#4D94BE</color>
+    <color name="color2">#DCECD7</color>
+    <color name="color3">#4FA13A</color>
+
+
+    <color name="white">#fff</color>
+    <color name="alpha_white">#55ffffff</color>
+
+    <color name="black">#000000</color>
+    <color name="black1">#222020</color>
+    <color name="black2">#30000000</color>
+
+
+    <color name="black_trans">#55000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray1">#fafafa</color>
+    <color name="gray2">#f5f5f5</color>
+    <color name="gray3">#eee</color>
+    <color name="gray4">#e0e0e0</color>
+    <color name="gray5">#9F9F9F</color>
+    <color name="gray6">#EFEFF4</color>
+    <color name="gray7">#2A2A2A</color>
+    <color name="gray8">#757575</color>
+    <color name="gray9">#707070</color>
+    <color name="gray10">#E3EBEE</color>
+    <color name="gray11">#C1C1C1</color>
+    <color name="gray12">#464646</color>
+    <color name="gray13">#8F8F8F</color>
+    <color name="gray14">#707070</color>
+    <color name="gray15">#5E5E5E</color>
+    <color name="gray16">#F3F2F3</color>
+    <color name="gray17">#2B2B2B</color>
+    <color name="gray18">#f1f1f1</color>
+    <color name="gray19">#464646</color>
+
+
+    <color name="rate">#fdd22a</color>
+
+
+    <color name="start_blur">#393737</color>
+    <color name="center_blur">#88A3A2A2</color>
+    <color name="end_blur">#00ffffff</color>
+
+
+</resources>
