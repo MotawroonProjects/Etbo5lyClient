@@ -15,6 +15,7 @@ public class DishModel implements Serializable {
     private String qty;
     private String created_at;
     private String updated_at;
+    private int amount = 0;
 
     public String getId() {
         return id;
@@ -62,5 +63,13 @@ public class DishModel implements Serializable {
 
     public String getUpdated_at() {
         return updated_at;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

@@ -11,7 +11,9 @@ import android.view.View;
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.adapters.catering_adapters.BuffetsAdapter;
 import com.apps.etbo5ly_client.databinding.ActivityBuffetsBinding;
+import com.apps.etbo5ly_client.model.BuffetModel;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityBuffetsMvvm;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_buffet_dishes.BuffetDishesActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseActivity;
 
 public class BuffetsActivity extends BaseActivity {
@@ -63,4 +65,9 @@ public class BuffetsActivity extends BaseActivity {
     }
 
 
+    public void setItemData(BuffetModel buffetModel) {
+        Intent intent = new Intent(this, BuffetDishesActivity.class);
+        intent.putExtra("data", buffetModel);
+        startActivity(intent);
+    }
 }

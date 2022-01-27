@@ -74,6 +74,7 @@ public class BuffetModel implements Serializable {
         private String id;
         private String titel;
         private String caterer_id;
+        private boolean isSelected = false;
         private List<DishModel> dishes_buffet;
 
         public String getId() {
@@ -90,6 +91,14 @@ public class BuffetModel implements Serializable {
 
         public List<DishModel> getDishes_buffet() {
             return dishes_buffet;
+        }
+
+        public boolean isSelected() {
+            return isSelected;
+        }
+
+        public void setSelected(boolean selected) {
+            isSelected = selected;
         }
     }
 }

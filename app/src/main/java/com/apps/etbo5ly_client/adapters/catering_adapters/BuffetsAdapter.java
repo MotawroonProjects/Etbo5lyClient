@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.databinding.BuffetRowBinding;
 import com.apps.etbo5ly_client.model.BuffetModel;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_buffets.BuffetsActivity;
 
 import java.util.List;
 
@@ -42,7 +43,10 @@ public class BuffetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
         myHolder.itemView.setOnClickListener(v -> {
-
+            if (appCompatActivity instanceof BuffetsActivity){
+                BuffetsActivity activity = (BuffetsActivity) appCompatActivity;
+                activity.setItemData(list.get(myHolder.getAbsoluteAdapterPosition()));
+            }
         });
 
     }

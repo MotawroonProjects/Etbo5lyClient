@@ -14,7 +14,7 @@
         tools:ignore="ScopedStorage" />
 
     <application
-        android:name="com.apps.etbo5ly_client.common.share.App"
+        android:name=".common.share.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -26,87 +26,90 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
-            android:name="com.apps.etbo5ly_client.uis.catering_uis.activity_buffets.BuffetsActivity"
+            android:name=".uis.catering_uis.activity_buffet_dishes.BuffetDishesActivity"
             android:exported="false" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.KitchenDetailsActivity"
+            android:name=".uis.catering_uis.activity_buffets.BuffetsActivity"
             android:exported="false" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.catering_uis.activity_filter.FilterActivity"
+            android:name=".uis.catering_uis.activity_kitchen_details.KitchenDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uis.catering_uis.activity_filter.FilterActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.catering_uis.activity_filter_setting.FilterSettingActivity"
+            android:name=".uis.catering_uis.activity_filter_setting.FilterSettingActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.catering_uis.activity_categories.CategoriesActivity"
+            android:name=".uis.catering_uis.activity_categories.CategoriesActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_map.MapActivity"
+            android:name=".uis.common_uis.activity_map.MapActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActivity"
-            android:configChanges="keyboardHidden|screenSize|orientation"
-            android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_app_category.AppCategoryActivity"
+            android:name=".uis.catering_uis.activity_home_catering.HomeActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_sign_up.SignUpActivity"
+            android:name=".uis.common_uis.activity_app_category.AppCategoryActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_verification_code.VerificationCodeActivity"
+            android:name=".uis.common_uis.activity_sign_up.SignUpActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_login.LoginActivity"
+            android:name=".uis.common_uis.activity_verification_code.VerificationCodeActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_intro_slider.IntroSliderActivity"
+            android:name=".uis.common_uis.activity_login.LoginActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_city.CityActivity"
+            android:name=".uis.common_uis.activity_intro_slider.IntroSliderActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_country.CountryActivity"
+            android:name=".uis.common_uis.activity_city.CityActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_language_country.LanguageCountryActivity"
+            android:name=".uis.common_uis.activity_country.CountryActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_language.LanguageActivity"
+            android:name=".uis.common_uis.activity_language_country.LanguageCountryActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_contact_us.ContactUsActivity"
+            android:name=".uis.common_uis.activity_language.LanguageActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".uis.common_uis.activity_contact_us.ContactUsActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.apps.etbo5ly_client.uis.common_uis.activity_splash.SplashActivity"
+            android:name=".uis.common_uis.activity_splash.SplashActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">إطبخلي (طعام)</string>
+    <string name="app_name">إطبخلي</string>
     <string name="map_api_key">AIzaSyAnjvMAJEmiAv3yeCDUXWv-PboXiT_uaoQ</string>
     <string name="search_key">AIzaSyAnjvMAJEmiAv3yeCDUXWv-PboXiT_uaoQ</string>
     <string name="name">الإسم</string>
@@ -137,5 +137,8 @@
     <string name="people">شخص</string>
     <string name="order">طلب</string>
     <string name="buffets">البوفيهات</string>
+    <string name="no_dishes_to_show">لا توجد أطباق لعرضها</string>
+    <string name="for1">تكفي</string>
+    <string name="dish">طبق</string>
 
 </resources>

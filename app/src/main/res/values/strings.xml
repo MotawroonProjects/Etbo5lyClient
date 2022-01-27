@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Catering</string>
+    <string name="app_name">Etbo5ly</string>
     <string name="map_api_key">AIzaSyAnjvMAJEmiAv3yeCDUXWv-PboXiT_uaoQ</string>
     <string name="search_key">AIzaSyAnjvMAJEmiAv3yeCDUXWv-PboXiT_uaoQ</string>
     <string name="name">Name</string>
@@ -136,5 +136,8 @@
     <string name="people">People</string>
     <string name="order">Order</string>
     <string name="buffets">Buffets</string>
+    <string name="no_dishes_to_show">No dishes to show</string>
+    <string name="for1">For</string>
+    <string name="dish">dish</string>
 
 </resources>
