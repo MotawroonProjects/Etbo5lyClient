@@ -140,5 +140,13 @@
     <string name="no_dishes_to_show">لا توجد أطباق لعرضها</string>
     <string name="for1">تكفي</string>
     <string name="dish">طبق</string>
+    <string name="dishes">أطباق</string>
+    <string name="feasts">الولائم</string>
+    <string name="people2">عدد الاشخاص</string>
+    <string name="menu">قائمة الطعام</string>
+    <string name="amount">الكمية</string>
+    <string name="feasts_menu">قائمة الولائم</string>
+    <string name="favorite">المفضلة</string>
+    <string name="support">الدعم الفني</string>
 
 </resources>

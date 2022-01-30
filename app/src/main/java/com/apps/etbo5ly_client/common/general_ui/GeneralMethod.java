@@ -36,55 +36,47 @@ public class GeneralMethod {
 
     @BindingAdapter("image")
     public static void image(View view, String imageUrl) {
+        if (imageUrl != null) {
+            view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-
-                if (view instanceof CircleImageView) {
-                    CircleImageView imageView = (CircleImageView) view;
-                    if (imageUrl != null) {
+                    if (view instanceof CircleImageView) {
+                        CircleImageView imageView = (CircleImageView) view;
                         RequestOptions options = new RequestOptions().override(view.getWidth(), view.getHeight());
                         Glide.with(view.getContext()).asBitmap()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                                .load(Tags.base_url + imageUrl)
+                                .centerCrop()
+                                .apply(options)
+                                .into(imageView);
+                    } else if (view instanceof RoundedImageView) {
+                        RoundedImageView imageView = (RoundedImageView) view;
+                        RequestOptions options = new RequestOptions().override(view.getWidth(), view.getHeight());
+                        Glide.with(view.getContext()).asBitmap()
+                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                                .load(Tags.base_url + imageUrl)
+                                .centerCrop()
+                                .apply(options)
+                                .into(imageView);
+                    } else if (view instanceof ImageView) {
+                        ImageView imageView = (ImageView) view;
+
+                        RequestOptions options = new RequestOptions().override(view.getWidth(), view.getHeight());
+                        Glide.with(view.getContext()).asBitmap()
+                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                                 .load(Tags.base_url + imageUrl)
                                 .centerCrop()
                                 .apply(options)
                                 .into(imageView);
                     }
-                } else if (view instanceof RoundedImageView) {
-                    RoundedImageView imageView = (RoundedImageView) view;
 
-                    if (imageUrl != null) {
-
-                        RequestOptions options = new RequestOptions().override(view.getWidth(), view.getHeight());
-                        Glide.with(view.getContext()).asBitmap()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .load(Tags.base_url + imageUrl)
-                                .centerCrop()
-                                .apply(options)
-                                .into(imageView);
-
-                    }
-                } else if (view instanceof ImageView) {
-                    ImageView imageView = (ImageView) view;
-
-                    if (imageUrl != null) {
-
-                        RequestOptions options = new RequestOptions().override(view.getWidth(), view.getHeight());
-                        Glide.with(view.getContext()).asBitmap()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .load(Tags.base_url + imageUrl)
-                                .centerCrop()
-                                .apply(options)
-                                .into(imageView);
-                    }
                 }
+            });
 
-            }
-        });
+        }
 
 
     }
@@ -152,22 +144,20 @@ public class GeneralMethod {
 
     @BindingAdapter("providerType")
     public static void providerType(TextView textView, String type) {
-        if (type!=null){
-            if (type.equals("man")){
+        if (type != null) {
+            if (type.equals("man")) {
                 textView.setText(R.string.men);
-            }else  if (type.equals("women")){
+            } else if (type.equals("women")) {
                 textView.setText(R.string.women);
 
-            }else  if (type.equals("man_and_women")){
+            } else if (type.equals("man_and_women")) {
                 textView.setText(R.string.men_women);
 
-            }else  if (type.equals("not_found")){
+            } else if (type.equals("not_found")) {
                 textView.setText(R.string.undefined);
 
             }
         }
-
-
 
 
     }

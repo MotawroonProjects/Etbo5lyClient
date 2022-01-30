@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.etbo5ly_client.R;
+import com.apps.etbo5ly_client.databinding.BuffetMenuRowBinding;
 import com.apps.etbo5ly_client.databinding.BuffetRowBinding;
 import com.apps.etbo5ly_client.model.BuffetModel;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_buffets.BuffetsActivity;
@@ -17,16 +19,14 @@ import com.apps.etbo5ly_client.uis.catering_uis.activity_feasts.FeastsActivity;
 
 import java.util.List;
 
-public class BuffetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<BuffetModel> list;
+public class BuffetMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<BuffetModel.Category> list;
     private Context context;
     private LayoutInflater inflater;
-    private AppCompatActivity appCompatActivity;
 
-    public BuffetsAdapter(Context context) {
+    public BuffetMenuAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-        appCompatActivity = (AppCompatActivity) context;
     }
 
 
@@ -34,7 +34,7 @@ public class BuffetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        BuffetRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.buffet_row, parent, false);
+        BuffetMenuRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.buffet_menu_row, parent, false);
         return new MyHolder(binding);
 
     }
@@ -43,15 +43,11 @@ public class BuffetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
-        myHolder.itemView.setOnClickListener(v -> {
-            if (appCompatActivity instanceof BuffetsActivity){
-                BuffetsActivity activity = (BuffetsActivity) appCompatActivity;
-                activity.setItemData(list.get(myHolder.getAbsoluteAdapterPosition()));
-            }else if (appCompatActivity instanceof FeastsActivity){
-                FeastsActivity activity = (FeastsActivity) appCompatActivity;
-                activity.setItemData(list.get(myHolder.getAbsoluteAdapterPosition()));
-            }
-        });
+        myHolder.binding.recView.setLayoutManager(new GridLayoutManager(context, 2));
+        MenuDishesAdapter adapter = new MenuDishesAdapter(context);
+        adapter.updateList(list.get(position).getDishes_buffet());
+        myHolder.binding.recView.setAdapter(adapter);
+
 
     }
 
@@ -61,9 +57,9 @@ public class BuffetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
-        private BuffetRowBinding binding;
+        private BuffetMenuRowBinding binding;
 
-        public MyHolder(BuffetRowBinding binding) {
+        public MyHolder(BuffetMenuRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
@@ -72,7 +68,7 @@ public class BuffetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     }
 
-    public void updateList(List<BuffetModel> list) {
+    public void updateList(List<BuffetModel.Category> list) {
         if (list != null) {
             this.list = list;
         }

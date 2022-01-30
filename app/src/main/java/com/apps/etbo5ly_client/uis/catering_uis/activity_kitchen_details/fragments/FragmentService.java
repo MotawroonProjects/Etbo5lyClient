@@ -18,6 +18,8 @@ import com.apps.etbo5ly_client.databinding.ChooseDialogBinding;
 import com.apps.etbo5ly_client.databinding.FragmentServiceBinding;
 import com.apps.etbo5ly_client.model.KitchenModel;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_buffets.BuffetsActivity;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_dishes.DishesActivity;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_feasts.FeastsActivity;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.KitchenDetailsActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseFragment;
 
@@ -76,12 +78,17 @@ public class FragmentService extends BaseFragment {
         chooseDialogBinding.llBuffet.setOnClickListener(v -> {
             if (type.equals("buffet")) {
                 navigateToBuffetActivity();
+            } else {
+                navigateToFeastsActivity();
             }
             dialog.cancel();
 
         });
 
         chooseDialogBinding.llDishes.setOnClickListener(v -> {
+
+            navigateToDishesActivity();
+
             dialog.cancel();
         });
 
@@ -98,6 +105,17 @@ public class FragmentService extends BaseFragment {
     private void navigateToBuffetActivity() {
         Intent intent = new Intent(activity, BuffetsActivity.class);
         intent.putExtra("kitchen_id", model.getId());
+        startActivity(intent);
+    }
+
+    private void navigateToFeastsActivity() {
+        Intent intent = new Intent(activity, FeastsActivity.class);
+        intent.putExtra("kitchen_id", model.getId());
+        startActivity(intent);
+    }
+
+    private void navigateToDishesActivity() {
+        Intent intent = new Intent(activity, DishesActivity.class);
         startActivity(intent);
     }
 }

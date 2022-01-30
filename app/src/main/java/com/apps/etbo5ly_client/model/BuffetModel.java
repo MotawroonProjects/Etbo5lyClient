@@ -1,5 +1,7 @@
 package com.apps.etbo5ly_client.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -75,6 +77,7 @@ public class BuffetModel implements Serializable {
         private String titel;
         private String caterer_id;
         private boolean isSelected = false;
+        @SerializedName(value = "dishes_buffet",alternate = {"dishes","dishes_feast"})
         private List<DishModel> dishes_buffet;
 
         public String getId() {
@@ -99,6 +102,10 @@ public class BuffetModel implements Serializable {
 
         public void setSelected(boolean selected) {
             isSelected = selected;
+        }
+
+        public void setDishes_buffet(List<DishModel> dishes_buffet) {
+            this.dishes_buffet = dishes_buffet;
         }
     }
 }

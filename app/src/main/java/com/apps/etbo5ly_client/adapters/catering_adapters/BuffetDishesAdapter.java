@@ -10,12 +10,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.etbo5ly_client.R;
-import com.apps.etbo5ly_client.databinding.BuffetRowBinding;
 import com.apps.etbo5ly_client.databinding.DishBuffetRowBinding;
-import com.apps.etbo5ly_client.model.BuffetModel;
 import com.apps.etbo5ly_client.model.DishModel;
-import com.apps.etbo5ly_client.uis.catering_uis.activity_buffet_dishes.BuffetDishesActivity;
-import com.apps.etbo5ly_client.uis.catering_uis.activity_buffets.BuffetsActivity;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_buffet_details.BuffetDetailsActivity;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_dishes.DishesActivity;
 
 import java.util.List;
 
@@ -46,33 +44,34 @@ public class BuffetDishesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
         myHolder.binding.imgIncrease.setOnClickListener(v -> {
-            DishModel model = list.get(myHolder.getAbsoluteAdapterPosition());
+            DishModel model = list.get(myHolder.getAdapterPosition());
             int amount = model.getAmount();
             amount++;
             model.setAmount(amount);
-            list.set(myHolder.getAbsoluteAdapterPosition(), model);
-            notifyItemChanged(myHolder.getAbsoluteAdapterPosition());
+            list.set(myHolder.getAdapterPosition(), model);
+            myHolder.binding.setModel(model);
 
-            if (appCompatActivity instanceof BuffetDishesActivity) {
-                BuffetDishesActivity activity = (BuffetDishesActivity) appCompatActivity;
-                activity.updateCart(model);
+            if (appCompatActivity instanceof DishesActivity) {
+                DishesActivity activity = (DishesActivity) appCompatActivity;
+                activity.updateCart(model, myHolder.getAdapterPosition());
             }
         });
 
         myHolder.binding.imgDecrease.setOnClickListener(v -> {
-            DishModel model = list.get(myHolder.getAbsoluteAdapterPosition());
+            DishModel model = list.get(myHolder.getAdapterPosition());
             int amount = model.getAmount();
             if (amount > 0) {
                 amount--;
                 model.setAmount(amount);
-                list.set(myHolder.getAbsoluteAdapterPosition(), model);
-                notifyItemChanged(myHolder.getAbsoluteAdapterPosition());
+                list.set(myHolder.getAdapterPosition(), model);
+                myHolder.binding.setModel(model);
+
             }
 
 
-            if (appCompatActivity instanceof BuffetDishesActivity) {
-                BuffetDishesActivity activity = (BuffetDishesActivity) appCompatActivity;
-                activity.updateCart(model);
+            if (appCompatActivity instanceof DishesActivity) {
+                DishesActivity activity = (DishesActivity) appCompatActivity;
+                activity.updateCart(model, myHolder.getAdapterPosition());
             }
         });
 

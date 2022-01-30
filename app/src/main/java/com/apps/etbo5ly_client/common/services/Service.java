@@ -4,6 +4,7 @@ package com.apps.etbo5ly_client.common.services;
 import com.apps.etbo5ly_client.model.BuffetsDataModel;
 import com.apps.etbo5ly_client.model.CategoryDataModel;
 import com.apps.etbo5ly_client.model.CountryDataModel;
+import com.apps.etbo5ly_client.model.DishesDataModel;
 import com.apps.etbo5ly_client.model.FilterModel;
 import com.apps.etbo5ly_client.model.KitchenDataModel;
 import com.apps.etbo5ly_client.model.NotificationDataModel;
@@ -118,6 +119,15 @@ public interface Service {
 
     @GET("api/Catering/CatererBuffets")
     Single<Response<BuffetsDataModel>> getBuffets(@Query(value = "Caterer_id") String caterer_id);
+
+
+    @GET("api/Catering/CatererFeasts")
+    Single<Response<BuffetsDataModel>> getFeasts(@Query(value = "Caterer_id") String caterer_id);
+
+
+    @GET("api/Catering/indexCategoryDishes")
+    Single<Response<DishesDataModel>> getCategoryDishes(@Query(value = "category_dishes_id") String category_dishes_id);
+
 
     @FormUrlEncoded
     @POST("api/logout")

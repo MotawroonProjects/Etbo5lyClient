@@ -26,7 +26,16 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
-            android:name=".uis.catering_uis.activity_buffet_dishes.BuffetDishesActivity"
+            android:name=".uis.catering_uis.activity_feast_details.FeastDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uis.catering_uis.activity_feasts.FeastsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uis.catering_uis.activity_dishes.DishesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uis.catering_uis.activity_buffet_details.BuffetDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".uis.catering_uis.activity_buffets.BuffetsActivity"

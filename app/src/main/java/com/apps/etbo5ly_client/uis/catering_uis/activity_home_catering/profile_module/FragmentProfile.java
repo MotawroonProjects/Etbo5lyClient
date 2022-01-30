@@ -30,6 +30,7 @@ public class FragmentProfile extends BaseFragment {
     }
 
     private void initView() {
-
+        binding.setLang(getLang());
+        binding.setModel(getUserModel());
     }
 }

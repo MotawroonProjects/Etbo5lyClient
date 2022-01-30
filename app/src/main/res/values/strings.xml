@@ -139,5 +139,13 @@
     <string name="no_dishes_to_show">No dishes to show</string>
     <string name="for1">For</string>
     <string name="dish">dish</string>
+    <string name="dishes">Dishes</string>
+    <string name="feasts">Feasts</string>
+    <string name="people2">People</string>
+    <string name="menu">Menu</string>
+    <string name="amount">Amount</string>
+    <string name="feasts_menu">Feasts menu</string>
+    <string name="favorite">Favorite</string>
+    <string name="support">Support</string>
 
 </resources>
