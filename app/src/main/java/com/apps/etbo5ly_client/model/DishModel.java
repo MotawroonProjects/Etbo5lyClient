@@ -17,6 +17,22 @@ public class DishModel implements Serializable {
     private String updated_at;
     private int amount = 0;
 
+    public DishModel(String id, String category_dishes_id, String caterer_id, String buffets_id, String feast_id, String titel, String photo, String price, String details, String qty, String created_at, String updated_at, int amount) {
+        this.id = id;
+        this.category_dishes_id = category_dishes_id;
+        this.caterer_id = caterer_id;
+        this.buffets_id = buffets_id;
+        this.feast_id = feast_id;
+        this.titel = titel;
+        this.photo = photo;
+        this.price = price;
+        this.details = details;
+        this.qty = qty;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.amount = amount;
+    }
+
     public String getId() {
         return id;
     }

@@ -148,5 +148,9 @@
     <string name="feasts_menu">قائمة الولائم</string>
     <string name="favorite">المفضلة</string>
     <string name="support">الدعم الفني</string>
+    <string name="total">الإجمالي</string>
+    <string name="checkout">إتمام العملية</string>
+    <string name="order_only_place">عفوا! لا يمكنك الطلب من اكثر من مكان</string>
+    <string name="cart_empty">السلة فارغة</string>
 
 </resources>

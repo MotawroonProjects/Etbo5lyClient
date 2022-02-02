@@ -147,5 +147,9 @@
     <string name="feasts_menu">Feasts menu</string>
     <string name="favorite">Favorite</string>
     <string name="support">Support</string>
+    <string name="total">Total</string>
+    <string name="checkout">checkout</string>
+    <string name="order_only_place">Sorry!,please order from only one place</string>
+    <string name="cart_empty">Shopping cart is empty</string>
 
 </resources>

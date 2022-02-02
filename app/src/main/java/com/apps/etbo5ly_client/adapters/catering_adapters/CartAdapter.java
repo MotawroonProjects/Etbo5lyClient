@@ -7,26 +7,29 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.etbo5ly_client.R;
+import com.apps.etbo5ly_client.databinding.CartRowBinding;
 import com.apps.etbo5ly_client.databinding.DishBuffetRowBinding;
 import com.apps.etbo5ly_client.model.DishModel;
-import com.apps.etbo5ly_client.uis.catering_uis.activity_buffet_details.BuffetDetailsActivity;
+import com.apps.etbo5ly_client.model.SendOrderModel;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_dishes.DishesActivity;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.cart_module.FragmentCart;
 
 import java.util.List;
 
-public class BuffetDishesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<DishModel> list;
+public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<SendOrderModel.Details> list;
     private Context context;
     private LayoutInflater inflater;
-    private AppCompatActivity appCompatActivity;
+    private Fragment fragment;
 
-    public BuffetDishesAdapter(Context context) {
+    public CartAdapter(Context context, Fragment fragment) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-        appCompatActivity = (AppCompatActivity) context;
+        this.fragment = fragment;
     }
 
 
@@ -34,7 +37,7 @@ public class BuffetDishesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        DishBuffetRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.dish_buffet_row, parent, false);
+        CartRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.cart_row, parent, false);
         return new MyHolder(binding);
 
     }
@@ -43,36 +46,44 @@ public class BuffetDishesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
+        myHolder.binding.imageDelete.setOnClickListener(v -> {
+            SendOrderModel.Details model = list.get(myHolder.getAdapterPosition());
+
+            if (fragment instanceof FragmentCart) {
+                FragmentCart fragmentCart = (FragmentCart) fragment;
+                fragmentCart.delete(model, myHolder.getAdapterPosition());
+            }
+        });
         myHolder.binding.imgIncrease.setOnClickListener(v -> {
-            DishModel model = list.get(myHolder.getAdapterPosition());
-            int amount = model.getAmount();
+            SendOrderModel.Details model = list.get(myHolder.getAdapterPosition());
+            int amount = Integer.parseInt(model.getQty());
             amount++;
-            model.setAmount(amount);
+            model.setQty(amount + "");
             list.set(myHolder.getAdapterPosition(), model);
             myHolder.binding.setModel(model);
 
-            if (appCompatActivity instanceof DishesActivity) {
-                DishesActivity activity = (DishesActivity) appCompatActivity;
-                activity.updateCart(model, myHolder.getAdapterPosition());
+            if (fragment instanceof FragmentCart) {
+                FragmentCart fragmentCart = (FragmentCart) fragment;
+                fragmentCart.updateCart(model, myHolder.getAdapterPosition());
             }
 
         });
 
         myHolder.binding.imgDecrease.setOnClickListener(v -> {
-            DishModel model = list.get(myHolder.getAdapterPosition());
-            int amount = model.getAmount();
+            SendOrderModel.Details model = list.get(myHolder.getAdapterPosition());
+            int amount = Integer.parseInt(model.getQty());
             if (amount > 0) {
                 amount--;
-                model.setAmount(amount);
+                model.setQty(amount + "");
                 list.set(myHolder.getAdapterPosition(), model);
                 myHolder.binding.setModel(model);
 
             }
 
 
-            if (appCompatActivity instanceof DishesActivity) {
-                DishesActivity activity = (DishesActivity) appCompatActivity;
-                activity.updateCart(model, myHolder.getAdapterPosition());
+            if (fragment instanceof FragmentCart) {
+                FragmentCart fragmentCart = (FragmentCart) fragment;
+                fragmentCart.updateCart(model, myHolder.getAdapterPosition());
             }
         });
 
@@ -84,9 +95,9 @@ public class BuffetDishesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
-        private DishBuffetRowBinding binding;
+        private CartRowBinding binding;
 
-        public MyHolder(DishBuffetRowBinding binding) {
+        public MyHolder(CartRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
@@ -95,7 +106,7 @@ public class BuffetDishesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
-    public void updateList(List<DishModel> list) {
+    public void updateList(List<SendOrderModel.Details> list) {
         if (list != null) {
             this.list = list;
         }

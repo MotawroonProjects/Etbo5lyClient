@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.adapters.catering_adapters.BuffetDishesAdapter;
@@ -14,6 +15,8 @@ import com.apps.etbo5ly_client.adapters.catering_adapters.CategoryDishesAdapter;
 import com.apps.etbo5ly_client.databinding.ActivityBuffetDetailsBinding;
 import com.apps.etbo5ly_client.model.BuffetModel;
 import com.apps.etbo5ly_client.model.DishModel;
+import com.apps.etbo5ly_client.model.ManageCartModel;
+import com.apps.etbo5ly_client.model.SendOrderModel;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseActivity;
 
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ public class BuffetDetailsActivity extends BaseActivity {
     private ActivityBuffetDetailsBinding binding;
     private BuffetModel model;
     private BuffetMenuAdapter adapter;
+    private ManageCartModel manageCartModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class BuffetDetailsActivity extends BaseActivity {
     }
 
     private void initView() {
+        manageCartModel = ManageCartModel.newInstance();
         binding.setLang(getLang());
         binding.setModel(model);
         adapter = new BuffetMenuAdapter(this);
@@ -49,6 +54,23 @@ public class BuffetDetailsActivity extends BaseActivity {
         binding.llBack.setOnClickListener(v -> {
             finish();
         });
+
+
+        binding.btnConfirm.setOnClickListener(v -> {
+
+            SendOrderModel.Details item = new SendOrderModel.Details("","",model.getId(),"", model.getCaterer_id(),"1",model.getPhoto(),model.getTitel(), model.getPrice());
+            if (manageCartModel.getSendOrderModel(this).getCaterer_id().isEmpty()||manageCartModel.getSendOrderModel(this).getCaterer_id().equals(model.getCaterer_id())){
+                manageCartModel.addItemToCart(this,item,model.getCaterer_id());
+                Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                finish();
+            }else {
+                Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
+
     }
 
 

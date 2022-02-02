@@ -41,9 +41,12 @@
     <color name="gray19">#464646</color>
     <color name="gray20">#2e2e2e</color>
     <color name="gray21">#B1ADAD</color>
+    <color name="gray22">#F7F8FA</color>
+
 
     <color name="rate">#fdd22a</color>
 
+    <color name="red_color">#E30808</color>
 
     <color name="start_blur">#393737</color>
     <color name="center_blur">#88A3A2A2</color>
