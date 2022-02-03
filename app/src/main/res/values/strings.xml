@@ -151,5 +151,10 @@
     <string name="checkout">checkout</string>
     <string name="order_only_place">Sorry!,please order from only one place</string>
     <string name="cart_empty">Shopping cart is empty</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="clear_cart">Clear cart</string>
+    <string name="unknown">UnKnown</string>
+    <string name="already_cart">Already in shopping cart</string>
+    <string name="no_offers">No offers to show</string>
 
 </resources>

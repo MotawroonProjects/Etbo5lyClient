@@ -18,6 +18,8 @@ public class BuffetModel implements Serializable {
     private String caterer_id;
     private String created_at;
     private String updated_at;
+    private boolean isInCart = false;
+    private int amountInCart = 0;
     private List<Category> categor_dishes;
 
     public String getId() {
@@ -68,8 +70,24 @@ public class BuffetModel implements Serializable {
         return is_completed;
     }
 
+    public int getAmountInCart() {
+        return amountInCart;
+    }
+
+    public void setAmountInCart(int amountInCart) {
+        this.amountInCart = amountInCart;
+    }
+
     public List<Category> getCategor_dishes() {
         return categor_dishes;
+    }
+
+    public boolean isInCart() {
+        return isInCart;
+    }
+
+    public void setInCart(boolean inCart) {
+        isInCart = inCart;
     }
 
     public static class Category implements Serializable {

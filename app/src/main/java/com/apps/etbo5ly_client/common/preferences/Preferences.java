@@ -69,10 +69,15 @@ public class Preferences {
 
     public void create_update_cart(Context context, SendOrderModel model) {
         SharedPreferences preferences = context.getSharedPreferences("cart", Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String cart_data = gson.toJson(model);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("cart_data", cart_data);
+        if (model != null) {
+            Gson gson = new Gson();
+            String cart_data = gson.toJson(model);
+            editor.putString("cart_data", cart_data);
+        } else {
+            editor.clear();
+        }
+
         editor.apply();
 
 

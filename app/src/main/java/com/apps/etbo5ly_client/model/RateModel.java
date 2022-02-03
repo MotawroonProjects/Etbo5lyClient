@@ -10,6 +10,7 @@ public class RateModel implements Serializable {
     private String comment;
     private String created_at;
     private String updated_at;
+    private UserModel.Data user;
 
     public String getId() {
         return id;
@@ -37,5 +38,9 @@ public class RateModel implements Serializable {
 
     public String getUpdated_at() {
         return updated_at;
+    }
+
+    public UserModel.Data getUser() {
+        return user;
     }
 }

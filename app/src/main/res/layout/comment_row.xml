@@ -17,7 +17,9 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:src="@color/gray1" />
+            android:src="@color/gray1"
+            user_image="@{model.user.photo}"
+            />
 
         <androidx.legacy.widget.Space
             android:layout_width="12dp"
@@ -35,7 +37,9 @@
                 android:lines="1"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:text="@{model.user.name}"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"

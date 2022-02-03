@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.apps.etbo5ly_client.model.OfferModel" />
+            type="com.apps.etbo5ly_client.model.KitchenModel" />
 
     </data>
 
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    image="@{model.photo}"
+                    image="@{model.user.photo}"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:src="@color/gray1" />
@@ -39,41 +39,6 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/gradient_bottom_blak" />
 
-                <LinearLayout
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/circle_primary"
-
-                    android:gravity="center"
-                    android:orientation="vertical"
-
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:gravity="center"
-                        android:lines="1"
-                        android:text='@{model.price}'
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:gravity="center"
-                        android:lines="1"
-                        android:text="@string/sar"
-                        android:textColor="@color/white"
-                        android:textSize="10sp"
-                        android:textStyle="bold"
-                        tools:ignore="SmallSp" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -90,27 +55,13 @@
                         android:layout_marginEnd="8dp"
                         android:ellipsize="end"
                         android:lines="1"
-                        android:text="@{model.title}"
+                        android:text="@{model.user.name}"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold"
 
                         />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="5dp"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:text="@{model.sub_titel}"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-
-                        />
 
                 </LinearLayout>
             </FrameLayout>

@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="total"
             type="Double" />
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -26,21 +28,41 @@
 
         </FrameLayout>
 
+        <FrameLayout
+            android:id="@+id/flClear"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/small_stroke_primary"
+            android:visibility='@{total>0?View.VISIBLE:View.GONE,default=gone}'
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/clear_cart"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+        </FrameLayout>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:translationY="20dp"
+            android:visibility='@{total>0?View.VISIBLE:View.GONE,default=gone}'
             app:cardBackgroundColor="@color/gray22"
             app:cardCornerRadius="20dp"
-            app:cardElevation="8dp"
-            android:visibility='@{total>0?View.VISIBLE:View.GONE,default=gone}'
-            >
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -50,25 +72,25 @@
                     android:layout_marginBottom="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
                         android:text="@string/total"
-                        />
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/black"
                         android:text='@{total+@string/sar}'
-                        />
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
 
                 </LinearLayout>
+
                 <Button
                     android:id="@+id/btnCheckout"
                     android:layout_width="match_parent"
@@ -76,10 +98,9 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
                     android:background="@drawable/small_rounded_primary"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
                     android:text="@string/checkout"
-                    />
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

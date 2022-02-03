@@ -116,6 +116,7 @@ public class FragmentService extends BaseFragment {
 
     private void navigateToDishesActivity() {
         Intent intent = new Intent(activity, DishesActivity.class);
+        intent.putExtra("kitchen_id", model.getId());
         startActivity(intent);
     }
 }

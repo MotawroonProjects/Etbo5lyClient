@@ -4,6 +4,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ public class DishesActivity extends BaseActivity {
     private CategoryDishesAdapter adapter;
     private BuffetDishesAdapter dishesAdapter;
     private ActivityDishesMvvm mvvm;
+    private String kitchen_id = "";
 
     private ManageCartModel manageCartModel;
     private List<DishModel> cartDishes = new ArrayList<>();
@@ -36,7 +38,13 @@ public class DishesActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dishes);
+        getDataFromIntent();
         initView();
+    }
+
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        kitchen_id = intent.getStringExtra("kitchen_id");
     }
 
 
@@ -58,7 +66,9 @@ public class DishesActivity extends BaseActivity {
             if (categories.size() > 0) {
                 updateUi();
                 binding.tvNoData.setVisibility(View.GONE);
+
             } else {
+                binding.cardViewTotal.setVisibility(View.GONE);
                 binding.tvNoData.setVisibility(View.VISIBLE);
 
             }
@@ -79,24 +89,22 @@ public class DishesActivity extends BaseActivity {
         binding.recViewCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.recViewCategory.setAdapter(adapter);
         binding.recView.setLayoutManager(new LinearLayoutManager(this));
-        dishesAdapter = new BuffetDishesAdapter(this);
+        dishesAdapter = new BuffetDishesAdapter(this, manageCartModel.getSendOrderModel(this).getCaterer_id());
         binding.recView.setAdapter(dishesAdapter);
 
         binding.btnConfirm.setOnClickListener(v -> {
-            /*if (cartDishes.size() > 0) {
-                for (DishModel model : cartDishes) {
-                    SendOrderModel.Details item = new SendOrderModel.Details( "", model.getId(), "", "", model.getCaterer_id(), model.getAmount() + "", model.getPhoto(), model.getTitel(), model.getPrice());
+            if (cartDishes.size() > 0) {
 
-                    manageCartModel.addItemToCart(this, item,model.getCaterer_id());
+                for (DishModel model : cartDishes) {
+                    SendOrderModel.Details item = new SendOrderModel.Details("", model.getId(), "", "", model.getCaterer_id(), model.getAmount() + "", model.getPhoto(), model.getTitel(), model.getPrice());
+                    manageCartModel.addItemToCart(this, item, model.getCaterer_id());
                 }
 
                 Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
                 finish();
 
 
-
-
-            }*/
+            }
 
 
         });
@@ -107,11 +115,12 @@ public class DishesActivity extends BaseActivity {
 
         calculateTotalAndAmount();
 
-        mvvm.getDishes(manageCartModel.getDishesList(this));
+        mvvm.getDishes(manageCartModel.getDishesList(this), kitchen_id);
 
     }
 
     private void updateUi() {
+        binding.cardViewTotal.setVisibility(View.VISIBLE);
         BuffetModel.Category category = mvvm.onDataSuccess().getValue().get(0);
         category.setSelected(true);
 

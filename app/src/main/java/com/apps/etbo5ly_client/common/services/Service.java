@@ -110,7 +110,7 @@ public interface Service {
     Single<Response<KitchenDataModel>> filterKitchen(@Body FilterModel filterModel);
 
     @GET("api/Service/Offers")
-    Single<Response<OfferDataModel>> getOffer(@Query("option_id") String option_id);
+    Single<Response<KitchenDataModel>> getOffer(@Query("option_id") String option_id);
 
     @GET("api/Catering/CatererDetails")
     Single<Response<SingleKitchenDataModel>> getKitchenDetails(@Query(value = "Caterer_id") String caterer_id,
@@ -126,7 +126,10 @@ public interface Service {
 
 
     @GET("api/Catering/indexCategoryDishes")
-    Single<Response<DishesDataModel>> getCategoryDishes(@Query(value = "category_dishes_id") String category_dishes_id);
+    Single<Response<DishesDataModel>> getCategoryDishes(@Query(value = "category_dishes_id") String category_dishes_id,
+                                                        @Query(value = "Caterer_id") String Caterer_id
+
+    );
 
 
     @FormUrlEncoded

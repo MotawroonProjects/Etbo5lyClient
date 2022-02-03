@@ -42,6 +42,12 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         initView();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activityHomeGeneralMvvm.onCartRefresh().setValue(true);
+    }
+
     private void getDataFromIntent() {
         Intent intent = getIntent();
         option_id = intent.getStringExtra("option_id");

@@ -9,6 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.apps.etbo5ly_client.common.remote.Api;
 import com.apps.etbo5ly_client.common.tags.Tags;
+import com.apps.etbo5ly_client.model.KitchenDataModel;
+import com.apps.etbo5ly_client.model.KitchenModel;
 import com.apps.etbo5ly_client.model.OfferDataModel;
 import com.apps.etbo5ly_client.model.OfferModel;
 
@@ -24,7 +26,7 @@ import retrofit2.Response;
 
 public class FragmentOfferMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> isOfferLoading;
-    private MutableLiveData<List<OfferModel>> onOfferSuccess;
+    private MutableLiveData<List<KitchenModel>> onOfferSuccess;
     private CompositeDisposable disposable = new CompositeDisposable();
 
 
@@ -39,7 +41,7 @@ public class FragmentOfferMvvm extends AndroidViewModel {
         return isOfferLoading;
     }
 
-    public MutableLiveData<List<OfferModel>> onOfferDataSuccess() {
+    public MutableLiveData<List<KitchenModel>> onOfferDataSuccess() {
         if (onOfferSuccess == null) {
             onOfferSuccess = new MutableLiveData<>();
         }
@@ -51,14 +53,14 @@ public class FragmentOfferMvvm extends AndroidViewModel {
         Api.getService(Tags.base_url).getOffer(option_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<OfferDataModel>>() {
+                .subscribe(new SingleObserver<Response<KitchenDataModel>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         disposable.add(d);
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response<OfferDataModel> response) {
+                    public void onSuccess(@NonNull Response<KitchenDataModel> response) {
                         getIsOfferLoading().setValue(false);
                         if (response.isSuccessful()) {
                             if (response.body() != null && response.body().getStatus() == 200 && response.body().getData() != null) {

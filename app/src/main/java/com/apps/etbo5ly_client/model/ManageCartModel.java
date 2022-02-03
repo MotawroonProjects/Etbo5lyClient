@@ -28,48 +28,47 @@ public class ManageCartModel implements Serializable {
 
     public void addItemToCart(Context context, SendOrderModel.Details item, String kitchen_id) {
         SendOrderModel model = getSendOrderModel(context);
-
-        if (!model.getCaterer_id().isEmpty()&&!model.getCaterer_id().equals(kitchen_id)){
+        if (!model.getCaterer_id().isEmpty() && !model.getCaterer_id().equals(kitchen_id)) {
             Toast.makeText(context, R.string.order_only_place, Toast.LENGTH_SHORT).show();
             return;
-        }else {
+        } else {
             model.setCaterer_id(kitchen_id);
         }
 
         List<SendOrderModel.Details> details = model.getDetails();
         if (details.size() > 0) {
-            int pos = getItemPos(item.getDishes_id(), model.getDetails());
+            String item_id = "";
+            if (item.getDishes_id() != null && !item.getDishes_id().isEmpty()) {
+                item_id = item.getDishes_id();
+            } else if (item.getBuffets_id() != null && !item.getBuffets_id().isEmpty()) {
+                item_id = item.getBuffets_id();
+            } else if (item.getFeast_id() != null && !item.getFeast_id().isEmpty()) {
+                item_id = item.getFeast_id();
+            } else if (item.getOffer_id() != null && !item.getOffer_id().isEmpty()) {
+                item_id = item.getOffer_id();
+            }
+
+            int pos = getItemPos(item_id, model.getDetails());
+            Log.e("itemid", item_id + "_" + pos);
+
             if (pos == -1) {
+
+
                 details.add(item);
 
 
             } else {
                 SendOrderModel.Details itemModel = details.get(pos);
-                int oldAmount = Integer.parseInt(itemModel.getQty());
                 int newAmount = Integer.parseInt(item.getQty());
-                if (newAmount > 0) {
-                    int totalAmount = oldAmount + newAmount;
-                    itemModel.setQty(totalAmount + "");
-                    details.set(pos, itemModel);
-                } else {
-                    String item_id = "";
-                    if (itemModel.getDishes_id() != null && !itemModel.getDishes_id().isEmpty()) {
-                        item_id = itemModel.getDishes_id();
-                    } else if (itemModel.getBuffets_id() != null && !itemModel.getBuffets_id().isEmpty()) {
-                        item_id = itemModel.getBuffets_id();
-                    } else if (itemModel.getFeast_id() != null && !itemModel.getFeast_id().isEmpty()) {
-                        item_id = itemModel.getFeast_id();
-                    } else if (itemModel.getOffer_id() != null && !itemModel.getOffer_id().isEmpty()) {
-                        item_id = itemModel.getOffer_id();
-                    }
-                    removeItem(context, item_id);
 
-                }
+                Log.e("qty", newAmount + "");
+                itemModel.setQty(newAmount + "");
+                details.set(pos, itemModel);
 
 
             }
         } else {
-
+            Log.e("itemid", item.getOffer_id() + "_");
             details.add(item);
 
         }
@@ -91,6 +90,9 @@ public class ManageCartModel implements Serializable {
             } else if (model.getFeast_id().equals(item_id)) {
                 pos = index;
                 return pos;
+            } else if (model.getOffer_id().equals(item_id)) {
+                pos = index;
+                return pos;
             }
         }
 
@@ -102,7 +104,8 @@ public class ManageCartModel implements Serializable {
         List<SendOrderModel.Details> details = model.getDetails();
         double total = 0;
         for (SendOrderModel.Details item : details) {
-            total += Double.parseDouble(item.getPrice()) + Integer.parseInt(item.getQty());
+            Log.e("price", item.getPrice() + item.getQty());
+            total += Double.parseDouble(item.getPrice()) * Integer.parseInt(item.getQty());
         }
 
         return total;
@@ -115,8 +118,20 @@ public class ManageCartModel implements Serializable {
         if (pos != -1) {
             details.remove(pos);
         }
-        model.setDetails(details);
+        if (details.size() == 0) {
+            model.setCaterer_id("");
+            model = null;
+        } else {
+            model.setDetails(details);
+
+        }
         setSendOrder(context, model);
+
+
+    }
+
+    public void clearCart(Context context) {
+        setSendOrder(context, null);
 
 
     }

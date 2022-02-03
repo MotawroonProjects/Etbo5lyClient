@@ -183,6 +183,7 @@ public class FragmentHomeCateringMvvm extends AndroidViewModel {
     }
 
     public void getPopularKitchenData(String user_id,String lat, String lng, String option_id) {
+        Log.e("latlng",lat+"__"+lng);
         getIsPopularDataLoading().setValue(true);
         Api.getService(Tags.base_url).getPopularKitchen(user_id,lat, lng, option_id)
                 .subscribeOn(Schedulers.io())

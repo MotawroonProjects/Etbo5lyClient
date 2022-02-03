@@ -46,10 +46,10 @@ public class BuffetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         myHolder.itemView.setOnClickListener(v -> {
             if (appCompatActivity instanceof BuffetsActivity){
                 BuffetsActivity activity = (BuffetsActivity) appCompatActivity;
-                activity.setItemData(list.get(myHolder.getAbsoluteAdapterPosition()));
+                activity.setItemData(list.get(myHolder.getAbsoluteAdapterPosition()),myHolder.getAdapterPosition());
             }else if (appCompatActivity instanceof FeastsActivity){
                 FeastsActivity activity = (FeastsActivity) appCompatActivity;
-                activity.setItemData(list.get(myHolder.getAbsoluteAdapterPosition()));
+                activity.setItemData(list.get(myHolder.getAbsoluteAdapterPosition()),myHolder.getAdapterPosition());
             }
         });
 

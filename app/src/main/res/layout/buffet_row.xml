@@ -8,6 +8,8 @@
         <variable
             name="model"
             type="com.apps.etbo5ly_client.model.BuffetModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -37,6 +39,39 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_margin="8dp"
+                    android:visibility='@{model.inCart?View.VISIBLE:View.GONE,default=gone}'
+
+                    >
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/circle_white"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_cart"
+                        app:tint="@color/colorPrimary"
+                        />
+                    <TextView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="10sp"
+                        android:background="@drawable/circle_primary"
+                        android:text="@{String.valueOf(model.amountInCart)}"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        tools:ignore="SmallSp" />
+                </FrameLayout>
+
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout

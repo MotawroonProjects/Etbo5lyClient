@@ -1,6 +1,7 @@
 package com.apps.etbo5ly_client.mvvm.mvvm_catering;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,8 @@ import com.apps.etbo5ly_client.common.remote.Api;
 import com.apps.etbo5ly_client.common.tags.Tags;
 import com.apps.etbo5ly_client.model.BuffetModel;
 import com.apps.etbo5ly_client.model.BuffetsDataModel;
+import com.apps.etbo5ly_client.model.ManageCartModel;
+import com.apps.etbo5ly_client.model.SendOrderModel;
 
 import java.util.List;
 
@@ -24,6 +27,8 @@ import retrofit2.Response;
 public class ActivityFeastsMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> isDataLoading;
     private MutableLiveData<List<BuffetModel>> onDataSuccess;
+    private MutableLiveData<Integer> selectedPos = new MutableLiveData<>(-1);
+
     private CompositeDisposable disposable = new CompositeDisposable();
 
 
@@ -45,7 +50,14 @@ public class ActivityFeastsMvvm extends AndroidViewModel {
         return onDataSuccess;
     }
 
-    public void getFeasts(String kitchen_id) {
+    public MutableLiveData<Integer> getSelectedPos() {
+        if (selectedPos == null) {
+            selectedPos = new MutableLiveData<>();
+        }
+        return selectedPos;
+    }
+
+    public void getFeasts(String kitchen_id, Context context) {
         getIsDataLoading().setValue(true);
         Api.getService(Tags.base_url).getFeasts(kitchen_id)
                 .subscribeOn(Schedulers.io())
@@ -61,7 +73,8 @@ public class ActivityFeastsMvvm extends AndroidViewModel {
                         getIsDataLoading().setValue(false);
                         if (response.isSuccessful()) {
                             if (response.body() != null && response.body().getStatus() == 200 && response.body().getData() != null) {
-                                onDataSuccess.setValue(response.body().getData());
+
+                                updateData(context, response.body().getData());
                             }
                         } else {
 
@@ -73,6 +86,26 @@ public class ActivityFeastsMvvm extends AndroidViewModel {
                         Log.d("error", e.getMessage());
                     }
                 });
+    }
+
+    private void updateData(Context context, List<BuffetModel> data) {
+        ManageCartModel manageCartModel = ManageCartModel.newInstance();
+
+        List<SendOrderModel.Details> detailsList = manageCartModel.getDishesList(context);
+        for (int index = 0; index < data.size(); index++) {
+            BuffetModel buffetModel = data.get(index);
+            for (SendOrderModel.Details details : detailsList) {
+                if (buffetModel.getId().equals(details.getFeast_id())) {
+                    buffetModel.setInCart(true);
+                    buffetModel.setAmountInCart(Integer.parseInt(details.getQty()));
+                    data.set(index, buffetModel);
+                    break;
+                }
+            }
+        }
+
+        onDataSuccess.setValue(data);
+
     }
 
     @Override

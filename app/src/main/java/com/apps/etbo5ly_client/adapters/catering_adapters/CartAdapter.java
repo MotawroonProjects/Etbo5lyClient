@@ -1,6 +1,7 @@
 package com.apps.etbo5ly_client.adapters.catering_adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -62,6 +63,8 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             list.set(myHolder.getAdapterPosition(), model);
             myHolder.binding.setModel(model);
 
+            Log.e("amount", model.getQty());
+
             if (fragment instanceof FragmentCart) {
                 FragmentCart fragmentCart = (FragmentCart) fragment;
                 fragmentCart.updateCart(model, myHolder.getAdapterPosition());
@@ -72,19 +75,20 @@ public class CartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         myHolder.binding.imgDecrease.setOnClickListener(v -> {
             SendOrderModel.Details model = list.get(myHolder.getAdapterPosition());
             int amount = Integer.parseInt(model.getQty());
-            if (amount > 0) {
+            if (amount > 1) {
                 amount--;
                 model.setQty(amount + "");
                 list.set(myHolder.getAdapterPosition(), model);
                 myHolder.binding.setModel(model);
 
+                if (fragment instanceof FragmentCart) {
+                    FragmentCart fragmentCart = (FragmentCart) fragment;
+                    fragmentCart.updateCart(model, myHolder.getAdapterPosition());
+                }
+
             }
 
 
-            if (fragment instanceof FragmentCart) {
-                FragmentCart fragmentCart = (FragmentCart) fragment;
-                fragmentCart.updateCart(model, myHolder.getAdapterPosition());
-            }
         });
 
     }

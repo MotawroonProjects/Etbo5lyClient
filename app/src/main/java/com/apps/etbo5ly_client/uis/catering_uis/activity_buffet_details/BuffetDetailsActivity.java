@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -58,15 +59,25 @@ public class BuffetDetailsActivity extends BaseActivity {
 
         binding.btnConfirm.setOnClickListener(v -> {
 
-            SendOrderModel.Details item = new SendOrderModel.Details("","",model.getId(),"", model.getCaterer_id(),"1",model.getPhoto(),model.getTitel(), model.getPrice());
-            if (manageCartModel.getSendOrderModel(this).getCaterer_id().isEmpty()||manageCartModel.getSendOrderModel(this).getCaterer_id().equals(model.getCaterer_id())){
-                manageCartModel.addItemToCart(this,item,model.getCaterer_id());
-                Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-                finish();
-            }else {
-                Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+            if (model.isInCart()) {
+                Toast.makeText(this, R.string.already_cart, Toast.LENGTH_SHORT).show();
+            } else {
+                SendOrderModel.Details item = new SendOrderModel.Details("", "", model.getId(), "", model.getCaterer_id(), "1", model.getPhoto(), model.getTitel(), model.getPrice());
+                if (manageCartModel.getSendOrderModel(this).getCaterer_id().isEmpty() || manageCartModel.getSendOrderModel(this).getCaterer_id().equals(model.getCaterer_id())) {
+                    manageCartModel.addItemToCart(this, item, model.getCaterer_id());
+                    model.setAmountInCart(1);
+                    model.setInCart(true);
+                    Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                    Intent intent = getIntent();
+                    intent.putExtra("data",model);
+                    setResult(RESULT_OK,intent);
+                    finish();
+                } else {
+                    Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
 
+                }
             }
+
 
         });
 

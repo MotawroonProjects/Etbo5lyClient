@@ -14,6 +14,7 @@ import com.apps.etbo5ly_client.adapters.common_adapter.MyPagerAdapter;
 import com.apps.etbo5ly_client.databinding.ActivityKitchenDetailsBinding;
 import com.apps.etbo5ly_client.model.KitchenModel;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityKitchenDetailsMvvm;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.fragments.FragmentCatererOffer;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.fragments.FragmentComments;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.fragments.FragmentGallery;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.fragments.FragmentService;
@@ -101,10 +102,12 @@ public class KitchenDetailsActivity extends BaseActivity {
         binding.setModel(model);
 
         fragmentList.add(FragmentService.newInstance(model));
+        fragmentList.add(FragmentCatererOffer.newInstance(model));
         fragmentList.add(FragmentGallery.newInstance(model));
         fragmentList.add(FragmentComments.newInstance(model));
 
         titles.add(getString(R.string.services));
+        titles.add(getString(R.string.offers));
         titles.add(getString(R.string.gallery2));
         titles.add(getString(R.string.rates));
 

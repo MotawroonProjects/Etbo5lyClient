@@ -18,6 +18,7 @@ public class KitchenModel implements Serializable {
     private String free_delivery;
     private String longitude;
     private String latitude;
+    private String address;
     private String start_work;
     private String end_work;
     private String tax;
@@ -35,6 +36,7 @@ public class KitchenModel implements Serializable {
     private List<FeastModel> feasts;
     private List<RateModel> rate;
     private List<FavoriteModel> favorite;
+    private List<OfferModel> offers;
 
 
     public String getId() {
@@ -91,6 +93,10 @@ public class KitchenModel implements Serializable {
 
     public String getLatitude() {
         return latitude;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public String getStart_work() {
@@ -159,6 +165,10 @@ public class KitchenModel implements Serializable {
 
     public List<FavoriteModel> getFavorite() {
         return favorite;
+    }
+
+    public List<OfferModel> getOffers() {
+        return offers;
     }
 
     public static class Photo implements Serializable {

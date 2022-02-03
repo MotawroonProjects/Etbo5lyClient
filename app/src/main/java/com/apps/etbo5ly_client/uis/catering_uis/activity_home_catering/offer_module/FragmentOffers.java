@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.adapters.catering_adapters.OfferAdapter;
 import com.apps.etbo5ly_client.databinding.FragmentOfferBinding;
+import com.apps.etbo5ly_client.model.KitchenModel;
 import com.apps.etbo5ly_client.model.OfferModel;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.FragmentOfferMvvm;
@@ -92,10 +93,10 @@ public class FragmentOffers extends BaseFragment {
         });
     }
 
-    public void setItemOffer(OfferModel offerModel) {
+    public void setItemOffer(KitchenModel kitchenModel) {
         req = 1;
         Intent intent = new Intent(activity, KitchenDetailsActivity.class);
-        intent.putExtra("kitchen_id", offerModel.getCaterer().getId());
+        intent.putExtra("kitchen_id", kitchenModel.getId());
         launcher.launch(intent);
     }
 }

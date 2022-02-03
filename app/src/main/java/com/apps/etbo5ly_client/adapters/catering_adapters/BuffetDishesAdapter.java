@@ -1,8 +1,10 @@
 package com.apps.etbo5ly_client.adapters.catering_adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,11 +24,13 @@ public class BuffetDishesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Context context;
     private LayoutInflater inflater;
     private AppCompatActivity appCompatActivity;
+    private String caterer_id;
 
-    public BuffetDishesAdapter(Context context) {
+    public BuffetDishesAdapter(Context context, String caterer_id) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         appCompatActivity = (AppCompatActivity) context;
+        this.caterer_id = caterer_id;
     }
 
 
@@ -44,36 +48,78 @@ public class BuffetDishesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
         myHolder.binding.imgIncrease.setOnClickListener(v -> {
-            DishModel model = list.get(myHolder.getAdapterPosition());
-            int amount = model.getAmount();
-            amount++;
-            model.setAmount(amount);
-            list.set(myHolder.getAdapterPosition(), model);
-            myHolder.binding.setModel(model);
 
-            if (appCompatActivity instanceof DishesActivity) {
-                DishesActivity activity = (DishesActivity) appCompatActivity;
-                activity.updateCart(model, myHolder.getAdapterPosition());
+            DishModel model = list.get(myHolder.getAdapterPosition());
+            Log.e("cat", caterer_id + "__" + model.getCaterer_id());
+
+            if (caterer_id == null || caterer_id.isEmpty()) {
+                int amount = model.getAmount();
+                amount++;
+                model.setAmount(amount);
+                list.set(myHolder.getAdapterPosition(), model);
+                myHolder.binding.setModel(model);
+
+                if (appCompatActivity instanceof DishesActivity) {
+                    DishesActivity activity = (DishesActivity) appCompatActivity;
+                    activity.updateCart(model, myHolder.getAdapterPosition());
+                }
+            } else if (caterer_id.equals(model.getCaterer_id())) {
+                int amount = model.getAmount();
+                amount++;
+                model.setAmount(amount);
+                list.set(myHolder.getAdapterPosition(), model);
+                myHolder.binding.setModel(model);
+
+                if (appCompatActivity instanceof DishesActivity) {
+                    DishesActivity activity = (DishesActivity) appCompatActivity;
+                    activity.updateCart(model, myHolder.getAdapterPosition());
+                }
+            } else {
+                Toast.makeText(context, context.getString(R.string.order_only_place), Toast.LENGTH_SHORT).show();
+
             }
+
 
         });
 
         myHolder.binding.imgDecrease.setOnClickListener(v -> {
             DishModel model = list.get(myHolder.getAdapterPosition());
-            int amount = model.getAmount();
-            if (amount > 0) {
-                amount--;
-                model.setAmount(amount);
-                list.set(myHolder.getAdapterPosition(), model);
-                myHolder.binding.setModel(model);
+            if (caterer_id == null || caterer_id.isEmpty()) {
+
+                int amount = model.getAmount();
+                if (amount > 0) {
+                    amount--;
+                    model.setAmount(amount);
+                    list.set(myHolder.getAdapterPosition(), model);
+                    myHolder.binding.setModel(model);
+
+                }
+
+
+                if (appCompatActivity instanceof DishesActivity) {
+                    DishesActivity activity = (DishesActivity) appCompatActivity;
+                    activity.updateCart(model, myHolder.getAdapterPosition());
+                }
+            } else if (caterer_id.equals(model.getCaterer_id())) {
+                int amount = model.getAmount();
+                if (amount > 0) {
+                    amount--;
+                    model.setAmount(amount);
+                    list.set(myHolder.getAdapterPosition(), model);
+                    myHolder.binding.setModel(model);
+
+                }
+
+
+                if (appCompatActivity instanceof DishesActivity) {
+                    DishesActivity activity = (DishesActivity) appCompatActivity;
+                    activity.updateCart(model, myHolder.getAdapterPosition());
+                }
+            } else {
+                Toast.makeText(context, context.getString(R.string.order_only_place), Toast.LENGTH_SHORT).show();
 
             }
 
-
-            if (appCompatActivity instanceof DishesActivity) {
-                DishesActivity activity = (DishesActivity) appCompatActivity;
-                activity.updateCart(model, myHolder.getAdapterPosition());
-            }
         });
 
     }

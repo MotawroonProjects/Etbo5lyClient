@@ -14,6 +14,8 @@ public class OfferModel implements Serializable {
     private String price;
     private String created_at;
     private String updated_at;
+    private boolean isInCart = false;
+    private int amountInCart;
     private KitchenModel caterer;
 
     public String getId() {
@@ -54,6 +56,22 @@ public class OfferModel implements Serializable {
 
     public String getUpdated_at() {
         return updated_at;
+    }
+
+    public boolean isInCart() {
+        return isInCart;
+    }
+
+    public void setInCart(boolean inCart) {
+        isInCart = inCart;
+    }
+
+    public int getAmountInCart() {
+        return amountInCart;
+    }
+
+    public void setAmountInCart(int amountInCart) {
+        this.amountInCart = amountInCart;
     }
 
     public KitchenModel getCaterer() {

@@ -53,16 +53,26 @@ public class FeastDetailsActivity extends BaseActivity {
 
         binding.btnConfirm.setOnClickListener(v -> {
 
-            SendOrderModel.Details item = new SendOrderModel.Details("", "", "", model.getId(), model.getCaterer_id(), "1", model.getPhoto(), model.getTitel(), model.getPrice());
-
-            if (manageCartModel.getSendOrderModel(this).getCaterer_id().isEmpty() || manageCartModel.getSendOrderModel(this).getCaterer_id().equals(model.getCaterer_id())) {
-                manageCartModel.addItemToCart(this, item, model.getCaterer_id());
-                Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-                finish();
+            if (model.isInCart()) {
+                Toast.makeText(this, R.string.already_cart, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                SendOrderModel.Details item = new SendOrderModel.Details("", "", "", model.getId(), model.getCaterer_id(), "1", model.getPhoto(), model.getTitel(), model.getPrice());
 
+                if (manageCartModel.getSendOrderModel(this).getCaterer_id().isEmpty() || manageCartModel.getSendOrderModel(this).getCaterer_id().equals(model.getCaterer_id())) {
+                    manageCartModel.addItemToCart(this, item, model.getCaterer_id());
+                    model.setAmountInCart(1);
+                    model.setInCart(true);
+                    Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                    Intent intent = getIntent();
+                    intent.putExtra("data", model);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else {
+                    Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+
+                }
             }
+
 
         });
     }
