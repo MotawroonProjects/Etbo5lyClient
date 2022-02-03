@@ -74,6 +74,7 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.16.1'
     implementation 'com.applandeo:material-calendar-view:1.7.0'
     implementation 'com.github.mmin18:realtimeblurview:1.2.1'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
 
 }

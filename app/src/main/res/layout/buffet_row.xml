@@ -40,6 +40,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:.4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:alpha=".7"
+                    android:visibility='@{model.inCart?View.VISIBLE:View.GONE,default=gone}'
+
+                    />
+
+
+
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -49,6 +66,7 @@
                     android:visibility='@{model.inCart?View.VISIBLE:View.GONE,default=gone}'
 
                     >
+
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
@@ -56,6 +74,15 @@
                         android:padding="4dp"
                         android:src="@drawable/ic_cart"
                         app:tint="@color/colorPrimary"
+                        />
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        android:id="@+id/loadView"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        style="@style/SpinKitView.Small.DoubleBounce"
+                        app:SpinKit_Style="DoubleBounce"
+                        app:SpinKit_Color="@color/colorPrimary"
                         />
                     <TextView
                         android:layout_width="20dp"

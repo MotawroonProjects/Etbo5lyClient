@@ -87,6 +87,7 @@ public class FragmentCart extends BaseFragment {
             adapter.updateList(cartList);
             binding.setTotal(manageCartModel.getTotal(getContext()));
             binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
+            activityHomeGeneralMvvm.onCartRefresh().setValue(true);
 
         });
 
@@ -155,6 +156,7 @@ public class FragmentCart extends BaseFragment {
 
         } else {
             binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
+            activityHomeGeneralMvvm.onCartRefresh().setValue(true);
 
         }
 

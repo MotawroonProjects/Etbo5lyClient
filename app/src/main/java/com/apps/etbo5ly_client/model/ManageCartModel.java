@@ -49,7 +49,6 @@ public class ManageCartModel implements Serializable {
             }
 
             int pos = getItemPos(item_id, model.getDetails());
-            Log.e("itemid", item_id + "_" + pos);
 
             if (pos == -1) {
 
@@ -61,14 +60,12 @@ public class ManageCartModel implements Serializable {
                 SendOrderModel.Details itemModel = details.get(pos);
                 int newAmount = Integer.parseInt(item.getQty());
 
-                Log.e("qty", newAmount + "");
                 itemModel.setQty(newAmount + "");
                 details.set(pos, itemModel);
 
 
             }
         } else {
-            Log.e("itemid", item.getOffer_id() + "_");
             details.add(item);
 
         }
@@ -104,7 +101,6 @@ public class ManageCartModel implements Serializable {
         List<SendOrderModel.Details> details = model.getDetails();
         double total = 0;
         for (SendOrderModel.Details item : details) {
-            Log.e("price", item.getPrice() + item.getQty());
             total += Double.parseDouble(item.getPrice()) * Integer.parseInt(item.getQty());
         }
 

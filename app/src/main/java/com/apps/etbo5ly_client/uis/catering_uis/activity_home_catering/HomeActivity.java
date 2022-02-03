@@ -4,19 +4,27 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.adapters.common_adapter.MyPagerAdapter;
 import com.apps.etbo5ly_client.databinding.ActivityHomeClientBinding;
+import com.apps.etbo5ly_client.databinding.ItemMenuCartBinding;
+import com.apps.etbo5ly_client.model.ManageCartModel;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.uis.FragmentBaseNavigation;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
@@ -33,6 +41,8 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private Map<Integer, Integer> map;
     private String option_id;
     private ActivityHomeGeneralMvvm activityHomeGeneralMvvm;
+    private ItemMenuCartBinding itemMenuCartBinding;
+    private ManageCartModel manageCartModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +55,12 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     protected void onResume() {
         super.onResume();
+        if (manageCartModel.getDishesList(this).size() > 0) {
+            updateMenuCartItem(View.VISIBLE);
+        } else {
+            updateMenuCartItem(View.GONE);
+
+        }
         activityHomeGeneralMvvm.onCartRefresh().setValue(true);
     }
 
@@ -55,10 +71,18 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     }
 
     private void initView() {
+        manageCartModel = ManageCartModel.newInstance();
         activityHomeGeneralMvvm = ViewModelProviders.of(this).get(ActivityHomeGeneralMvvm.class);
         activityHomeGeneralMvvm.updateLocation(getUserSettings());
         activityHomeGeneralMvvm.setOptionId(option_id);
+        activityHomeGeneralMvvm.onCartRefresh().observe(this, aBoolean -> {
+            if (manageCartModel.getDishesList(this).size() > 0) {
+                updateMenuCartItem(View.VISIBLE);
+            } else {
+                updateMenuCartItem(View.GONE);
 
+            }
+        });
         fragmentList = new ArrayList<>();
         stack = new Stack<>();
         map = new HashMap<>();
@@ -82,6 +106,20 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         binding.pager.setOffscreenPageLimit(fragmentList.size());
         binding.pager.addOnPageChangeListener(this);
         binding.bottomNavigation.setOnItemSelectedListener(this);
+
+        itemMenuCartBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.item_menu_cart, null, false);
+        BottomNavigationMenuView bottomNavigationMenuView = (BottomNavigationMenuView) binding.bottomNavigation.getChildAt(0);
+        View childAt = bottomNavigationMenuView.getChildAt(2);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) childAt;
+        itemView.addView(itemMenuCartBinding.getRoot());
+        updateMenuCartItem(View.GONE);
+
+
+    }
+
+    private void updateMenuCartItem(int visibility) {
+
+        itemMenuCartBinding.loadView.setVisibility(visibility);
     }
 
     @Override
