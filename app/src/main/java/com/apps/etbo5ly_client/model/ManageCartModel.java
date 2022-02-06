@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.common.preferences.Preferences;
+import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseActivity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -37,18 +38,8 @@ public class ManageCartModel implements Serializable {
 
         List<SendOrderModel.Details> details = model.getDetails();
         if (details.size() > 0) {
-            String item_id = "";
-            if (item.getDishes_id() != null && !item.getDishes_id().isEmpty()) {
-                item_id = item.getDishes_id();
-            } else if (item.getBuffets_id() != null && !item.getBuffets_id().isEmpty()) {
-                item_id = item.getBuffets_id();
-            } else if (item.getFeast_id() != null && !item.getFeast_id().isEmpty()) {
-                item_id = item.getFeast_id();
-            } else if (item.getOffer_id() != null && !item.getOffer_id().isEmpty()) {
-                item_id = item.getOffer_id();
-            }
 
-            int pos = getItemPos(item_id, model.getDetails());
+            int pos = getItemPos(item, model.getDetails());
 
             if (pos == -1) {
 
@@ -74,20 +65,40 @@ public class ManageCartModel implements Serializable {
 
     }
 
-    private int getItemPos(String item_id, List<SendOrderModel.Details> details) {
+    private int getItemPos(SendOrderModel.Details item, List<SendOrderModel.Details> details) {
         int pos = -1;
+        String item_id = "";
+        if (item.getDishes_id() != null && !item.getDishes_id().isEmpty() && item.getItem_type().equals(BaseActivity.DISH)) {
+            item_id = item.getDishes_id();
+        } else if (item.getBuffets_id() != null && !item.getBuffets_id().isEmpty() && item.getItem_type().equals(BaseActivity.BUFFET)) {
+            item_id = item.getBuffets_id();
+        } else if (item.getFeast_id() != null && !item.getFeast_id().isEmpty() && item.getItem_type().equals(BaseActivity.FEAST)) {
+            item_id = item.getFeast_id();
+        } else if (item.getOffer_id() != null && !item.getOffer_id().isEmpty() && item.getItem_type().equals(BaseActivity.OFFER)) {
+            item_id = item.getOffer_id();
+        }
         for (int index = 0; index < details.size(); index++) {
             SendOrderModel.Details model = details.get(index);
-            if (model.getDishes_id().equals(item_id)) {
+
+
+            if (model.getDishes_id().equals(item_id) && model.getItem_type().equals(item.getItem_type())) {
+                Log.e("item_id1", item_id + "__" + model.getDishes_id() + "__" + model.getItem_type());
+
                 pos = index;
                 return pos;
-            } else if (model.getBuffets_id().equals(item_id)) {
+            } else if (model.getBuffets_id().equals(item_id) && model.getItem_type().equals(item.getItem_type())) {
+                Log.e("item_id2", item_id + "__" + model.getBuffets_id() + "__" + model.getItem_type());
+
                 pos = index;
                 return pos;
-            } else if (model.getFeast_id().equals(item_id)) {
+            } else if (model.getFeast_id().equals(item_id) && model.getItem_type().equals(item.getItem_type())) {
+                Log.e("item_id3", item_id + "__" + model.getFeast_id() + "__" + model.getItem_type());
+
                 pos = index;
                 return pos;
-            } else if (model.getOffer_id().equals(item_id)) {
+            } else if (model.getOffer_id().equals(item_id) && model.getItem_type().equals(item.getItem_type())) {
+                Log.e("item_id4", item_id + "__" + model.getOffer_id() + "__" + model.getItem_type());
+
                 pos = index;
                 return pos;
             }
@@ -107,10 +118,10 @@ public class ManageCartModel implements Serializable {
         return total;
     }
 
-    public void removeItem(Context context, String item_id) {
+    public void removeItem(Context context, SendOrderModel.Details item) {
         SendOrderModel model = getSendOrderModel(context);
         List<SendOrderModel.Details> details = model.getDetails();
-        int pos = getItemPos(item_id, model.getDetails());
+        int pos = getItemPos(item, model.getDetails());
         if (pos != -1) {
             details.remove(pos);
         }

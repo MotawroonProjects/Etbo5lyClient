@@ -56,7 +56,7 @@ public class FeastDetailsActivity extends BaseActivity {
             if (model.isInCart()) {
                 Toast.makeText(this, R.string.already_cart, Toast.LENGTH_SHORT).show();
             } else {
-                SendOrderModel.Details item = new SendOrderModel.Details("", "", "", model.getId(), model.getCaterer_id(), "1", model.getPhoto(), model.getTitel(), model.getPrice());
+                SendOrderModel.Details item = new SendOrderModel.Details("", "", "", model.getId(), model.getCaterer_id(), "1", model.getPhoto(), model.getTitel(), model.getPrice(),FEAST);
 
                 if (manageCartModel.getSendOrderModel(this).getCaterer_id().isEmpty() || manageCartModel.getSendOrderModel(this).getCaterer_id().equals(model.getCaterer_id())) {
                     manageCartModel.addItemToCart(this, item, model.getCaterer_id());

@@ -23,6 +23,10 @@ public class BaseActivity extends AppCompatActivity {
     public static final String WRITE_REQ = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     public static final String CAM_REQ = Manifest.permission.CAMERA;
     public static final String fineLocPerm = Manifest.permission.ACCESS_FINE_LOCATION;
+    public static final String BUFFET = "BUFFET";
+    public static final String FEAST = "FEAST";
+    public static final String DISH = "DISH";
+    public static final String OFFER = "OFFER";
 
 
     @Override

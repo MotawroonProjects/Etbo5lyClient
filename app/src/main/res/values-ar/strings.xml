@@ -157,5 +157,23 @@
     <string name="unknown">غير محدد</string>
     <string name="already_cart">موجود في السلة بالفعل</string>
     <string name="no_offers">لا توجد عروض لعرضها</string>
+    <string name="drop_off_location">عنوان التسليم</string>
+    <string name="drop_off_area">منطقة الاستلام</string>
+    <string name="address_in_details">العنوان/رقم الطابق/رقم الشقة</string>
+    <string name="booking_date">تاريخ الحجز</string>
+    <string name="notes">ملاحظات</string>
+    <string name="enter_coupon_code">أدخل كوبون الخصم</string>
+    <string name="check">تحقق</string>
+    <string name="items_total">المجموع :</string>
+    <string name="tax">الضريبة :</string>
+    <string name="coupon_value">قيمة الكوبون :</string>
+    <string name="payment">طريقة الدفع</string>
+    <string name="cash">الدفع كاش</string>
+    <string name="online">الدفع اون لاين</string>
+    <string name="free">مجاني</string>
+    <string name="not_available">غير متوفر</string>
+    <string name="customer_service_cost">خدمة</string>
+    <string name="discount">خصم :</string>
+    <string name="covered_area">مناطق التوصيل</string>
 
 </resources>

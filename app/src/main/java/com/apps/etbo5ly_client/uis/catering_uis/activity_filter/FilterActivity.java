@@ -47,8 +47,7 @@ public class FilterActivity extends BaseActivity {
         }
     }
 
-    private void initView()
-    {
+    private void initView() {
         setUpToolbar(binding.toolbar, getString(R.string.filter), R.color.colorPrimary, R.color.white);
         mvvm = ViewModelProviders.of(this).get(ActivityFilterMvvm.class);
         mvvm.getIsDataLoading().observe(this, isLoading -> {
@@ -66,10 +65,10 @@ public class FilterActivity extends BaseActivity {
             if (kitchenList.size() > 0) {
                 if (adapter != null) {
                     adapter.updateList(kitchenList);
-                    binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
+                    binding.recViewLayout.tvNoData.setVisibility(View.GONE);
                 }
             } else {
-                binding.recViewLayout.tvNoData.setVisibility(View.GONE);
+                binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
 
             }
         });
@@ -105,8 +104,8 @@ public class FilterActivity extends BaseActivity {
             }
         });
     }
-    private void createMenu(View v)
-    {
+
+    private void createMenu(View v) {
 
         PopupMenu popupMenu = new PopupMenu(this, v);
         popupMenu.getMenu().add(0, 1, 1, R.string.most_rated);
@@ -127,8 +126,8 @@ public class FilterActivity extends BaseActivity {
         popupMenu.show();
 
     }
-    public void setItemKitchen(KitchenModel model, int adapterPosition)
-    {
+
+    public void setItemKitchen(KitchenModel model, int adapterPosition) {
         req = 2;
         Intent intent = new Intent(this, KitchenDetailsActivity.class);
         intent.putExtra("kitchen_id", model.getId());

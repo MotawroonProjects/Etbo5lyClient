@@ -22,6 +22,7 @@ import com.apps.etbo5ly_client.model.ManageCartModel;
 import com.apps.etbo5ly_client.model.SendOrderModel;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActivity;
+import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseFragment;
 
 import java.util.ArrayList;
@@ -118,17 +119,17 @@ public class FragmentCart extends BaseFragment {
         String item_feasts_id = "";
         String item_offer_id = "";
 
-        if (model.getDishes_id() != null && !model.getDishes_id().isEmpty()) {
+        if (model.getDishes_id() != null && !model.getDishes_id().isEmpty() && model.getItem_type().equals(BaseActivity.DISH)) {
             item_dish_id = model.getDishes_id();
-        } else if (model.getBuffets_id() != null && !model.getBuffets_id().isEmpty()) {
+        } else if (model.getBuffets_id() != null && !model.getBuffets_id().isEmpty() && model.getItem_type().equals(BaseActivity.BUFFET)) {
             item_buffet_id = model.getBuffets_id();
-        } else if (model.getFeast_id() != null && !model.getFeast_id().isEmpty()) {
+        } else if (model.getFeast_id() != null && !model.getFeast_id().isEmpty() && model.getItem_type().equals(BaseActivity.FEAST)) {
             item_feasts_id = model.getFeast_id();
-        } else if (model.getOffer_id() != null && !model.getOffer_id().isEmpty()) {
+        } else if (model.getOffer_id() != null && !model.getOffer_id().isEmpty() && model.getItem_type().equals(BaseActivity.OFFER)) {
             item_offer_id = model.getOffer_id();
         }
 
-        SendOrderModel.Details item = new SendOrderModel.Details(item_offer_id, item_dish_id, item_buffet_id, item_feasts_id, model.getCaterer_id(), model.getQty(), model.getImage(), model.getName(), model.getPrice());
+        SendOrderModel.Details item = new SendOrderModel.Details(item_offer_id, item_dish_id, item_buffet_id, item_feasts_id, model.getCaterer_id(), model.getQty(), model.getImage(), model.getName(), model.getPrice(), model.getItem_type());
 
         manageCartModel.addItemToCart(activity, item, model.getCaterer_id());
         binding.setTotal(manageCartModel.getTotal(getContext()));
@@ -137,17 +138,24 @@ public class FragmentCart extends BaseFragment {
 
     public void delete(SendOrderModel.Details model, int adapterPosition) {
         cartList.remove(adapterPosition);
-        String item_id = "";
-        if (model.getDishes_id() != null && !model.getDishes_id().isEmpty()) {
-            item_id = model.getDishes_id();
-        } else if (model.getBuffets_id() != null && !model.getBuffets_id().isEmpty()) {
-            item_id = model.getBuffets_id();
-        } else if (model.getFeast_id() != null && !model.getFeast_id().isEmpty()) {
-            item_id = model.getFeast_id();
-        } else if (model.getOffer_id() != null && !model.getOffer_id().isEmpty()) {
-            item_id = model.getOffer_id();
+        String item_dish_id = "";
+        String item_buffet_id = "";
+        String item_feasts_id = "";
+        String item_offer_id = "";
+
+        if (model.getDishes_id() != null && !model.getDishes_id().isEmpty() && model.getItem_type().equals(BaseActivity.DISH)) {
+            item_dish_id = model.getDishes_id();
+        } else if (model.getBuffets_id() != null && !model.getBuffets_id().isEmpty() && model.getItem_type().equals(BaseActivity.BUFFET)) {
+            item_buffet_id = model.getBuffets_id();
+        } else if (model.getFeast_id() != null && !model.getFeast_id().isEmpty() && model.getItem_type().equals(BaseActivity.FEAST)) {
+            item_feasts_id = model.getFeast_id();
+        } else if (model.getOffer_id() != null && !model.getOffer_id().isEmpty() && model.getItem_type().equals(BaseActivity.OFFER)) {
+            item_offer_id = model.getOffer_id();
         }
-        manageCartModel.removeItem(activity, item_id);
+
+        SendOrderModel.Details item = new SendOrderModel.Details(item_offer_id, item_dish_id, item_buffet_id, item_feasts_id, model.getCaterer_id(), model.getQty(), model.getImage(), model.getName(), model.getPrice(), model.getItem_type());
+
+        manageCartModel.removeItem(activity, item);
         adapter.notifyItemRemoved(adapterPosition);
 
         if (cartList.size() > 0) {

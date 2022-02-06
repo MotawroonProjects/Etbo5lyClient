@@ -4,11 +4,11 @@ package com.apps.etbo5ly_client.common.services;
 import com.apps.etbo5ly_client.model.BuffetsDataModel;
 import com.apps.etbo5ly_client.model.CategoryDataModel;
 import com.apps.etbo5ly_client.model.CountryDataModel;
+import com.apps.etbo5ly_client.model.CouponDataModel;
 import com.apps.etbo5ly_client.model.DishesDataModel;
 import com.apps.etbo5ly_client.model.FilterModel;
 import com.apps.etbo5ly_client.model.KitchenDataModel;
 import com.apps.etbo5ly_client.model.NotificationDataModel;
-import com.apps.etbo5ly_client.model.OfferDataModel;
 import com.apps.etbo5ly_client.model.PlaceGeocodeData;
 import com.apps.etbo5ly_client.model.PlaceMapDetailsData;
 import com.apps.etbo5ly_client.model.SingleKitchenDataModel;
@@ -175,5 +175,13 @@ public interface Service {
 
     @GET("api/Catering/cities")
     Single<Response<CountryDataModel>> getCityByCountryId(@Query("governorates_id") String country_id);
+
+
+    @GET("api/Service/zone_cover")
+    Single<Response<SingleKitchenDataModel>> getCoveredZone(@Query("Caterer_id") String Caterer_id);
+
+    @FormUrlEncoded
+    @POST("api/Catering/copon")
+    Single<Response<CouponDataModel>> checkCoupon(@Query("copon") String copon_code);
 
 }

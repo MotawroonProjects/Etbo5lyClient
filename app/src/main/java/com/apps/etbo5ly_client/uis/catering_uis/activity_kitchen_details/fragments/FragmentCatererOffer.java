@@ -25,6 +25,7 @@ import com.apps.etbo5ly_client.model.ManageCartModel;
 import com.apps.etbo5ly_client.model.OfferModel;
 import com.apps.etbo5ly_client.model.SendOrderModel;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.KitchenDetailsActivity;
+import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseFragment;
 
 import java.util.List;
@@ -110,7 +111,7 @@ public class FragmentCatererOffer extends BaseFragment {
 
 
     public void addToCart(OfferModel model) {
-        SendOrderModel.Details item = new SendOrderModel.Details(model.getId(), "", "", "", model.getCaterer_id(), "1", model.getPhoto(), model.getTitle(), model.getPrice());
+        SendOrderModel.Details item = new SendOrderModel.Details(model.getId(), "", "", "", model.getCaterer_id(), "1", model.getPhoto(), model.getTitle(), model.getPrice(), BaseActivity.OFFER);
         manageCartModel.addItemToCart(activity, item, model.getCaterer_id());
         Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
     }

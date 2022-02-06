@@ -26,6 +26,9 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.catering_uis.activity_zone_cover.ZoneCoverActivity"
+            android:exported="false" />
+        <activity
             android:name=".uis.catering_uis.activity_feast_details.FeastDetailsActivity"
             android:exported="false" />
         <activity

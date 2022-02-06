@@ -21,15 +21,16 @@ public class KitchenModel implements Serializable {
     private String address;
     private String start_work;
     private String end_work;
-    private String tax;
-    private String customers_service;
-    private String delivry_cost;
-    private String discount;
+    private String tax = "0.0";
+    private String customers_service = "0.0";
+    private String delivry_cost = "0.0";
+    private String discount = "0.0";
     private String commercial_register;
     private String is_completed;
     private String is_favorite = "no";
     private String rates_val;
     private String rates_count;
+    private List<ZoneCover> zone_cover;
     private UserModel.Data user;
     private List<Photo> photos;
     private List<BuffetModel> buffets;
@@ -169,6 +170,10 @@ public class KitchenModel implements Serializable {
 
     public List<OfferModel> getOffers() {
         return offers;
+    }
+
+    public List<ZoneCover> getZone_cover() {
+        return zone_cover;
     }
 
     public static class Photo implements Serializable {

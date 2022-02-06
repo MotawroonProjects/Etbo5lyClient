@@ -156,5 +156,23 @@
     <string name="unknown">UnKnown</string>
     <string name="already_cart">Already in shopping cart</string>
     <string name="no_offers">No offers to show</string>
+    <string name="drop_off_location">Drop off location</string>
+    <string name="drop_off_area">Drop off area</string>
+    <string name="address_in_details">Address/Floor No/Apartment No</string>
+    <string name="booking_date">Booking date</string>
+    <string name="notes">Notes</string>
+    <string name="enter_coupon_code">Enter coupon code</string>
+    <string name="check">Check</string>
+    <string name="items_total">Sub total :</string>
+    <string name="tax">TAX :</string>
+    <string name="coupon_value">Coupon value :</string>
+    <string name="payment">Payment</string>
+    <string name="cash">Cash</string>
+    <string name="online">Online</string>
+    <string name="free">Free</string>
+    <string name="not_available">Not available</string>
+    <string name="customer_service_cost">Customer service cost</string>
+    <string name="discount">Discount:</string>
+    <string name="covered_area">Covered areas</string>
 
 </resources>
