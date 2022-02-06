@@ -44,14 +44,14 @@ public class SendOrderModel extends BaseObservable implements Serializable {
             if (hasZone) {
                 if (zone_id.isEmpty()) {
                     error_zone.set(context.getString(R.string.field_required));
-                    isValid = false;
+                    setValid(false);
                     return false;
                 }
             }
             error_date.set(null);
             error_address.set(null);
             error_zone.set(null);
-            isValid = true;
+            setValid(true);
             return true;
         } else {
             if (!zone_id.isEmpty()) {
@@ -86,7 +86,7 @@ public class SendOrderModel extends BaseObservable implements Serializable {
             }
 
         }
-        isValid = false;
+        setValid(false);
         return false;
     }
 
@@ -142,6 +142,10 @@ public class SendOrderModel extends BaseObservable implements Serializable {
 
     public boolean isValid() {
         return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
     }
 
     @Bindable
