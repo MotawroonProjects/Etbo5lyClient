@@ -17,6 +17,10 @@
             type="Double" />
 
         <variable
+            name="couponValue"
+            type="Double" />
+
+        <variable
             name="kitchen"
             type="com.apps.etbo5ly_client.model.KitchenModel" />
 
@@ -108,9 +112,7 @@
                             android:padding="12dp"
                             android:text="@={model.address}"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
-
-                            />
+                            android:textSize="15sp" />
 
 
                     </LinearLayout>
@@ -198,6 +200,7 @@
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/rbCash"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -209,6 +212,7 @@
                             app:buttonTint="@color/colorPrimary" />
 
                         <RadioButton
+                            android:id="@+id/rbOnline"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -328,17 +332,16 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/tax"
+                            android:text="@string/delivery"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{kitchen.tax+" %"}'
+                            android:text='@{kitchen.is_delivry.equals("delivry")?(!model.zone_id.isEmpty()?(Double.parseDouble(model.delivery_cost)>0?model.delivery_cost+" "+@string/sar:@string/free):"0.0 "+@string/sar):@string/not_available}'
                             android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -355,16 +358,17 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/delivery"
+                            android:text="@string/tax"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{kitchen.is_delivry.equals("delivry")?(Double.parseDouble(kitchen.delivry_cost)>0?kitchen.delivry_cost+" "+@string/sar:@string/free):@string/not_available}'
+                            android:text='@{kitchen.tax!=null?kitchen.tax+" %":"0.0 %",default="0.0 %"}'
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
 
@@ -389,7 +393,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{kitchen.customers_service+" %"}'
+                            android:text='@{kitchen.customers_service!=null?kitchen.customers_service+" %":"0.0 %",default="0.0 %"}'
                             android:textColor="@color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -416,7 +420,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{kitchen.discount+" %"}'
+                            android:text='@{kitchen.discount!=null?kitchen.discount+" %":"0.0 %",default="0.0 %"}'
                             android:textColor="@color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -442,7 +446,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
+                            android:text='@{couponValue+" %",default="0.0 %"}'
                             android:textColor="@color/black"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -499,7 +503,9 @@
             android:id="@+id/flLoader"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/black_trans">
+            android:background="@color/black_trans"
+            android:clickable="true"
+            android:focusable="true">
 
             <ProgressBar
                 android:id="@+id/progBar"

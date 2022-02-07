@@ -1,6 +1,7 @@
 package com.apps.etbo5ly_client.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -25,6 +26,8 @@ public class SendOrderModel extends BaseObservable implements Serializable {
     private String zone = "";
     private String address = "";
     private String copon = "";
+    private String paid_type="cash";
+    private String delivery_cost = "0.0";
     private String coupon_value = "0.0";
     private boolean hasZone = false;
     private boolean isValid = false;
@@ -38,22 +41,23 @@ public class SendOrderModel extends BaseObservable implements Serializable {
         this.context = context;
     }
 
-    public boolean isDataValid() {
+    public void isDataValid() {
         if (!address.isEmpty() &&
                 !booking_date.isEmpty()) {
             if (hasZone) {
                 if (zone_id.isEmpty()) {
                     error_zone.set(context.getString(R.string.field_required));
                     setValid(false);
-                    return false;
+                    return;
                 }
             }
+
+            setValid(true);
             error_date.set(null);
             error_address.set(null);
             error_zone.set(null);
-            setValid(true);
-            return true;
         } else {
+
             if (!zone_id.isEmpty()) {
                 error_zone.set(null);
 
@@ -85,9 +89,11 @@ public class SendOrderModel extends BaseObservable implements Serializable {
                 }
             }
 
+            Log.e("6", "6");
+            setValid(false);
+
+
         }
-        setValid(false);
-        return false;
     }
 
 
@@ -140,12 +146,14 @@ public class SendOrderModel extends BaseObservable implements Serializable {
         this.hasZone = hasZone;
     }
 
+    @Bindable
     public boolean isValid() {
         return isValid;
     }
 
-    public void setValid(boolean valid) {
-        isValid = valid;
+    public void setValid(boolean isValid) {
+        this.isValid = isValid;
+        notifyPropertyChanged(BR.valid);
     }
 
     @Bindable
@@ -168,6 +176,22 @@ public class SendOrderModel extends BaseObservable implements Serializable {
         notifyPropertyChanged(BR.booking_date);
         isDataValid();
 
+    }
+
+    public String getPaid_type() {
+        return paid_type;
+    }
+
+    public void setPaid_type(String paid_type) {
+        this.paid_type = paid_type;
+    }
+
+    public String getDelivery_cost() {
+        return delivery_cost;
+    }
+
+    public void setDelivery_cost(String delivery_cost) {
+        this.delivery_cost = delivery_cost;
     }
 
     public String getCopon() {

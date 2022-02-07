@@ -11,5 +11,10 @@
         android:label="@string/cart"
         tools:layout="@layout/fragment_cart" />
 
+    <fragment
+        android:id="@+id/fragmentCheckout"
+        android:name="com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.cart_module.FragmentCheckout"
+        android:label=""
+        tools:layout="@layout/fragment_checkout" />
 
 </navigation>

@@ -12,6 +12,7 @@ import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.common.share.Common;
@@ -30,18 +31,30 @@ public class LoginActivity extends BaseActivity {
     private boolean isAccepted = false;
     private int req;
     private ActivityResultLauncher<Intent> launcher;
+    private boolean isFromSplash = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        getDataFromIntent();
         initView();
+    }
+
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        if (intent.hasExtra("from")) {
+            isFromSplash = false;
+        }
     }
 
     private void initView() {
         model = new LoginModel();
         binding.setModel(model);
+        if (!isFromSplash) {
+            binding.tvSkip.setVisibility(View.GONE);
+        }
         binding.tvSkip.setPaintFlags(binding.tvSkip.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         binding.edtPhone.addTextChangedListener(new TextWatcher() {
@@ -76,7 +89,13 @@ public class LoginActivity extends BaseActivity {
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (req == 1 && result.getResultCode() == RESULT_OK) {
-                navigateToAppCategoryActivity("login");
+                if (isFromSplash) {
+                    navigateToAppCategoryActivity("login");
+
+                } else {
+                    setResult(RESULT_OK);
+                    finish();
+                }
             } else if (req == 2 && result.getResultCode() == RESULT_OK && result.getData() != null) {
                 String option_id = result.getData().getStringExtra("option_id");
                 navigateToHomeActivity(option_id);

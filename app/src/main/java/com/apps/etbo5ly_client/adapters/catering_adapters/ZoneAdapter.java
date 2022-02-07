@@ -20,11 +20,12 @@ public class ZoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<ZoneCover> list;
     private LayoutInflater inflater;
     private AppCompatActivity activity;
-
+    private String lang;
 
     public ZoneAdapter(Context context, String lang) {
         inflater = LayoutInflater.from(context);
         activity = (AppCompatActivity) context;
+        this.lang = lang;
     }
 
 
@@ -41,6 +42,7 @@ public class ZoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
+        myHolder.binding.setLang(lang);
         myHolder.itemView.setOnClickListener(v -> {
             if (activity instanceof ZoneCoverActivity) {
                 ZoneCoverActivity zoneCoverActivity = (ZoneCoverActivity) activity;

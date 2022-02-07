@@ -69,7 +69,7 @@
             android:name=".uis.catering_uis.activity_home_catering.HomeActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".uis.common_uis.activity_app_category.AppCategoryActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"

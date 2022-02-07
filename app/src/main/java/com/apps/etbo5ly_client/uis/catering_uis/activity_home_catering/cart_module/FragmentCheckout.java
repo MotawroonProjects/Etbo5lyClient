@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -16,6 +18,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -25,21 +28,31 @@ import com.apps.etbo5ly_client.model.KitchenModel;
 import com.apps.etbo5ly_client.model.ManageCartModel;
 import com.apps.etbo5ly_client.model.SendOrderModel;
 import com.apps.etbo5ly_client.model.ZoneCover;
+import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.FragmentCheckoutMvvm;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActivity;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_zone_cover.ZoneCoverActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseFragment;
+import com.apps.etbo5ly_client.uis.common_uis.activity_login.LoginActivity;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-public class FragmentCheckout extends BaseFragment {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+public class FragmentCheckout extends BaseFragment implements DatePickerDialog.OnDateSetListener {
     private HomeActivity activity;
     private FragmentCheckoutBinding binding;
     private FragmentCheckoutMvvm mvvm;
+    private ActivityHomeGeneralMvvm activityHomeGeneralMvvm;
     private ManageCartModel manageCartModel;
     private SendOrderModel model;
     private KitchenModel kitchenModel;
     private int req;
     private ActivityResultLauncher<Intent> launcher;
-
+    private DatePickerDialog datePickerDialog;
+    private double finalTotal = 0.0;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -49,9 +62,13 @@ public class FragmentCheckout extends BaseFragment {
             if (req == 1 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                 ZoneCover zoneCover = (ZoneCover) result.getData().getSerializableExtra("data");
                 model.setZone(zoneCover.getZone().getTitel());
+                model.setDelivery_cost(zoneCover.getZone_cost());
                 model.setZone_id(zoneCover.getZone_id());
                 binding.setModel(model);
                 calculateTotal();
+            } else if (req == 2 && result.getResultCode() == Activity.RESULT_OK) {
+                //user logged in
+                activityHomeGeneralMvvm.onUserDateRefresh().setValue(true);
             }
 
         });
@@ -73,7 +90,7 @@ public class FragmentCheckout extends BaseFragment {
 
     private void initView() {
         mvvm = ViewModelProviders.of(this).get(FragmentCheckoutMvvm.class);
-
+        activityHomeGeneralMvvm = ViewModelProviders.of(activity).get(ActivityHomeGeneralMvvm.class);
         mvvm.getIsLoading().observe(activity, isLoading -> {
             if (isLoading) {
                 binding.flLoader.setVisibility(View.VISIBLE);
@@ -95,10 +112,13 @@ public class FragmentCheckout extends BaseFragment {
 
         });
 
+        createDateDialog();
         manageCartModel = ManageCartModel.newInstance();
         model = manageCartModel.getSendOrderModel(activity);
         model.setContext(activity);
         binding.setLang(getLang());
+        binding.setTotal(0.0);
+        binding.setCouponValue(0.0);
         binding.setModel(model);
         binding.setSubTotal(manageCartModel.getTotal(activity));
 
@@ -124,15 +144,98 @@ public class FragmentCheckout extends BaseFragment {
             }
         });
 
+        binding.rbCash.setOnClickListener(v -> {
+            model.setPaid_type("cash");
+        });
+
+        binding.rbOnline.setOnClickListener(v -> {
+            model.setPaid_type("online");
+        });
+
         binding.llZone.setOnClickListener(v -> {
             req = 1;
             Intent intent = new Intent(activity, ZoneCoverActivity.class);
             intent.putExtra("caterer_id", model.getCaterer_id());
             launcher.launch(intent);
         });
+
+        binding.llDate.setOnClickListener(v -> {
+            try {
+                datePickerDialog.show(getChildFragmentManager(), "");
+
+            } catch (Exception exception) {
+
+            }
+        });
+        binding.btnCheck.setOnClickListener(v -> {
+            if (getUserModel() != null) {
+                String coupon_code = binding.edtCoupon.getText().toString();
+                mvvm.checkCoupon(getUserModel(), coupon_code);
+            } else {
+                navigateToLoginActivity();
+            }
+
+        });
+
+        mvvm.getZone(model.getCaterer_id());
+
+
+    }
+
+    private void navigateToLoginActivity() {
+        req = 2;
+        Intent intent = new Intent(activity, LoginActivity.class);
+        intent.putExtra("from", "cart");
+        launcher.launch(intent);
+    }
+
+    private void createDateDialog() {
+        Calendar calendar = Calendar.getInstance();
+        datePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.setAccentColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+        datePickerDialog.setCancelColor(ContextCompat.getColor(activity, R.color.gray4));
+        datePickerDialog.setOkColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+        datePickerDialog.setCancelText(R.string.dismiss);
+        datePickerDialog.setOkText(R.string.select);
+        datePickerDialog.setMinDate(calendar);
+        datePickerDialog.setLocale(new Locale(getLang()));
+        datePickerDialog.setTitle(getString(R.string.booking_date));
+        datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
+
+
     }
 
     private void calculateTotal() {
+        double total = manageCartModel.getTotal(activity);
+        double tax = Double.parseDouble(kitchenModel.getTax());
+        double delivery = Double.parseDouble(model.getDelivery_cost());
+        double service_cost = Double.parseDouble(kitchenModel.getCustomers_service());
+        double discount = Double.parseDouble(kitchenModel.getDiscount());
+        double coupon = Double.parseDouble(model.getCoupon_value());
+
+        double taxValue = (tax / 100) * total;
+        double serviceValue = (service_cost / 100) * total;
+        double discountValue = (discount / 100) * total;
+        double couponValue = (coupon / 100) * total;
+        double totalAfterDiscount = total - (discountValue + couponValue);
+
+        finalTotal = totalAfterDiscount + delivery + taxValue + serviceValue;
+
+        binding.setTotal(finalTotal);
+
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, monthOfYear);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        String date = dateFormat.format(calendar.getTime());
+        model.setBooking_date(date);
+        binding.setModel(model);
+
 
     }
 }

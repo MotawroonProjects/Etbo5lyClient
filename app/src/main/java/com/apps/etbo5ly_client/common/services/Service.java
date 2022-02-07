@@ -182,6 +182,9 @@ public interface Service {
 
     @FormUrlEncoded
     @POST("api/Catering/copon")
-    Single<Response<CouponDataModel>> checkCoupon(@Query("copon") String copon_code);
+    Single<Response<CouponDataModel>> checkCoupon(@Field("copon") String copon_code,
+                                                  @Field("user_id") String user_id
+
+    );
 
 }

@@ -175,5 +175,9 @@
     <string name="customer_service_cost">خدمة</string>
     <string name="discount">خصم :</string>
     <string name="covered_area">مناطق التوصيل</string>
+    <string name="dismiss">إلغاء</string>
+    <string name="select">إختر</string>
+    <string name="order_sent_successfully">تمت العملية بنجاح</string>
+    <string name="order_num">رقم طلبك :</string>
 
 </resources>

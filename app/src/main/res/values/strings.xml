@@ -174,5 +174,9 @@
     <string name="customer_service_cost">Customer service cost</string>
     <string name="discount">Discount:</string>
     <string name="covered_area">Covered areas</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="select">Select</string>
+    <string name="order_sent_successfully">Order sent successfully</string>
+    <string name="order_num">Order Num :</string>
 
 </resources>

@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -90,6 +92,10 @@ public class FragmentCart extends BaseFragment {
             binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
             activityHomeGeneralMvvm.onCartRefresh().setValue(true);
 
+        });
+
+        binding.btnCheckout.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.fragmentCheckout);
         });
 
     }
