@@ -9,32 +9,56 @@ import androidx.databinding.ObservableField;
 
 import com.apps.etbo5ly_client.BR;
 import com.apps.etbo5ly_client.R;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SendOrderModel extends BaseObservable implements Serializable {
+
+    @SerializedName("user_id")
     private String user_id = "";
+
+    @SerializedName("option_id")
     private String option_id = "";
+
+    @SerializedName("caterer_id")
     private String caterer_id = "";
+
+    @SerializedName("total")
     private String total = "0.0";
-    private String address_id = "";
+
+    @SerializedName("notes")
     private String notes = "";
+
+    @SerializedName("booking_date")
     private String booking_date = "";
+
+    @SerializedName("zone_id")
     private String zone_id = "";
     private String zone = "";
+
+    @SerializedName("address")
     private String address = "";
+
+    @SerializedName("copon")
     private String copon = "";
+
+    @SerializedName("paid_type")
     private String paid_type="cash";
+
     private String delivery_cost = "0.0";
     private String coupon_value = "0.0";
     private boolean hasZone = false;
     private boolean isValid = false;
+
+    @SerializedName("details")
     private List<Details> details = new ArrayList<>();
     public ObservableField<String> error_zone = new ObservableField<>();
     public ObservableField<String> error_address = new ObservableField<>();
     public ObservableField<String> error_date = new ObservableField<>();
+
     private Context context;
 
     public void setContext(Context context) {
@@ -129,14 +153,7 @@ public class SendOrderModel extends BaseObservable implements Serializable {
         this.total = total;
     }
 
-    public String getAddress_id() {
-        return address_id;
-    }
 
-    public void setAddress_id(String address_id) {
-        this.address_id = address_id;
-
-    }
 
     public boolean isHasZone() {
         return hasZone;

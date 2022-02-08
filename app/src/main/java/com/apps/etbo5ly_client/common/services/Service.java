@@ -2,6 +2,7 @@ package com.apps.etbo5ly_client.common.services;
 
 
 import com.apps.etbo5ly_client.model.BuffetsDataModel;
+import com.apps.etbo5ly_client.model.CartOrderModel;
 import com.apps.etbo5ly_client.model.CategoryDataModel;
 import com.apps.etbo5ly_client.model.CountryDataModel;
 import com.apps.etbo5ly_client.model.CouponDataModel;
@@ -11,7 +12,9 @@ import com.apps.etbo5ly_client.model.KitchenDataModel;
 import com.apps.etbo5ly_client.model.NotificationDataModel;
 import com.apps.etbo5ly_client.model.PlaceGeocodeData;
 import com.apps.etbo5ly_client.model.PlaceMapDetailsData;
+import com.apps.etbo5ly_client.model.SendOrderModel;
 import com.apps.etbo5ly_client.model.SingleKitchenDataModel;
+import com.apps.etbo5ly_client.model.SingleOrderDataModel;
 import com.apps.etbo5ly_client.model.StatusResponse;
 import com.apps.etbo5ly_client.model.UserModel;
 
@@ -186,5 +189,9 @@ public interface Service {
                                                   @Field("user_id") String user_id
 
     );
+
+    @POST("api/Catering/storeOrder")
+    Single<Response<SingleOrderDataModel>> sendOrder(@Body CartOrderModel model);
+
 
 }

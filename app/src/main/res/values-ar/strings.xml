@@ -179,5 +179,10 @@
     <string name="select">إختر</string>
     <string name="order_sent_successfully">تمت العملية بنجاح</string>
     <string name="order_num">رقم طلبك :</string>
+    <string name="copoun_not_found">الكوبون غير موجود</string>
+    <string name="coupon_used">الكوبون غير صالح</string>
+    <string name="coupon_not_activr">الكوبون غير فعال</string>
+    <string name="cnt_book_time">عفوا! لايمكنك الحجز في هذا الموعد</string>
+    <string name="follow_your_order">متابعة طلبك</string>
 
 </resources>

@@ -178,5 +178,10 @@
     <string name="select">Select</string>
     <string name="order_sent_successfully">Order sent successfully</string>
     <string name="order_num">Order Num :</string>
+    <string name="copoun_not_found">Coupon is not found</string>
+    <string name="coupon_used">Coupon is used</string>
+    <string name="coupon_not_activr">Coupon is not active</string>
+    <string name="cnt_book_time">Cannot booking at this time</string>
+    <string name="follow_your_order">Follow your order</string>
 
 </resources>

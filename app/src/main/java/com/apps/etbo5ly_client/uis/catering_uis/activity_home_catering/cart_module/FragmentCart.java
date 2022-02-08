@@ -65,6 +65,15 @@ public class FragmentCart extends BaseFragment {
             }
 
         });
+
+        activityHomeGeneralMvvm.onOrderRefresh().observe(activity, orderModel -> {
+            if (orderModel!=null) {
+                Bundle bundle = new Bundle();
+                bundle.putString("order_id",orderModel.getId());
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.fragmentOrderSuccess,bundle);
+            }
+
+        });
         cartList = new ArrayList<>();
         manageCartModel = ManageCartModel.newInstance();
         cartList.addAll(manageCartModel.getDishesList(activity));

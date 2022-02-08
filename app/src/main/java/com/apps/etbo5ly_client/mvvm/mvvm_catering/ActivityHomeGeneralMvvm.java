@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.apps.etbo5ly_client.model.OrderModel;
 import com.apps.etbo5ly_client.model.UserSettingsModel;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -17,6 +18,7 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> onRefreshSuccess;
     private MutableLiveData<Boolean> onRefreshCartSuccess;
     private MutableLiveData<Boolean> onUserDataRefresh;
+    private MutableLiveData<OrderModel> onOrderRefresh;
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -63,6 +65,13 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
         }
 
         return onUserDataRefresh;
+    }
+    public MutableLiveData<OrderModel> onOrderRefresh() {
+        if (onOrderRefresh == null) {
+            onOrderRefresh = new MutableLiveData<>();
+        }
+
+        return onOrderRefresh;
     }
 
     public void setOnRefreshSuccess(boolean refresh) {

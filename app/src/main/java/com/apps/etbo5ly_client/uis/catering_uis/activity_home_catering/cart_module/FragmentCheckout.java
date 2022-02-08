@@ -21,8 +21,10 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import com.apps.etbo5ly_client.R;
+import com.apps.etbo5ly_client.common.share.Common;
 import com.apps.etbo5ly_client.databinding.FragmentCheckoutBinding;
 import com.apps.etbo5ly_client.model.KitchenModel;
 import com.apps.etbo5ly_client.model.ManageCartModel;
@@ -102,6 +104,14 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
             }
         });
 
+        mvvm.getOnCouponDataSuccess().observe(activity, couponModel -> {
+            model.setCoupon_value(couponModel.getAmount());
+            model.setCopon(couponModel.getName());
+            binding.setModel(model);
+            binding.setCouponValue(Integer.parseInt(couponModel.getAmount()));
+            calculateTotal();
+        });
+
         mvvm.getOnDataSuccess().observe(activity, m -> {
             kitchenModel = m;
             binding.setKitchen(kitchenModel);
@@ -112,13 +122,20 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
 
         });
 
+        mvvm.getOnOrderSuccess().observe(activity, orderModel -> {
+            manageCartModel.clearCart(activity);
+            activityHomeGeneralMvvm.onCartRefresh().setValue(true);
+            activityHomeGeneralMvvm.onOrderRefresh().setValue(orderModel);
+            Navigation.findNavController(binding.getRoot()).navigateUp();
+        });
+
         createDateDialog();
         manageCartModel = ManageCartModel.newInstance();
         model = manageCartModel.getSendOrderModel(activity);
         model.setContext(activity);
         binding.setLang(getLang());
         binding.setTotal(0.0);
-        binding.setCouponValue(0.0);
+        binding.setCouponValue(0);
         binding.setModel(model);
         binding.setSubTotal(manageCartModel.getTotal(activity));
 
@@ -167,14 +184,28 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
 
             }
         });
+
         binding.btnCheck.setOnClickListener(v -> {
             if (getUserModel() != null) {
                 String coupon_code = binding.edtCoupon.getText().toString();
-                mvvm.checkCoupon(getUserModel(), coupon_code);
+                mvvm.checkCoupon(getUserModel(), coupon_code, activity);
+                Common.CloseKeyBoard(activity, binding.edtCoupon);
             } else {
                 navigateToLoginActivity();
             }
 
+        });
+
+        binding.btnSend.setOnClickListener(v -> {
+            if (getUserModel() != null) {
+                model.setUser_id(getUserModel().getData().getId());
+                model.setOption_id(getUserSettings().getOption_id());
+                model.setTotal(finalTotal+"");
+                mvvm.sendOrder(model, activity);
+
+            } else {
+                navigateToLoginActivity();
+            }
         });
 
         mvvm.getZone(model.getCaterer_id());

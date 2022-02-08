@@ -1,21 +1,31 @@
 package com.apps.etbo5ly_client.mvvm.mvvm_catering;
 
 import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.common.remote.Api;
+import com.apps.etbo5ly_client.common.share.Common;
 import com.apps.etbo5ly_client.common.tags.Tags;
+import com.apps.etbo5ly_client.model.CartOrderModel;
 import com.apps.etbo5ly_client.model.CouponDataModel;
 import com.apps.etbo5ly_client.model.CouponModel;
 import com.apps.etbo5ly_client.model.KitchenModel;
+import com.apps.etbo5ly_client.model.OrderModel;
+import com.apps.etbo5ly_client.model.SendOrderModel;
 import com.apps.etbo5ly_client.model.SingleKitchenDataModel;
+import com.apps.etbo5ly_client.model.SingleOrderDataModel;
 import com.apps.etbo5ly_client.model.UserModel;
 import com.apps.etbo5ly_client.model.ZoneCover;
 
+import java.io.IOException;
 import java.util.List;
 
 import io.reactivex.SingleObserver;
@@ -30,6 +40,7 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
 
     private MutableLiveData<KitchenModel> onDataSuccess;
     private MutableLiveData<CouponModel> onCouponDataSuccess;
+    private MutableLiveData<OrderModel> onOrderSuccess;
 
     private MutableLiveData<Boolean> isLoadingLivData;
 
@@ -53,6 +64,13 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
             onCouponDataSuccess = new MutableLiveData<>();
         }
         return onCouponDataSuccess;
+    }
+
+    public MutableLiveData<OrderModel> getOnOrderSuccess() {
+        if (onOrderSuccess == null) {
+            onOrderSuccess = new MutableLiveData<>();
+        }
+        return onOrderSuccess;
     }
 
 
@@ -95,7 +113,7 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
 
     }
 
-    public void checkCoupon(UserModel userModel, String coupon_code) {
+    public void checkCoupon(UserModel userModel, String coupon_code, Context context) {
         if (userModel == null) {
             return;
         }
@@ -114,8 +132,19 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<CouponDataModel> response) {
                         isLoadingLivData.setValue(false);
                         if (response.isSuccessful()) {
-                            if (response.body() != null && response.body().getStatus() == 200) {
-                                getOnCouponDataSuccess().setValue(response.body().getData());
+                            if (response.body() != null) {
+                                if (response.body().getStatus() == 200) {
+                                    getOnCouponDataSuccess().setValue(response.body().getData());
+
+                                } else if (response.body().getStatus() == 400) {
+                                    Toast.makeText(context, R.string.copoun_not_found, Toast.LENGTH_SHORT).show();
+                                } else if (response.body().getStatus() == 408) {
+                                    Toast.makeText(context, R.string.coupon_used, Toast.LENGTH_SHORT).show();
+
+                                } else if (response.body().getStatus() == 409) {
+                                    Toast.makeText(context, R.string.coupon_not_activr, Toast.LENGTH_SHORT).show();
+
+                                }
                             }
                         }
                     }
@@ -124,6 +153,76 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
                     public void onError(@NonNull Throwable e) {
                         Log.d(TAG, "Error", e);
                         isLoadingLivData.setValue(false);
+                    }
+                });
+    }
+
+    public void sendOrder(SendOrderModel sendOrderModel, Context context) {
+
+
+        CartOrderModel model = new CartOrderModel(sendOrderModel.getUser_id(), sendOrderModel.getOption_id(), sendOrderModel.getCaterer_id(), sendOrderModel.getTotal(), sendOrderModel.getNotes(), sendOrderModel.getBooking_date(), sendOrderModel.getZone_id(), sendOrderModel.getAddress(), sendOrderModel.getCopon(), sendOrderModel.getPaid_type(), sendOrderModel.getDetails());
+
+        Log.e("user_id", model.getUser_id());
+        Log.e("option_id", model.getOption_id());
+        Log.e("caterer_id", model.getCaterer_id());
+        Log.e("total", model.getTotal());
+        Log.e("zone_id", model.getZone_id());
+        Log.e("notes", model.getNotes());
+        Log.e("booking_date", model.getBooking_date());
+        Log.e("copon", model.getCopon());
+        Log.e("address", model.getAddress());
+        Log.e("paid_type", model.getPaid_type());
+        for (SendOrderModel.Details details : model.getDetails()) {
+            Log.e("offer_id", details.getOffer_id());
+            Log.e("dishes_id", details.getDishes_id());
+            Log.e("buffets_id", details.getBuffets_id());
+            Log.e("feast_id", details.getFeast_id());
+            Log.e("qty", details.getQty());
+
+        }
+
+
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getString(R.string.wait));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .sendOrder(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<SingleOrderDataModel>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<SingleOrderDataModel> response) {
+                        dialog.dismiss();
+                        Log.e("code", response.code() + "__");
+
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                if (response.body().getStatus() == 200) {
+                                    getOnOrderSuccess().setValue(response.body().getSingelOrder());
+
+                                } else if (response.body().getStatus() == 409) {
+                                    Toast.makeText(context, R.string.cnt_book_time, Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        } else {
+                            try {
+                                Log.e("error", response.code() + "" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dialog.dismiss();
+                        Log.e("Error", e.getMessage() + "__" + e.getLocalizedMessage());
                     }
                 });
     }
