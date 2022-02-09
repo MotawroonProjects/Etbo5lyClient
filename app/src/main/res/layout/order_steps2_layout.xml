@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.apps.etbo5ly_client.model.OrderModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvDateAccepted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:ems="3"
+            android:gravity="center"
+            android:text="02/09/2022"
+            android:textColor="@color/gray21"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageDateAccepted"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:src="@color/gray4"
+            app:layout_constraintBottom_toBottomOf="@id/tvDateAccepted"
+            app:layout_constraintStart_toEndOf="@id/tvDateAccepted"
+            app:layout_constraintTop_toTopOf="@id/tvDateAccepted" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAccept"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="3dp"
+            app:cardBackgroundColor="@color/status1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:layout_constraintBottom_toBottomOf="@id/imageDateAccepted"
+            app:layout_constraintStart_toEndOf="@id/imageDateAccepted"
+            app:layout_constraintTop_toTopOf="@id/imageDateAccepted">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:padding="3dp"
+                android:src="@drawable/ic_shop" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/cardAccept"
+            app:layout_constraintTop_toBottomOf="@id/cardAccept"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                android:textColor="@color/gray21"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:text="@string/received_your_order"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="2dp"
+            android:layout_height="80dp"
+            android:background="@color/gray4"
+            app:layout_constraintEnd_toEndOf="@id/imageDateAccepted"
+            app:layout_constraintStart_toStartOf="@id/imageDateAccepted"
+            app:layout_constraintTop_toBottomOf="@id/imageDateAccepted" />
+
+
+        <TextView
+            android:id="@+id/tvDatePending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:gravity="center"
+            android:textColor="@color/gray21"
+            app:layout_constraintBottom_toBottomOf="@id/imagePending"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imagePending"
+
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imagePending"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@color/gray4"
+            app:layout_constraintEnd_toEndOf="@id/imageDateAccepted"
+            app:layout_constraintStart_toStartOf="@id/imageDateAccepted"
+            app:layout_constraintTop_toBottomOf="@id/line1" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardPending"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="3dp"
+            app:cardBackgroundColor="@color/status2"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:layout_constraintBottom_toBottomOf="@id/imagePending"
+            app:layout_constraintStart_toEndOf="@id/imagePending"
+            app:layout_constraintTop_toTopOf="@id/imagePending">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:padding="3dp"
+                android:src="@drawable/ic_fork" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/cardPending"
+            app:layout_constraintTop_toBottomOf="@id/cardPending"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                android:textColor="@color/gray21"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:text="@string/status_pending"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+
+                />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="2dp"
+            android:layout_height="80dp"
+            android:background="@color/gray4"
+            app:layout_constraintEnd_toEndOf="@id/imagePending"
+            app:layout_constraintStart_toStartOf="@id/imagePending"
+            app:layout_constraintTop_toBottomOf="@id/imagePending" />
+
+
+        <TextView
+            android:id="@+id/tvDateDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:gravity="center"
+            android:textColor="@color/gray21"
+            app:layout_constraintBottom_toBottomOf="@id/imageDone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imageDone"
+
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageDone"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@color/gray4"
+            app:layout_constraintEnd_toEndOf="@id/imageDateAccepted"
+            app:layout_constraintStart_toStartOf="@id/imageDateAccepted"
+            app:layout_constraintTop_toBottomOf="@id/line2" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDone"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="3dp"
+            app:cardBackgroundColor="@color/status3"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp"
+            app:layout_constraintBottom_toBottomOf="@id/imageDone"
+            app:layout_constraintStart_toEndOf="@id/imageDone"
+            app:layout_constraintTop_toTopOf="@id/imageDone">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:padding="3dp"
+                android:src="@drawable/ic_box"
+                app:tint="@color/colorPrimary" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/cardDone"
+            app:layout_constraintTop_toBottomOf="@id/cardDone"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                android:textColor="@color/gray21"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:text="@string/done"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+
+                />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

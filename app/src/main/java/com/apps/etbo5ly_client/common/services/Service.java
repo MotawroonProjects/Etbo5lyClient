@@ -10,6 +10,7 @@ import com.apps.etbo5ly_client.model.DishesDataModel;
 import com.apps.etbo5ly_client.model.FilterModel;
 import com.apps.etbo5ly_client.model.KitchenDataModel;
 import com.apps.etbo5ly_client.model.NotificationDataModel;
+import com.apps.etbo5ly_client.model.OrderDataModel;
 import com.apps.etbo5ly_client.model.PlaceGeocodeData;
 import com.apps.etbo5ly_client.model.PlaceMapDetailsData;
 import com.apps.etbo5ly_client.model.SendOrderModel;
@@ -131,6 +132,17 @@ public interface Service {
     @GET("api/Catering/indexCategoryDishes")
     Single<Response<DishesDataModel>> getCategoryDishes(@Query(value = "category_dishes_id") String category_dishes_id,
                                                         @Query(value = "Caterer_id") String Caterer_id
+
+    );
+
+    @GET("api/Catering/myOrder")
+    Single<Response<OrderDataModel>> getCatererOrder(@Query(value = "user_id") String user_id,
+                                                     @Query(value = "is_end") String is_end
+
+    );
+
+    @GET("api/Catering/SingelOrder")
+    Single<Response<SingleOrderDataModel>> getSingleOrder(@Query(value = "order_id") String order_id
 
     );
 

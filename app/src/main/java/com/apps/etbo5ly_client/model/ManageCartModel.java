@@ -153,6 +153,7 @@ public class ManageCartModel implements Serializable {
     }
 
     private void setSendOrder(Context context, SendOrderModel model) {
+        instance = null;
         Preferences preferences = Preferences.getInstance();
         preferences.create_update_cart(context, model);
 

@@ -183,5 +183,22 @@
     <string name="coupon_not_activr">Coupon is not active</string>
     <string name="cnt_book_time">Cannot booking at this time</string>
     <string name="follow_your_order">Follow your order</string>
+    <string name="status_new">New</string>
+    <string name="status_accepted">Accepted</string>
+    <string name="status_pending">Pending</string>
+    <string name="status_refused">Refused</string>
+    <string name="call">Call</string>
+    <string name="follow">Follow</string>
+    <string name="reorder">Re-Order</string>
+    <string name="no_orders">No orders to show</string>
+    <string name="rate">Rate</string>
+    <string name="completed">Completed</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="status">Status :</string>
+    <string name="received_your_order">Received your order</string>
+    <string name="delivering">Delivering</string>
+    <string name="delivered">Delivered</string>
+    <string name="done">Done</string>
 
 </resources>

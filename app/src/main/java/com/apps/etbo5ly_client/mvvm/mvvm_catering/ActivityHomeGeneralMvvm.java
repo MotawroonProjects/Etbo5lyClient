@@ -19,6 +19,7 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> onRefreshCartSuccess;
     private MutableLiveData<Boolean> onUserDataRefresh;
     private MutableLiveData<OrderModel> onOrderRefresh;
+    private MutableLiveData<Boolean> onOrdersRefresh;
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -57,6 +58,14 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
         }
 
         return onRefreshCartSuccess;
+    }
+
+    public MutableLiveData<Boolean> onOrdersRefresh() {
+        if (onOrdersRefresh == null) {
+            onOrdersRefresh = new MutableLiveData<>();
+        }
+
+        return onOrdersRefresh;
     }
 
     public MutableLiveData<Boolean> onUserDateRefresh() {

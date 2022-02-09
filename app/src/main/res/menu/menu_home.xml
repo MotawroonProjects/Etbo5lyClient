@@ -14,12 +14,12 @@
 
     <item
         android:id="@+id/cart"
-        android:icon="@drawable/ic_delivery_truck"
+        android:icon="@drawable/ic_cart2"
         android:title="@string/cart" />
 
     <item
         android:id="@+id/order"
-        android:icon="@drawable/ic_calendar"
+        android:icon="@drawable/ic_delivery_truck"
         android:title="@string/orders" />
 
     <item

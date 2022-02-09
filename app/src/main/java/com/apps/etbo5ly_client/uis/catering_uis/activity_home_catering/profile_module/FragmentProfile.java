@@ -56,5 +56,8 @@ public class FragmentProfile extends BaseFragment {
         });
         binding.setLang(getLang());
         binding.setModel(getUserModel());
+        binding.llOrders.setOnClickListener(v -> {
+            activity.displaySpecificPage(3);
+        });
     }
 }

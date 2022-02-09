@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.apps.etbo5ly_client.R;
@@ -124,9 +125,15 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
 
         mvvm.getOnOrderSuccess().observe(activity, orderModel -> {
             manageCartModel.clearCart(activity);
+            NavController navController = Navigation.findNavController(activity,R.id.fragmentBaseCart);
+            navController.navigateUp();
             activityHomeGeneralMvvm.onCartRefresh().setValue(true);
             activityHomeGeneralMvvm.onOrderRefresh().setValue(orderModel);
-            Navigation.findNavController(binding.getRoot()).navigateUp();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("order_id", orderModel.getId());
+            navController.navigate(R.id.fragmentOrderSuccess, bundle);
+
         });
 
         createDateDialog();
@@ -207,6 +214,8 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
                 navigateToLoginActivity();
             }
         });
+
+
 
         mvvm.getZone(model.getCaterer_id());
 

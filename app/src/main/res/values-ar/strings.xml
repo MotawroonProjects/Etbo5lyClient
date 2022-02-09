@@ -184,5 +184,20 @@
     <string name="coupon_not_activr">الكوبون غير فعال</string>
     <string name="cnt_book_time">عفوا! لايمكنك الحجز في هذا الموعد</string>
     <string name="follow_your_order">متابعة طلبك</string>
+    <string name="status_new">بإنتظار الموافقة</string>
+    <string name="status_accepted">تمت الموافقة</string>
+    <string name="status_pending">قيد التنفيذ</string>
+    <string name="status_refused">مرفوض</string>
+    <string name="call">تواصل</string>
+    <string name="follow">تتبع</string>
+    <string name="reorder">إعادة الطلب</string>
+    <string name="no_orders">لا توجد طلبات لعرضها</string>
+    <string name="rate">تقييم</string>
+    <string name="completed">مكتملة</string>
+    <string name="status">الحالة :</string>
+    <string name="received_your_order">استلمنا طلبك</string>
+    <string name="delivering">طلبك بالطريق</string>
+    <string name="delivered">تم استلام الطلب</string>
+    <string name="done">تم التجهيز</string>
 
 </resources>

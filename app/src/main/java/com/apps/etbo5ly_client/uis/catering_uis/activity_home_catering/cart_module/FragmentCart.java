@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +23,7 @@ import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.adapters.catering_adapters.CartAdapter;
 import com.apps.etbo5ly_client.databinding.FragmentCartBinding;
 import com.apps.etbo5ly_client.model.ManageCartModel;
+import com.apps.etbo5ly_client.model.OrderModel;
 import com.apps.etbo5ly_client.model.SendOrderModel;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActivity;
@@ -42,6 +45,7 @@ public class FragmentCart extends BaseFragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         activity = (HomeActivity) context;
+
     }
 
     @Nullable
@@ -66,18 +70,10 @@ public class FragmentCart extends BaseFragment {
 
         });
 
-        activityHomeGeneralMvvm.onOrderRefresh().observe(activity, orderModel -> {
-            if (orderModel!=null) {
-                Bundle bundle = new Bundle();
-                bundle.putString("order_id",orderModel.getId());
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.fragmentOrderSuccess,bundle);
-            }
-
-        });
         cartList = new ArrayList<>();
         manageCartModel = ManageCartModel.newInstance();
         cartList.addAll(manageCartModel.getDishesList(activity));
-        binding.setTotal(manageCartModel.getTotal(getContext()));
+        binding.setTotal(manageCartModel.getTotal(activity));
         binding.recViewLayout.tvNoData.setText(R.string.cart_empty);
         adapter = new CartAdapter(activity, this);
         binding.recViewLayout.recView.setLayoutManager(new LinearLayoutManager(activity));

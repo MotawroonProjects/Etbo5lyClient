@@ -62,6 +62,10 @@ public class FragmentOrderSuccess extends BaseFragment {
     private void initView() {
         binding.setOrderNum(order_id);
         binding.btnDetails.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigateUp();
+            Bundle bundle = new Bundle();
+            bundle.putString("order_id", order_id);
+            Navigation.findNavController(v).navigate(R.id.fragmentOrderDetails, bundle);
 
         });
 

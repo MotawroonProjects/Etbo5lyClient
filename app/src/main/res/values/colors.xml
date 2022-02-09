@@ -9,6 +9,19 @@
     <color name="color3">#4FA13A</color>
     <color name="color4">#DCECD7</color>
 
+    <color name="status1">#FCF3D6</color>
+    <color name="status2">#FEEDDD</color>
+    <color name="status3">#E3F0DF</color>
+    <color name="status4">#D5E3D5</color>
+
+    <color name="new_color">#F2E529</color>
+    <color name="pending">#F2C029</color>
+    <color name="refused">#EC8484</color>
+    <color name="completed">#8EC381</color>
+
+
+
+
 
     <color name="white">#fff</color>
     <color name="alpha_white">#55ffffff</color>

@@ -156,6 +156,12 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         stack.push(pos);
     }
 
+    public void displaySpecificPage(int pos) {
+        if (binding.pager.getCurrentItem() != pos) {
+            setItemPos(pos);
+        }
+    }
+
     private int getPos(int itemId) {
         int position = 0;
         for (int index = 0; index < map.size(); index++) {
