@@ -42,7 +42,7 @@ public class ZoneCoverActivity extends BaseActivity {
     }
 
     private void initView() {
-        setUpToolbar(binding.toolBar,getString(R.string.covered_area), R.color.white, R.color.black);
+        setUpToolbar(binding.toolBar, getString(R.string.covered_area), R.color.white, R.color.black);
         binding.recViewLayout.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
         mvvm = ViewModelProviders.of(this).get(ActivityZoneMvvm.class);
         mvvm.getIsLoading().observe(this, isLoading -> {
@@ -53,6 +53,7 @@ public class ZoneCoverActivity extends BaseActivity {
         });
 
         mvvm.getOnDataSuccess().observe(this, zoneList -> {
+
             if (adapter != null) {
                 adapter.updateList(zoneList);
             }

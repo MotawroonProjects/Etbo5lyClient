@@ -39,10 +39,10 @@
 
                 <ImageView
                     android:id="@+id/imageFav"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_margin="3dp"
-                    android:src='@{model.is_favorite.equals("yes")?@drawable/ic_fill_heart:@drawable/ic_empty_heart,default=@drawable/ic_empty_heart}'
+                    android:src='@{model.is_favorite.equals("true")?@drawable/ic_fill_heart:@drawable/ic_empty_heart,default=@drawable/ic_empty_heart}'
 
                     />
             </FrameLayout>

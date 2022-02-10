@@ -200,5 +200,6 @@
     <string name="delivering">Delivering</string>
     <string name="delivered">Delivered</string>
     <string name="done">Done</string>
+    <string name="no_fav">No favorite items</string>
 
 </resources>

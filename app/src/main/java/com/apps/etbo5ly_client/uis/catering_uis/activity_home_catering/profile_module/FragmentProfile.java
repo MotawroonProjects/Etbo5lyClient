@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.databinding.FragmentProfileBinding;
@@ -58,6 +59,13 @@ public class FragmentProfile extends BaseFragment {
         binding.setModel(getUserModel());
         binding.llOrders.setOnClickListener(v -> {
             activity.displaySpecificPage(3);
+        });
+
+        binding.llFavourite.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.fragmentFavorite);
+        });
+        binding.llNotifications.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.fragmentNotification);
         });
     }
 }

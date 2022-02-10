@@ -1,5 +1,9 @@
 package com.apps.etbo5ly_client.uis.catering_uis.activity_categories;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -23,6 +27,9 @@ public class CategoriesActivity extends BaseActivity {
     private ActivityCategoriesBinding binding;
     private Category2Adapter adapter;
     private ActivityCategoriesMvvm mvvm;
+    private boolean isDataChanged = false;
+    private int req;
+    private ActivityResultLauncher<Intent> launcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +54,15 @@ public class CategoriesActivity extends BaseActivity {
 
         mvvm.onCategoryDataSuccess().observe(this, categoryList -> {
             if (categoryList.size() > 0) {
-                if (adapter != null) {
-                    adapter.updateList(categoryList);
-                    binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
-                }
+                binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
+
+
             } else {
                 binding.recViewLayout.tvNoData.setVisibility(View.GONE);
 
+            }
+            if (adapter != null) {
+                adapter.updateList(categoryList);
             }
         });
         adapter = new Category2Adapter(this);
@@ -65,6 +74,14 @@ public class CategoriesActivity extends BaseActivity {
         mvvm.getCategoryData();
 
         binding.recViewLayout.swipeRefresh.setOnRefreshListener(() -> mvvm.getCategoryData());
+
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (req == 1 && result.getResultCode() == RESULT_OK) {
+                isDataChanged = true;
+            }
+        });
+
+
     }
 
     public void setItemCategory(CategoryModel categoryModel) {
@@ -72,17 +89,29 @@ public class CategoriesActivity extends BaseActivity {
     }
 
     private void navigateToFilterActivity(String type, String category_id) {
+        req = 1;
         FilterModel filterModel = new FilterModel();
         if (!category_id.isEmpty()) {
             List<String> ids = filterModel.getCategory_id();
             ids.add(category_id);
             filterModel.setCategory_id(ids);
         }
+        if (getUserModel() != null) {
+            filterModel.setUser_id(getUserModel().getData().getId());
+        }
 
         filterModel.setIs_type(type);
 
         Intent intent = new Intent(this, FilterActivity.class);
         intent.putExtra("filter", filterModel);
-        startActivity(intent);
+        launcher.launch(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (isDataChanged) {
+            setResult(RESULT_OK);
+        }
+        super.onDestroy();
     }
 }

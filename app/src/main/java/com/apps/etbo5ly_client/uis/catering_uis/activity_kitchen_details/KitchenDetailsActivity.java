@@ -13,6 +13,7 @@ import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.adapters.common_adapter.MyPagerAdapter;
 import com.apps.etbo5ly_client.databinding.ActivityKitchenDetailsBinding;
 import com.apps.etbo5ly_client.model.KitchenModel;
+import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityKitchenDetailsMvvm;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.fragments.FragmentCatererOffer;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.fragments.FragmentComments;
@@ -54,7 +55,12 @@ public class KitchenDetailsActivity extends BaseActivity {
         titles = new ArrayList<>();
         binding.setLang(getLang());
 
+        mvvm.onFavoriteSuccess().observe(this, model -> {
+            this.model = model;
+            binding.setModel(model);
 
+
+        });
         mvvm.getIsDataLoading().observe(this, isLoading -> {
             if (isLoading) {
                 binding.coordinator.setVisibility(View.GONE);
@@ -75,6 +81,7 @@ public class KitchenDetailsActivity extends BaseActivity {
             user_id = getUserModel().getData().getId();
         }
 
+
         mvvm.getKitchenData(kitchen_id, user_id);
 
         binding.appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
@@ -86,6 +93,10 @@ public class KitchenDetailsActivity extends BaseActivity {
                 binding.tvTitle.setVisibility(View.VISIBLE);
                 binding.tvTitleBottom.setVisibility(View.GONE);
             }
+        });
+
+        binding.imageFav.setOnClickListener(v -> {
+            mvvm.addRemoveFavorite(getUserModel(), model);
         });
 
         binding.llBack.setOnClickListener(v -> {
@@ -129,5 +140,11 @@ public class KitchenDetailsActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if (model != null && model.getIs_favorite() != null && !model.getIs_favorite().equals(oldFav)) {
+            setResult(RESULT_OK);
+        }
+        super.onBackPressed();
+    }
 }

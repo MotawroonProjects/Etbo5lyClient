@@ -57,6 +57,7 @@ public class FragmentHomeCatering extends BaseFragment {
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
                 getData();
+                activityHomeGeneralMvvm.onFavoriteRefresh().setValue(true);
             }
         });
     }
@@ -84,12 +85,6 @@ public class FragmentHomeCatering extends BaseFragment {
             getData();
         });
 
-        activityHomeGeneralMvvm.onDataRefresh().observe(activity, refresh -> {
-            if (refresh) {
-                getData();
-            }
-
-        });
 
 
         mvvm.getIsSliderDataLoading().observe(activity, isLoading -> {
@@ -132,68 +127,93 @@ public class FragmentHomeCatering extends BaseFragment {
         mvvm.onSliderDataSuccess().observe(activity, sliderList -> {
 
             if (sliderList.size() > 0) {
-                if (sliderAdapter != null) {
-                    sliderAdapter.updateList(sliderList);
-                    binding.flSlider.setVisibility(View.VISIBLE);
-                    binding.pager.setOffscreenPageLimit(sliderList.size());
-                }
+                binding.flSlider.setVisibility(View.VISIBLE);
+
+
             } else {
                 binding.flSlider.setVisibility(View.GONE);
 
+            }
+
+            if (sliderAdapter != null) {
+                sliderAdapter.updateList(sliderList);
+                binding.pager.setOffscreenPageLimit(sliderList.size());
             }
         });
 
         mvvm.onCategoryDataSuccess().observe(activity, categoryList -> {
             if (categoryList.size() > 0) {
-                if (categoryAdapter != null) {
-                    categoryAdapter.updateList(categoryList);
-                    binding.llCategories.setVisibility(View.VISIBLE);
-                }
+                binding.llCategories.setVisibility(View.VISIBLE);
+
+
             } else {
                 binding.llCategories.setVisibility(View.GONE);
 
+            }
+
+            if (categoryAdapter != null) {
+                categoryAdapter.updateList(categoryList);
             }
         });
 
         mvvm.onPopularKitchenDataSuccess().observe(activity, kitchenList -> {
             if (kitchenList.size() > 0) {
-                if (popularAdapter != null) {
-                    popularAdapter.updateList(kitchenList);
-                    binding.llPopular.setVisibility(View.VISIBLE);
-                }
+                binding.llPopular.setVisibility(View.VISIBLE);
+
+
             } else {
-                Log.e("1", "1");
                 binding.llPopular.setVisibility(View.GONE);
 
+            }
+
+            if (popularAdapter != null) {
+                popularAdapter.updateList(kitchenList);
             }
         });
 
         mvvm.onFeaturedKitchenDataSuccess().observe(activity, kitchenList -> {
             if (kitchenList.size() > 0) {
-                if (kitchenFeaturedAdapter != null) {
-                    kitchenFeaturedAdapter.updateList(kitchenList);
-                    binding.llFeaturedKitchens.setVisibility(View.VISIBLE);
-                }
+
+                binding.llFeaturedKitchens.setVisibility(View.VISIBLE);
+
             } else {
 
                 binding.llFeaturedKitchens.setVisibility(View.GONE);
 
             }
+
+            if (kitchenFeaturedAdapter != null) {
+                kitchenFeaturedAdapter.updateList(kitchenList);
+            }
         });
 
         mvvm.onFreeKitchenDataSuccess().observe(activity, kitchenList -> {
             if (kitchenList.size() > 0) {
-                if (kitchenFreeAdapter != null) {
-                    kitchenFreeAdapter.updateList(kitchenList);
-                    binding.llFreeDelivery.setVisibility(View.VISIBLE);
-                }
+
+
+                binding.llFreeDelivery.setVisibility(View.VISIBLE);
+
             } else {
 
                 binding.llFreeDelivery.setVisibility(View.GONE);
 
             }
+
+            if (kitchenFreeAdapter != null) {
+                kitchenFreeAdapter.updateList(kitchenList);
+            }
         });
 
+        activityHomeGeneralMvvm.onFavoriteRefresh().observe(activity, isRefreshed -> {
+            getData();
+        });
+
+        mvvm.onAddRemoveFavoriteSuccess().observe(activity, isRefreshed -> {
+            if (isRefreshed) {
+                activityHomeGeneralMvvm.onFavoriteRefresh().setValue(true);
+                getData();
+            }
+        });
 
         sliderAdapter = new SliderAdapter(activity);
         binding.pager.setAdapter(sliderAdapter);
@@ -275,7 +295,14 @@ public class FragmentHomeCatering extends BaseFragment {
     }
 
     private void navigateToFilterActivity(String type, String category_id) {
+        req = 1;
         FilterModel filterModel = new FilterModel();
+        filterModel.setLatitude(getUserSettings().getLocation().getLat()+"");
+        filterModel.setLongitude(getUserSettings().getLocation().getLng()+"");
+
+        if (getUserModel()!=null){
+            filterModel.setUser_id(getUserModel().getData().getId());
+        }
         if (!category_id.isEmpty()) {
             List<String> ids = filterModel.getCategory_id();
             ids.add(category_id);
@@ -286,6 +313,11 @@ public class FragmentHomeCatering extends BaseFragment {
 
         Intent intent = new Intent(activity, FilterActivity.class);
         intent.putExtra("filter", filterModel);
-        startActivity(intent);
+        launcher.launch(intent);
+    }
+
+    public void addRemoveFavorite(String kitchen_id) {
+        mvvm.addRemoveFavorite(getUserModel(), kitchen_id, getUserSettings().getLocation().getLat() + "", getUserSettings().getLocation().getLng() + "", getUserSettings().getOption_id());
+
     }
 }

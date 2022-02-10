@@ -199,5 +199,6 @@
     <string name="delivering">طلبك بالطريق</string>
     <string name="delivered">تم استلام الطلب</string>
     <string name="done">تم التجهيز</string>
+    <string name="no_fav">لا توجد عناصر مفضلة</string>
 
 </resources>

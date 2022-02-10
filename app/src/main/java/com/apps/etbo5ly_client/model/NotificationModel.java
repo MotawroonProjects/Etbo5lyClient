@@ -3,57 +3,57 @@ package com.apps.etbo5ly_client.model;
 import java.io.Serializable;
 
 public class NotificationModel implements Serializable {
-    private String id;
-    private String notification_info_id;
-    private String user_type;
-    private String from_user_id;
-    private String to_user_id;
-    private String title;
-    private String message;
-    private String notification_type;
-    private String action_type;
-    private String is_read;
-    private String created_at;
-    private String updated_at;
+   private String id;
+   private String user_id;
+   private String user_name;
+   private String caterer_id;
+   private String order_id;
+   private String caterer_name;
+   private String title;
+   private String body;
+   private String body_caterer;
+   private String status;
+   private String created_at;
+   private String updated_at;
 
     public String getId() {
         return id;
     }
 
-    public String getNotification_info_id() {
-        return notification_info_id;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public String getUser_type() {
-        return user_type;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public String getFrom_user_id() {
-        return from_user_id;
+    public String getCaterer_id() {
+        return caterer_id;
     }
 
-    public String getTo_user_id() {
-        return to_user_id;
+    public String getOrder_id() {
+        return order_id;
+    }
+
+    public String getCaterer_name() {
+        return caterer_name;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getMessage() {
-        return message;
+    public String getBody() {
+        return body;
     }
 
-    public String getNotification_type() {
-        return notification_type;
+    public String getBody_caterer() {
+        return body_caterer;
     }
 
-    public String getAction_type() {
-        return action_type;
-    }
-
-    public String getIs_read() {
-        return is_read;
+    public String getStatus() {
+        return status;
     }
 
     public String getCreated_at() {

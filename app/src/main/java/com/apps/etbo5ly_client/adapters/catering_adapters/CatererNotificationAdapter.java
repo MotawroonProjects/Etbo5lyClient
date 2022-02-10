@@ -1,4 +1,4 @@
-package com.apps.etbo5ly_client.adapters.common_adapter;
+package com.apps.etbo5ly_client.adapters.catering_adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,21 +6,25 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.databinding.NotificationRowBinding;
 import com.apps.etbo5ly_client.model.NotificationModel;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.profile_module.FragmentNotification;
 
 import java.util.List;
 
-public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CatererNotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<NotificationModel> list;
     private Context context;
     private LayoutInflater inflater;
-    public NotificationAdapter(Context context) {
+    private Fragment fragment;
+    public CatererNotificationAdapter(Context context,Fragment fragment) {
         this.context = context;
         inflater = LayoutInflater.from(context);
+        this.fragment = fragment;
     }
 
 
@@ -37,6 +41,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
+
+        myHolder.itemView.setOnClickListener(v -> {
+            if (fragment instanceof FragmentNotification){
+                FragmentNotification fragmentNotification = (FragmentNotification) fragment;
+                fragmentNotification.navigateToCatererDetails(list.get(myHolder.getAdapterPosition()).getCaterer_id());
+            }
+        });
 
 
     }

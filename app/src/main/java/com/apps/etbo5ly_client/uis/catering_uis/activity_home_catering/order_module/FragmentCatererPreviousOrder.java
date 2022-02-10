@@ -73,13 +73,15 @@ public class FragmentCatererPreviousOrder extends BaseFragment {
         mvvm.onDataSuccess().observe(activity, orderList -> {
             if (orderList.size() > 0) {
                 binding.recViewLayout.tvNoData.setVisibility(View.GONE);
-                if (adapter != null) {
-                    adapter.updateList(orderList);
-                }
+
 
             } else {
                 binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
 
+            }
+
+            if (adapter != null) {
+                adapter.updateList(orderList);
             }
         });
         binding.recViewLayout.tvNoData.setText(R.string.no_orders);

@@ -1,6 +1,7 @@
 package com.apps.etbo5ly_client.adapters.catering_adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -28,7 +29,6 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         appCompatActivity = (AppCompatActivity) context;
     }
 
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,9 +43,16 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
         myHolder.itemView.setOnClickListener(v -> {
-            if (appCompatActivity instanceof FilterActivity){
+            if (appCompatActivity instanceof FilterActivity) {
                 FilterActivity activity = (FilterActivity) appCompatActivity;
-                activity.setItemKitchen(list.get(myHolder.getAdapterPosition()),myHolder.getAdapterPosition());
+                activity.setItemKitchen(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
+            }
+        });
+
+        myHolder.binding.imageFav.setOnClickListener(v -> {
+            if (appCompatActivity instanceof FilterActivity) {
+                FilterActivity activity = (FilterActivity) appCompatActivity;
+                activity.addRemoveFavorite(list.get(myHolder.getAdapterPosition()), myHolder.getAdapterPosition());
             }
         });
 

@@ -95,7 +95,7 @@ public class BuffetModel implements Serializable {
         private String titel;
         private String caterer_id;
         private boolean isSelected = false;
-        @SerializedName(value = "dishes_buffet",alternate = {"dishes","dishes_feast"})
+        @SerializedName(value = "dishes_buffet", alternate = {"dishes", "dishes_feast"})
         private List<DishModel> dishes_buffet;
 
         public String getId() {

@@ -110,20 +110,20 @@ public class OrderModel implements Serializable {
         return order_details;
     }
 
-    public static class OrderDetail implements Serializable{
-       private String id;
-       private String order_id;
-       private String offer_id;
-       private String qty;
-       private String dishes_id;
-       private String buffets_id;
-       private String feast_id;
-       private String created_at;
-       private String updated_at;
-       private OfferModel offer;
-       private DishModel dishes;
-       private BuffetModel buffet;
-       private BuffetModel feast;
+    public static class OrderDetail implements Serializable {
+        private String id;
+        private String order_id;
+        private String offer_id;
+        private String qty;
+        private String dishes_id;
+        private String buffets_id;
+        private String feast_id;
+        private String created_at;
+        private String updated_at;
+        private OfferModel offer;
+        private DishModel dishes;
+        private BuffetModel buffet;
+        private BuffetModel feast;
 
         public String getId() {
             return id;

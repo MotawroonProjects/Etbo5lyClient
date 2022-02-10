@@ -147,6 +147,21 @@ public interface Service {
     );
 
 
+    @GET("api/Catering/indexFavorite")
+    Single<Response<KitchenDataModel>> getFavorite(@Query("option_id") String option_id,
+                                                   @Query(value = "user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("api/Catering/addFavorite")
+    Single<Response<StatusResponse>> addRemoveFavorite(@Field(value = "caterer_id") String caterer_id,
+                                                       @Field("user_id") String user_id);
+
+
+    @GET("api/Catering/notifications")
+    Single<Response<NotificationDataModel>> getNotifications(@Query("option_id") String option_id,
+                                                             @Query(value = "user_id") String user_id
+    );
+
     @FormUrlEncoded
     @POST("api/logout")
     Single<Response<StatusResponse>> logout(@Header("AUTHORIZATION") String token,
@@ -178,12 +193,6 @@ public interface Service {
 
     );
 
-
-    @GET("api/notifications")
-    Single<Response<NotificationDataModel>> getNotifications(@Header("AUTHORIZATION") String token,
-                                                             @Query(value = "api_key") String api_key,
-                                                             @Query(value = "user_id") String user_id
-    );
 
     @GET("api/Catering/governorates")
     Single<Response<CountryDataModel>> getCountry();

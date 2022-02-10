@@ -10,19 +10,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.etbo5ly_client.R;
-import com.apps.etbo5ly_client.databinding.KitchenRowBinding;
+import com.apps.etbo5ly_client.databinding.FavoriteRowBinding;
 import com.apps.etbo5ly_client.model.KitchenModel;
-import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.home_module.FragmentHomeCatering;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.profile_module.FragmentFavorite;
 
 import java.util.List;
 
-public class KitchenFeaturedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FavoriteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<KitchenModel> list;
     private Context context;
     private LayoutInflater inflater;
-    private String lang;
     private Fragment fragment;
-    public KitchenFeaturedAdapter(Context context, Fragment fragment) {
+
+    public FavoriteAdapter(Context context, Fragment fragment) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.fragment = fragment;
@@ -33,7 +33,7 @@ public class KitchenFeaturedAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        KitchenRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.kitchen_row, parent, false);
+        FavoriteRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.favorite_row, parent, false);
         return new MyHolder(binding);
 
     }
@@ -42,17 +42,18 @@ public class KitchenFeaturedAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
+
         myHolder.itemView.setOnClickListener(v -> {
-            if (fragment instanceof FragmentHomeCatering){
-                FragmentHomeCatering fragmentHomeCatering = (FragmentHomeCatering) fragment;
-                fragmentHomeCatering.setItemKitchen(list.get(myHolder.getAdapterPosition()));
+            if (fragment instanceof FragmentFavorite){
+                FragmentFavorite fragmentFavorite = (FragmentFavorite) fragment;
+                fragmentFavorite.navigateToCatererDetails(list.get(myHolder.getAdapterPosition()));
             }
         });
 
         myHolder.binding.imageFav.setOnClickListener(v -> {
-            if (fragment instanceof FragmentHomeCatering){
-                FragmentHomeCatering fragmentHomeCatering = (FragmentHomeCatering) fragment;
-                fragmentHomeCatering.addRemoveFavorite(list.get(myHolder.getAdapterPosition()).getId());
+            if (fragment instanceof FragmentFavorite){
+                FragmentFavorite fragmentFavorite = (FragmentFavorite) fragment;
+                fragmentFavorite.addRemoveFavorite(myHolder.getAdapterPosition());
             }
         });
 
@@ -64,9 +65,9 @@ public class KitchenFeaturedAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
-        private KitchenRowBinding binding;
+        private FavoriteRowBinding binding;
 
-        public MyHolder(KitchenRowBinding binding) {
+        public MyHolder(FavoriteRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

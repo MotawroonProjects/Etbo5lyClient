@@ -49,6 +49,13 @@ public class KitchenPopularAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
         });
 
+        myHolder.binding.imageFav.setOnClickListener(v -> {
+            if (fragment instanceof FragmentHomeCatering){
+                FragmentHomeCatering fragmentHomeCatering = (FragmentHomeCatering) fragment;
+                fragmentHomeCatering.addRemoveFavorite(list.get(myHolder.getAdapterPosition()).getId());
+            }
+        });
+
     }
 
     @Override

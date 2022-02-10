@@ -13,6 +13,8 @@ import com.apps.etbo5ly_client.model.CategoryDataModel;
 import com.apps.etbo5ly_client.model.CategoryModel;
 import com.apps.etbo5ly_client.model.KitchenDataModel;
 import com.apps.etbo5ly_client.model.KitchenModel;
+import com.apps.etbo5ly_client.model.StatusResponse;
+import com.apps.etbo5ly_client.model.UserModel;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,6 +32,7 @@ public class FragmentHomeCateringMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> isPopularDataLoading;
     private MutableLiveData<Boolean> isFeaturedDataLoading;
     private MutableLiveData<Boolean> isFreeDeliveryDataLoading;
+    private MutableLiveData<Boolean> onFavoriteSuccess;
 
 
     private MutableLiveData<List<CategoryModel>> onSliderSuccess;
@@ -113,6 +116,13 @@ public class FragmentHomeCateringMvvm extends AndroidViewModel {
         return onFreeKitchenSuccess;
     }
 
+    public MutableLiveData<Boolean> onAddRemoveFavoriteSuccess() {
+        if (onFavoriteSuccess == null) {
+            onFavoriteSuccess = new MutableLiveData<>();
+        }
+        return onFavoriteSuccess;
+    }
+
 
     public void getSliderData() {
         getIsSliderDataLoading().setValue(true);
@@ -129,7 +139,7 @@ public class FragmentHomeCateringMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<CategoryDataModel> response) {
                         getIsSliderDataLoading().setValue(false);
                         if (response.isSuccessful()) {
-                            if (response.body() != null &&response.body().getStatus()==200&& response.body().getData() != null) {
+                            if (response.body() != null && response.body().getStatus() == 200 && response.body().getData() != null) {
                                 onSliderSuccess.setValue(response.body().getData());
                             }
                         } else {
@@ -182,10 +192,9 @@ public class FragmentHomeCateringMvvm extends AndroidViewModel {
                 });
     }
 
-    public void getPopularKitchenData(String user_id,String lat, String lng, String option_id) {
-        Log.e("latlng",lat+"__"+lng);
+    public void getPopularKitchenData(String user_id, String lat, String lng, String option_id) {
         getIsPopularDataLoading().setValue(true);
-        Api.getService(Tags.base_url).getPopularKitchen(user_id,lat, lng, option_id)
+        Api.getService(Tags.base_url).getPopularKitchen(user_id, lat, lng, option_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<KitchenDataModel>>() {
@@ -198,7 +207,7 @@ public class FragmentHomeCateringMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<KitchenDataModel> response) {
                         getIsPopularDataLoading().setValue(false);
                         if (response.isSuccessful()) {
-                            if (response.body() != null &&response.body().getStatus()==200&& response.body().getData() != null) {
+                            if (response.body() != null && response.body().getStatus() == 200 && response.body().getData() != null) {
                                 onPopularKitchenSuccess.setValue(response.body().getData());
                             }
                         } else {
@@ -217,9 +226,9 @@ public class FragmentHomeCateringMvvm extends AndroidViewModel {
                 });
     }
 
-    public void getFeaturedKitchenData(String user_id,String lat, String lng, String option_id) {
+    public void getFeaturedKitchenData(String user_id, String lat, String lng, String option_id) {
         getIsFeaturedDataLoading().setValue(true);
-        Api.getService(Tags.base_url).getFeaturedKitchen(user_id,lat, lng, option_id)
+        Api.getService(Tags.base_url).getFeaturedKitchen(user_id, lat, lng, option_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<KitchenDataModel>>() {
@@ -232,7 +241,7 @@ public class FragmentHomeCateringMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<KitchenDataModel> response) {
                         getIsFeaturedDataLoading().setValue(false);
                         if (response.isSuccessful()) {
-                            if (response.body() != null &&response.body().getStatus()==200&& response.body().getData() != null) {
+                            if (response.body() != null && response.body().getStatus() == 200 && response.body().getData() != null) {
                                 onFeaturedKitchenSuccess.setValue(response.body().getData());
                             }
                         } else {
@@ -251,9 +260,9 @@ public class FragmentHomeCateringMvvm extends AndroidViewModel {
                 });
     }
 
-    public void getFreeKitchenData(String user_id,String lat, String lng, String option_id) {
+    public void getFreeKitchenData(String user_id, String lat, String lng, String option_id) {
         getIsFreeDeliveryDataLoading().setValue(true);
-        Api.getService(Tags.base_url).getFreeDeliveryKitchen(user_id,lat, lng, option_id)
+        Api.getService(Tags.base_url).getFreeDeliveryKitchen(user_id, lat, lng, option_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<KitchenDataModel>>() {
@@ -266,7 +275,7 @@ public class FragmentHomeCateringMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<KitchenDataModel> response) {
                         getIsFreeDeliveryDataLoading().setValue(false);
                         if (response.isSuccessful()) {
-                            if (response.body() != null &&response.body().getStatus()==200&& response.body().getData() != null) {
+                            if (response.body() != null && response.body().getStatus() == 200 && response.body().getData() != null) {
                                 onFreeKitchenSuccess.setValue(response.body().getData());
                             }
                         } else {
@@ -284,6 +293,47 @@ public class FragmentHomeCateringMvvm extends AndroidViewModel {
                     }
                 });
     }
+
+    public void addRemoveFavorite(UserModel userModel, String kitchen_id, String lat, String lng, String option_id) {
+        if (userModel == null) {
+            return;
+        }
+        Api.getService(Tags.base_url).addRemoveFavorite(kitchen_id, userModel.getData().getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<StatusResponse>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<StatusResponse> response) {
+                        if (response.isSuccessful()) {
+                            if (response.body() != null && response.body().getStatus() == 200) {
+                                onAddRemoveFavoriteSuccess().setValue(true);
+
+                            } else {
+
+                            }
+
+                        } else {
+                            try {
+                                Log.e("error", response.code() + "__" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                        Log.e("error", e.toString());
+                    }
+                });
+    }
+
 
     @Override
     protected void onCleared() {

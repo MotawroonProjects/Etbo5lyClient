@@ -16,7 +16,7 @@ public class CartOrderModel implements Serializable {
     private String zone_id = "";
     private String address = "";
     private String copon = "";
-    private String paid_type="cash";
+    private String paid_type = "cash";
     private List<SendOrderModel.Details> details = new ArrayList<>();
 
     public CartOrderModel(String user_id, String option_id, String caterer_id, String total, String notes, String booking_date, String zone_id, String address, String copon, String paid_type, List<SendOrderModel.Details> details) {

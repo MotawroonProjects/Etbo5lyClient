@@ -13,6 +13,8 @@ public class FilterModel implements Serializable {
     private String end_work;
     private String option_id;
     private String user_id;
+    private String latitude;
+    private String longitude;
 
     public FilterModel() {
         category_id = new ArrayList<>();
@@ -86,5 +88,21 @@ public class FilterModel implements Serializable {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

@@ -44,6 +44,13 @@ public class FilterActivity extends BaseActivity {
         filterModel = (FilterModel) intent.getSerializableExtra("filter");
         if (filterModel == null) {
             filterModel = new FilterModel();
+            if (getUserModel()!=null){
+                filterModel.setUser_id(getUserModel().getData().getId());
+
+            }
+            filterModel.setLatitude(getUserSettings().getLocation().getLat()+"");
+            filterModel.setLongitude(getUserSettings().getLocation().getLng()+"");
+
         }
     }
 
@@ -63,23 +70,33 @@ public class FilterActivity extends BaseActivity {
 
         mvvm.onKitchenDataSuccess().observe(this, kitchenList -> {
             if (kitchenList.size() > 0) {
-                if (adapter != null) {
-                    adapter.updateList(kitchenList);
-                    binding.recViewLayout.tvNoData.setVisibility(View.GONE);
-                }
+                binding.recViewLayout.tvNoData.setVisibility(View.GONE);
+
+
             } else {
                 binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
 
             }
-        });
+            if (adapter != null) {
+                adapter.updateList(kitchenList);
 
+            }
+
+        });
+        mvvm.onAddRemoveFavoriteSuccess().observe(this,itemPos->{
+            if (adapter!=null){
+                adapter.notifyItemChanged(itemPos);
+
+            }
+
+            isDataChanged = true;
+        });
         adapter = new FilterAdapter(this);
         binding.recViewLayout.recView.setLayoutManager(new LinearLayoutManager(this));
         binding.recViewLayout.recView.setAdapter(adapter);
 
         binding.recViewLayout.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
 
-        mvvm.getData(filterModel);
 
         binding.recViewLayout.swipeRefresh.setOnRefreshListener(() -> mvvm.getData(filterModel));
 
@@ -103,6 +120,10 @@ public class FilterActivity extends BaseActivity {
 
             }
         });
+
+        mvvm.getData(filterModel);
+
+
     }
 
     private void createMenu(View v) {
@@ -134,12 +155,15 @@ public class FilterActivity extends BaseActivity {
         launcher.launch(intent);
     }
 
+    public void addRemoveFavorite(KitchenModel model, int adapterPosition) {
+        mvvm.addRemoveFavorite(getUserModel(),adapterPosition);
+    }
+
     @Override
-    protected void onDestroy() {
+    public void onBackPressed() {
         if (isDataChanged) {
             setResult(RESULT_OK);
         }
-        super.onDestroy();
-
+        super.onBackPressed();
     }
 }

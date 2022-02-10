@@ -49,6 +49,13 @@ public class KitchenFreeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             }
         });
 
+        myHolder.binding.imageFav.setOnClickListener(v -> {
+            if (fragment instanceof FragmentHomeCatering){
+                FragmentHomeCatering fragmentHomeCatering = (FragmentHomeCatering) fragment;
+                fragmentHomeCatering.addRemoveFavorite(list.get(myHolder.getAdapterPosition()).getId());
+            }
+        });
+
     }
 
     @Override

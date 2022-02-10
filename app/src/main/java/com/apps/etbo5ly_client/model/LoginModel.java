@@ -17,17 +17,17 @@ public class LoginModel extends BaseObservable implements Serializable {
     public ObservableField<String> error_phone = new ObservableField<>();
 
     public LoginModel() {
-        phone_code ="+20";
-        phone ="";
+        phone_code = "+20";
+        phone = "";
     }
 
-    public boolean isDataValid(Context context){
-        if (!phone.isEmpty()){
+    public boolean isDataValid(Context context) {
+        if (!phone.isEmpty()) {
             error_phone.set(null);
 
 
             return true;
-        }else {
+        } else {
 
             error_phone.set(context.getString(R.string.field_required));
 
@@ -35,6 +35,7 @@ public class LoginModel extends BaseObservable implements Serializable {
             return false;
         }
     }
+
     @Bindable
     public String getPhone_code() {
         return phone_code;
@@ -44,6 +45,7 @@ public class LoginModel extends BaseObservable implements Serializable {
         this.phone_code = phone_code;
         notifyPropertyChanged(BR.phone_code);
     }
+
     @Bindable
     public String getPhone() {
         return phone;

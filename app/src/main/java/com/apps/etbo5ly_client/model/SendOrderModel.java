@@ -46,7 +46,7 @@ public class SendOrderModel extends BaseObservable implements Serializable {
     private String copon = "";
 
     @SerializedName("paid_type")
-    private String paid_type="cash";
+    private String paid_type = "cash";
 
     private String delivery_cost = "0.0";
     private String coupon_value = "0.0";
@@ -152,7 +152,6 @@ public class SendOrderModel extends BaseObservable implements Serializable {
     public void setTotal(String total) {
         this.total = total;
     }
-
 
 
     public boolean isHasZone() {

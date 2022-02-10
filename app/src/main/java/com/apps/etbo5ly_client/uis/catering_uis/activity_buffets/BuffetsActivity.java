@@ -54,12 +54,14 @@ public class BuffetsActivity extends BaseActivity {
             if (buffetsList.size() > 0) {
                 binding.recViewLayout.tvNoData.setVisibility(View.GONE);
 
-                if (adapter != null) {
-                    adapter.updateList(buffetsList);
-                }
+
             } else {
                 binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
 
+            }
+
+            if (adapter != null) {
+                adapter.updateList(buffetsList);
             }
         });
         adapter = new BuffetsAdapter(this);

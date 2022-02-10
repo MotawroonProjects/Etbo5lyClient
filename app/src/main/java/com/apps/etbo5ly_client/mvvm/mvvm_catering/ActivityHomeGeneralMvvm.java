@@ -20,6 +20,7 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> onUserDataRefresh;
     private MutableLiveData<OrderModel> onOrderRefresh;
     private MutableLiveData<Boolean> onOrdersRefresh;
+    private MutableLiveData<Boolean> onFavoriteRefresh;
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -75,6 +76,16 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
 
         return onUserDataRefresh;
     }
+
+    public MutableLiveData<Boolean> onFavoriteRefresh() {
+        if (onFavoriteRefresh == null) {
+            onFavoriteRefresh = new MutableLiveData<>();
+        }
+
+        return onFavoriteRefresh;
+    }
+
+
     public MutableLiveData<OrderModel> onOrderRefresh() {
         if (onOrderRefresh == null) {
             onOrderRefresh = new MutableLiveData<>();
@@ -82,6 +93,8 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
 
         return onOrderRefresh;
     }
+
+
 
     public void setOnRefreshSuccess(boolean refresh) {
         onDataRefresh().setValue(refresh);
