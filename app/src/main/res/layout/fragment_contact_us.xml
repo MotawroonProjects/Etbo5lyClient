@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.apps.etbo5ly_client.model.ContactUsModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_gray2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+
+                >
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="16dp"
+                    android:layout_height="0dp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_user" />
+
+                <EditText
+                    android:id="@+id/edtName"
+                    error="@{model.error_name}"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/name"
+                    android:lines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@={model.name}"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray4"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/email"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_gray2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+
+                >
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="16dp"
+                    android:layout_height="0dp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_mail2"
+                    app:tint="@color/gray21" />
+
+                <EditText
+                    error="@{model.error_email}"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:lines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@={model.email}"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray4"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/subject"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_gray2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+
+                >
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="16dp"
+                    android:layout_height="0dp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_paper"
+                    app:tint="@color/gray21" />
+
+                <EditText
+                    error="@{model.error_subject}"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/subject"
+                    android:lines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@={model.subject}"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray4"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/message"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_gray2"
+                android:orientation="horizontal"
+
+                >
+
+
+                <EditText
+                    error="@{model.error_message}"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/transparent"
+                    android:gravity="top|start"
+                    android:hint="@string/message"
+                    android:lines="1"
+                    android:padding="16dp"
+                    android:text="@={model.message}"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray4"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/btn_enabled_rounded"
+                android:enabled="@{model.valid,default=false}"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/send"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

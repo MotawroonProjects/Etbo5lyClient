@@ -72,6 +72,7 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
             } else if (req == 2 && result.getResultCode() == Activity.RESULT_OK) {
                 //user logged in
                 activityHomeGeneralMvvm.onUserDateRefresh().setValue(true);
+                activity.updateFireBase();
             }
 
         });
@@ -125,11 +126,11 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
 
         mvvm.getOnOrderSuccess().observe(activity, orderModel -> {
             manageCartModel.clearCart(activity);
-            NavController navController = Navigation.findNavController(activity,R.id.fragmentBaseCart);
+            NavController navController = Navigation.findNavController(activity, R.id.fragmentBaseCart);
             navController.navigateUp();
             activityHomeGeneralMvvm.onCartRefresh().setValue(true);
             activityHomeGeneralMvvm.onOrderRefresh().setValue(orderModel);
-
+            activityHomeGeneralMvvm.onOrdersRefresh().setValue(true);
             Bundle bundle = new Bundle();
             bundle.putString("order_id", orderModel.getId());
             navController.navigate(R.id.fragmentOrderSuccess, bundle);
@@ -207,14 +208,13 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
             if (getUserModel() != null) {
                 model.setUser_id(getUserModel().getData().getId());
                 model.setOption_id(getUserSettings().getOption_id());
-                model.setTotal(finalTotal+"");
+                model.setTotal(finalTotal + "");
                 mvvm.sendOrder(model, activity);
 
             } else {
                 navigateToLoginActivity();
             }
         });
-
 
 
         mvvm.getZone(model.getCaterer_id());

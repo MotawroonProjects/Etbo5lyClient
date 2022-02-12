@@ -66,6 +66,12 @@ public class FragmentCatererPreviousOrder extends BaseFragment {
             }
         });
 
+        activityHomeGeneralMvvm.onUserDateRefresh().observe(this, isRefreshed -> {
+            if (isRefreshed) {
+                mvvm.getOrders(getUserModel());
+            }
+        });
+
         mvvm.getIsDataLoading().observe(activity, isLoading -> {
             binding.recViewLayout.swipeRefresh.setRefreshing(isLoading);
         });

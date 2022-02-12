@@ -24,8 +24,13 @@ import com.apps.etbo5ly_client.mvvm.mvvm_catering.FragmentOrderDetailsMvvm;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseFragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 
 public class FragmentOrderDetails extends BaseFragment {
@@ -143,6 +148,12 @@ public class FragmentOrderDetails extends BaseFragment {
         binding.step1.line2.setBackgroundResource(R.color.gray4);
         binding.step1.line3.setBackgroundResource(R.color.gray4);
 
+        binding.step1.tvDateAccepted.setText(getDate(orderModel.getUpdated_at()));
+        binding.step1.tvDatePending.setText(null);
+        binding.step1.tvDateDelivering.setText(null);
+        binding.step1.tvDateDelivered.setText(null);
+
+
     }
 
     private void updateState1Step2() {
@@ -154,6 +165,11 @@ public class FragmentOrderDetails extends BaseFragment {
         binding.step1.line1.setBackgroundResource(R.color.colorPrimary);
         binding.step1.line2.setBackgroundResource(R.color.gray4);
         binding.step1.line3.setBackgroundResource(R.color.gray4);
+
+        binding.step1.tvDateAccepted.setText(null);
+        binding.step1.tvDatePending.setText(getDate(orderModel.getUpdated_at()));
+        binding.step1.tvDateDelivering.setText(null);
+        binding.step1.tvDateDelivered.setText(null);
 
     }
 
@@ -167,6 +183,10 @@ public class FragmentOrderDetails extends BaseFragment {
         binding.step1.line2.setBackgroundResource(R.color.colorPrimary);
         binding.step1.line3.setBackgroundResource(R.color.gray4);
 
+        binding.step1.tvDateAccepted.setText(null);
+        binding.step1.tvDatePending.setText(null);
+        binding.step1.tvDateDelivering.setText(getDate(orderModel.getUpdated_at()));
+        binding.step1.tvDateDelivered.setText(null);
     }
 
     private void updateState1Step4() {
@@ -179,6 +199,11 @@ public class FragmentOrderDetails extends BaseFragment {
         binding.step1.line2.setBackgroundResource(R.color.colorPrimary);
         binding.step1.line3.setBackgroundResource(R.color.colorPrimary);
 
+        binding.step1.tvDateAccepted.setText(null);
+        binding.step1.tvDatePending.setText(null);
+        binding.step1.tvDateDelivering.setText(null);
+        binding.step1.tvDateDelivered.setText(getDate(orderModel.getUpdated_at()));
+
     }
 
 
@@ -190,6 +215,11 @@ public class FragmentOrderDetails extends BaseFragment {
         binding.step2.line1.setBackgroundResource(R.color.gray4);
         binding.step2.line2.setBackgroundResource(R.color.gray4);
 
+        binding.step2.tvDateAccepted.setText(getDate(orderModel.getUpdated_at()));
+        binding.step2.tvDatePending.setText(null);
+        binding.step2.tvDateDone.setText(null);
+
+
     }
 
     private void updateState2Step2() {
@@ -199,6 +229,11 @@ public class FragmentOrderDetails extends BaseFragment {
 
         binding.step2.line1.setBackgroundResource(R.color.colorPrimary);
         binding.step2.line2.setBackgroundResource(R.color.gray4);
+
+        binding.step2.tvDateAccepted.setText(null);
+        binding.step2.tvDatePending.setText(getDate(orderModel.getUpdated_at()));
+        binding.step2.tvDateDone.setText(null);
+
 
     }
 
@@ -210,5 +245,34 @@ public class FragmentOrderDetails extends BaseFragment {
         binding.step2.line1.setBackgroundResource(R.color.colorPrimary);
         binding.step2.line2.setBackgroundResource(R.color.colorPrimary);
 
+        binding.step2.tvDateAccepted.setText(null);
+        binding.step2.tvDatePending.setText(null);
+        binding.step2.tvDateDone.setText(getDate(orderModel.getUpdated_at()));
+
     }
+    
+    private String getDate(String updateAt){
+        String date = "";
+        if (updateAt != null) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            try {
+                Date d = simpleDateFormat.parse(updateAt);
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd\nhh:mm aa",Locale.ENGLISH);
+                dateFormat.setTimeZone(TimeZone.getDefault());
+                date = dateFormat.format(d);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+
+    }
+        return date;
+    }
+
 }
+
+
+

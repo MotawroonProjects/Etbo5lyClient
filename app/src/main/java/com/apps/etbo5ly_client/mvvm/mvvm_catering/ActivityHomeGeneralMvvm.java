@@ -1,15 +1,30 @@
 package com.apps.etbo5ly_client.mvvm.mvvm_catering;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.apps.etbo5ly_client.common.remote.Api;
+import com.apps.etbo5ly_client.common.tags.Tags;
 import com.apps.etbo5ly_client.model.OrderModel;
+import com.apps.etbo5ly_client.model.StatusResponse;
+import com.apps.etbo5ly_client.model.UserModel;
 import com.apps.etbo5ly_client.model.UserSettingsModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.IOException;
+
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 
 public class ActivityHomeGeneralMvvm extends AndroidViewModel {
 
@@ -21,6 +36,9 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
     private MutableLiveData<OrderModel> onOrderRefresh;
     private MutableLiveData<Boolean> onOrdersRefresh;
     private MutableLiveData<Boolean> onFavoriteRefresh;
+    private MutableLiveData<UserModel> onTokenSuccess;
+
+
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -95,6 +113,15 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
     }
 
 
+    public MutableLiveData<UserModel> onTokenSuccess() {
+        if (onTokenSuccess == null) {
+            onTokenSuccess = new MutableLiveData<>();
+        }
+
+        return onTokenSuccess;
+    }
+
+
 
     public void setOnRefreshSuccess(boolean refresh) {
         onDataRefresh().setValue(refresh);
@@ -108,5 +135,59 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
         getLocation().setValue(model);
     }
 
+
+
+    public void updateToken(UserModel userModel){
+        if (userModel==null){
+            return;
+        }
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                String token = task.getResult();
+                Api.getService(Tags.base_url)
+                        .updateFireBaseToken(token,userModel.getData().getId(),"android")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new SingleObserver<Response<StatusResponse>>() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+                                disposable.add(d);
+                            }
+
+                            @Override
+                            public void onSuccess(@NonNull Response<StatusResponse> response) {
+
+                                if (response.isSuccessful()) {
+                                    Log.e("status", response.body().getStatus() + "");
+                                    if (response.body() != null) {
+                                        if (response.body().getStatus() == 200) {
+                                            userModel.setFireBaseToken(token);
+                                            onTokenSuccess().setValue(userModel);
+                                            Log.e("token","updated");
+
+                                        }
+                                    }
+
+                                } else {
+                                    try {
+                                        Log.e("error", response.errorBody().string() + "__" + response.code());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+                               Log.e("token",e.toString());
+
+                            }
+                        });
+            }
+        });
+
+
+    }
 
 }

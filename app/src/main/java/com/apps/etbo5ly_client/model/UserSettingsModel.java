@@ -8,6 +8,7 @@ public class UserSettingsModel implements Serializable {
     private CountryModel cityModel;
     private SelectedLocation location;
     private String option_id = "";
+    private boolean canSendNotifications = true;
 
     public boolean isFirstTime() {
         return isFirstTime;
@@ -47,5 +48,13 @@ public class UserSettingsModel implements Serializable {
 
     public void setOption_id(String option_id) {
         this.option_id = option_id;
+    }
+
+    public boolean isCanSendNotifications() {
+        return canSendNotifications;
+    }
+
+    public void setCanSendNotifications(boolean canSendNotifications) {
+        this.canSendNotifications = canSendNotifications;
     }
 }

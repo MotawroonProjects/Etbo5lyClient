@@ -66,9 +66,6 @@ public class VerificationCodeActivity extends BaseActivity {
             if (userModel == null) {
                 navigateToSignUpActivity();
             } else {
-                UserSettingsModel userSettingsModel = getUserSettings();
-                userSettingsModel.setOption_id("");
-                setUserSettings(userSettingsModel);
                 setUserModel(userModel);
                 setResult(RESULT_OK);
                 finish();
@@ -91,10 +88,6 @@ public class VerificationCodeActivity extends BaseActivity {
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
-                UserSettingsModel userSettingsModel = getUserSettings();
-                userSettingsModel.setOption_id("");
-                setUserSettings(userSettingsModel);
-
                 setResult(RESULT_OK);
                 finish();
             }

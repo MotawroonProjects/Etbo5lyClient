@@ -84,7 +84,6 @@ public class ActivityCountryMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<CountryDataModel> response) {
                         isLoadingLivData.setValue(false);
                         if (response.isSuccessful()) {
-                            Log.d("status",response.body().getStatus()+"__");
                             if (response.body() != null && response.body().getStatus() == 200) {
                                 countryLiveData.setValue(response.body().getData());
                             }

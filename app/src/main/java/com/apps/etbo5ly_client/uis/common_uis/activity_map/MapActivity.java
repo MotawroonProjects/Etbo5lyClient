@@ -107,9 +107,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
             finish();
         });
 
-        binding.llBack.setOnClickListener(v -> {
-            finish();
-        });
+
         updateUI();
         CheckPermission();
     }
@@ -381,4 +379,8 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
     }
 
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

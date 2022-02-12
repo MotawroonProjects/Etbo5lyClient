@@ -28,45 +28,38 @@ public class LanguageActivity extends BaseActivity {
     private void initView() {
         lang = getLang();
         selectedLang = lang;
-        if (lang.equals("ar")) {
-            binding.flAr.setBackgroundResource(R.drawable.small_stroke_primary);
-            binding.flEn.setBackgroundResource(0);
+        binding.setLang(selectedLang);
 
-        } else {
-            binding.flAr.setBackgroundResource(0);
-            binding.flEn.setBackgroundResource(R.drawable.small_stroke_primary);
 
-        }
 
-        binding.cardAr.setOnClickListener(view -> {
+        binding.llAr.setOnClickListener(view -> {
             selectedLang = "ar";
 
             if (!selectedLang.equals(lang)) {
-                binding.btnNext.setVisibility(View.VISIBLE);
+                binding.btnSave.setVisibility(View.VISIBLE);
 
             } else {
-                binding.btnNext.setVisibility(View.INVISIBLE);
+                binding.btnSave.setVisibility(View.INVISIBLE);
 
             }
-            binding.flAr.setBackgroundResource(R.drawable.small_stroke_primary);
-            binding.flEn.setBackgroundResource(0);
+            binding.setLang(selectedLang);
 
         });
 
-        binding.cardEn.setOnClickListener(view -> {
+        binding.llEn.setOnClickListener(view -> {
             selectedLang = "en";
             if (!selectedLang.equals(lang)) {
-                binding.btnNext.setVisibility(View.VISIBLE);
+                binding.btnSave.setVisibility(View.VISIBLE);
 
             } else {
-                binding.btnNext.setVisibility(View.INVISIBLE);
+                binding.btnSave.setVisibility(View.INVISIBLE);
 
             }
-            binding.flAr.setBackgroundResource(0);
-            binding.flEn.setBackgroundResource(R.drawable.small_stroke_primary);
+            binding.setLang(selectedLang);
+
         });
 
-        binding.btnNext.setOnClickListener(view -> {
+        binding.btnSave.setOnClickListener(view -> {
 
             Intent intent = getIntent();
             intent.putExtra("lang", selectedLang);

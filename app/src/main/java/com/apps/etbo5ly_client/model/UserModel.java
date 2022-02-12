@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class UserModel extends StatusResponse {
     private Data data;
+    private String fireBaseToken;
 
     public Data getData() {
         return data;
@@ -75,4 +76,11 @@ public class UserModel extends StatusResponse {
         }
     }
 
+    public String getFireBaseToken() {
+        return fireBaseToken;
+    }
+
+    public void setFireBaseToken(String fireBaseToken) {
+        this.fireBaseToken = fireBaseToken;
+    }
 }

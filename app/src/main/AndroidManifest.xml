@@ -115,11 +115,7 @@
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name=".uis.common_uis.activity_contact_us.ContactUsActivity"
-            android:configChanges="keyboardHidden|screenSize|orientation"
-            android:exported="true"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+       
         <activity
             android:name=".uis.common_uis.activity_splash.SplashActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
@@ -135,6 +131,11 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
+        <service android:name=".common.notifications.FireBaseNotifications"
+            android:stopWithTask="false"
+            android:exported="false"
+            />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

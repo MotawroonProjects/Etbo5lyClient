@@ -16,13 +16,16 @@ public class ContactUsModel extends BaseObservable {
     private String email;
     private String subject;
     private String message;
+    private boolean isValid ;
+    private Context context;
     public ObservableField<String> error_name = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
     public ObservableField<String> error_subject = new ObservableField<>();
     public ObservableField<String> error_message = new ObservableField<>();
 
 
-    public boolean isDataValid(Context context) {
+
+    public void isDataValid(Context context) {
 
         if (!name.isEmpty() &&
                 !email.isEmpty() &&
@@ -39,7 +42,7 @@ public class ContactUsModel extends BaseObservable {
             error_message.set(null);
 
 
-            return true;
+           setValid(true);
 
         } else {
 
@@ -75,7 +78,8 @@ public class ContactUsModel extends BaseObservable {
 
             }
 
-            return false;
+            setValid(false);
+
 
         }
 
@@ -86,6 +90,7 @@ public class ContactUsModel extends BaseObservable {
         email = "";
         subject = "";
         message = "";
+        isValid = false;
     }
 
     @Bindable
@@ -96,6 +101,7 @@ public class ContactUsModel extends BaseObservable {
     public void setName(String name) {
         this.name = name;
         notifyPropertyChanged(BR.name);
+        isDataValid(getContext());
     }
 
     @Bindable
@@ -106,6 +112,8 @@ public class ContactUsModel extends BaseObservable {
     public void setEmail(String email) {
         this.email = email;
         notifyPropertyChanged(BR.email);
+        isDataValid(getContext());
+
 
     }
 
@@ -117,6 +125,8 @@ public class ContactUsModel extends BaseObservable {
     public void setSubject(String subject) {
         this.subject = subject;
         notifyPropertyChanged(BR.subject);
+        isDataValid(getContext());
+
 
     }
 
@@ -128,6 +138,26 @@ public class ContactUsModel extends BaseObservable {
     public void setMessage(String message) {
         this.message = message;
         notifyPropertyChanged(BR.message);
+        isDataValid(getContext());
 
+
+    }
+
+    @Bindable
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
+        notifyPropertyChanged(BR.valid);
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

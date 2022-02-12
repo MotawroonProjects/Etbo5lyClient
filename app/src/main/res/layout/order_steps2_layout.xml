@@ -21,7 +21,6 @@
             android:layout_marginTop="12dp"
             android:ems="3"
             android:gravity="center"
-            android:text="02/09/2022"
             android:textColor="@color/gray21"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

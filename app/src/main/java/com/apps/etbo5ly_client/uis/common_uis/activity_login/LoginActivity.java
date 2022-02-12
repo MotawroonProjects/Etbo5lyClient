@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -19,6 +20,7 @@ import com.apps.etbo5ly_client.common.share.Common;
 import com.apps.etbo5ly_client.databinding.ActivityLoginBinding;
 import com.apps.etbo5ly_client.databinding.BottomSheetDialogBinding;
 import com.apps.etbo5ly_client.model.LoginModel;
+import com.apps.etbo5ly_client.model.UserSettingsModel;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_app_category.AppCategoryActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseActivity;
@@ -32,6 +34,14 @@ public class LoginActivity extends BaseActivity {
     private int req;
     private ActivityResultLauncher<Intent> launcher;
     private boolean isFromSplash = true;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (getUserModel()!=null){
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +94,12 @@ public class LoginActivity extends BaseActivity {
         });
 
         binding.tvSkip.setOnClickListener(v -> {
-            navigateToAppCategoryActivity("skip");
+            if (getUserSettings() != null && !getUserSettings().getOption_id().isEmpty()) {
+                navigateToHomeActivity(getUserSettings().getOption_id());
+            } else {
+                navigateToAppCategoryActivity("skip");
+
+            }
         });
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -98,7 +113,14 @@ public class LoginActivity extends BaseActivity {
                 }
             } else if (req == 2 && result.getResultCode() == RESULT_OK && result.getData() != null) {
                 String option_id = result.getData().getStringExtra("option_id");
+                UserSettingsModel userSettingsModel = getUserSettings();
+                if (userSettingsModel==null){
+                    userSettingsModel = new UserSettingsModel();
+                }
+                userSettingsModel.setOption_id(option_id);
+                setUserSettings(userSettingsModel);
                 navigateToHomeActivity(option_id);
+                Log.e("opt",option_id);
             }
         });
     }

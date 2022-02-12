@@ -2,11 +2,15 @@ package com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.profile_
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,21 +20,31 @@ import androidx.navigation.Navigation;
 
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.databinding.FragmentProfileBinding;
+import com.apps.etbo5ly_client.model.UserModel;
 import com.apps.etbo5ly_client.model.ZoneCover;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseFragment;
+import com.apps.etbo5ly_client.uis.common_uis.activity_sign_up.SignUpActivity;
 
 public class FragmentProfile extends BaseFragment {
     private FragmentProfileBinding binding;
     private ActivityHomeGeneralMvvm activityHomeGeneralMvvm;
     private HomeActivity activity;
+    private int req;
+    private ActivityResultLauncher<Intent> launcher;
 
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         activity = (HomeActivity) context;
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (req==1&&result.getResultCode()==Activity.RESULT_OK){
+                UserModel userModel = getUserModel();
+                binding.setModel(userModel);
+            }
+        });
 
     }
 
@@ -66,6 +80,21 @@ public class FragmentProfile extends BaseFragment {
         });
         binding.llNotifications.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.fragmentNotification);
+        });
+
+        binding.llSetting.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.fragmentCatrerSetting);
+        });
+
+        binding.llContactUs.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.fragmentContactUs);
+        });
+
+        binding.llUpdateProfile.setOnClickListener(v -> {
+           req = 1;
+           Intent intent = new Intent(activity, SignUpActivity.class);
+           launcher.launch(intent);
+
         });
     }
 }

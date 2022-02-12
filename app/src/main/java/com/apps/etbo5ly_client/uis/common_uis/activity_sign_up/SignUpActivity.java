@@ -67,16 +67,21 @@ public class SignUpActivity extends BaseActivity {
         model = new SignUpModel(phone_code, phone);
         userModel = getUserModel();
         if (userModel != null) {
-            model.setPhone_code(userModel.getData().getPhone_code());
-            model.setPhone(userModel.getData().getPhone());
+            phone_code = userModel.getData().getPhone_code();
+            phone = userModel.getData().getPhone();
+            model.setName(userModel.getData().getName());
+            model.setEmail(userModel.getData().getEmail());
+
+            model.setPhone_code(phone_code);
+            model.setPhone(phone);
             binding.llPhone.setVisibility(View.GONE);
-            binding.tvPhone.setVisibility(View.GONE);
 
             if (userModel.getData().getPhoto() != null) {
                 String url = Tags.base_url + userModel.getData().getPhoto();
                 Picasso.get().load(Uri.parse(url)).into(binding.image);
                 model.setImage(url);
             }
+
 
             binding.btnSignup.setText(getString(R.string.update));
         }

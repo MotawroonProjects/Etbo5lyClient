@@ -15,6 +15,7 @@
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/ic_close2.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/ic_close3.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/ic_tag.xml" value="0.2169230769230769" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/ic_user.xml" value="0.2169230769230769" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/rounded_color4.xml" value="0.2203125" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/rounded_gray4.xml" value="0.2203125" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/small_rounded_color4.xml" value="0.21614583333333334" />
@@ -32,7 +33,11 @@
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_feast_details.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_feasts.xml" value="0.1859375" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_kitchen_details.xml" value="0.2" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_language.xml" value="0.17962962962962964" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_language_country.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_login.xml" value="0.20102564102564102" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_map.xml" value="0.17962962962962964" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_sign_up.xml" value="0.4136460554371002" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_zone_cover.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/buffet_menu_row.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/buffet_row.xml" value="0.4109848484848485" />
@@ -52,7 +57,9 @@
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_base_profile_navigations.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_cart.xml" value="0.22" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_caterer_offer.xml" value="0.2" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_caterer_setting.xml" value="0.22" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_checkout.xml" value="0.2" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_contact_us.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_current_order.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_favorite.xml" value="0.18611111111111112" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_notification.xml" value="0.18611111111111112" />

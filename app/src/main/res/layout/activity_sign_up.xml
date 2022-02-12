@@ -108,65 +108,72 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
 
-                            <TextView
-                                android:id="@+id/tvPhone"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="12dp"
-                                android:text="@string/phone"
-                                android:textColor="@color/gray12"
-                                android:textSize="14sp" />
-
                             <LinearLayout
                                 android:id="@+id/llPhone"
                                 android:layout_width="match_parent"
-                                android:layout_height="56dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="60dp"
-                                android:background="@drawable/small_stroke_gray8"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:paddingStart="8dp"
-                                android:paddingEnd="8dp">
-
-                                <ImageView
-                                    android:layout_width="30dp"
-                                    android:layout_height="20dp"
-                                    android:src="@drawable/flag"
-
-                                    />
-
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                >
                                 <TextView
+                                    android:id="@+id/tvPhone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginEnd="5dp"
-                                    android:text='@{model.phone_code}'
-                                    android:textColor="@color/black"
-                                    android:textSize="15sp" />
+                                    android:layout_marginTop="12dp"
+                                    android:text="@string/phone"
+                                    android:textColor="@color/gray12"
+                                    android:textSize="14sp" />
 
-                                <View
-                                    android:layout_width="1px"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:background="@color/gray8" />
-
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/transparent"
+                                    android:layout_height="56dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="60dp"
+                                    android:background="@drawable/small_stroke_gray8"
                                     android:gravity="center_vertical"
-                                    android:paddingStart="22dp"
-                                    android:paddingEnd="22dp"
-                                    android:singleLine="true"
-                                    android:text="@{model.phone}"
-                                    android:textColor="@color/black"
-                                    android:textSize="15sp"
-                                    tools:ignore="TextFields" />
+                                    android:orientation="horizontal"
+                                    android:paddingStart="8dp"
+                                    android:paddingEnd="8dp">
+
+                                    <ImageView
+                                        android:layout_width="30dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/flag"
+
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:layout_marginEnd="5dp"
+                                        android:text='@{model.phone_code}'
+                                        android:textColor="@color/black"
+                                        android:textSize="15sp" />
+
+                                    <View
+                                        android:layout_width="1px"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginBottom="5dp"
+                                        android:background="@color/gray8" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/transparent"
+                                        android:gravity="center_vertical"
+                                        android:paddingStart="22dp"
+                                        android:paddingEnd="22dp"
+                                        android:singleLine="true"
+                                        android:text="@{model.phone}"
+                                        android:textColor="@color/black"
+                                        android:textSize="15sp"
+                                        tools:ignore="TextFields" />
 
 
+                                </LinearLayout>
                             </LinearLayout>
+
 
 
                         </LinearLayout>

@@ -162,32 +162,12 @@ public interface Service {
                                                              @Query(value = "user_id") String user_id
     );
 
-    @FormUrlEncoded
-    @POST("api/logout")
-    Single<Response<StatusResponse>> logout(@Header("AUTHORIZATION") String token,
-                                            @Field("api_key") String api_key,
-                                            @Field("phone_token") String phone_token
-
-
-    );
 
     @FormUrlEncoded
-    @POST("api/firebase-tokens")
-    Single<Response<StatusResponse>> updateFirebasetoken(@Header("AUTHORIZATION") String token,
-                                                         @Field("api_key") String api_key,
-                                                         @Field("phone_token") String phone_token,
-                                                         @Field("user_id") String user_id,
-                                                         @Field("software_type") String software_type
-
-
-    );
-
-    @FormUrlEncoded
-    @POST("api/contact-us")
-    Single<Response<StatusResponse>> contactUs(@Field("api_key") String api_key,
-                                               @Field("name") String name,
+    @POST("api/Catering/CountactUs")
+    Single<Response<StatusResponse>> contactUs(@Field("name") String name,
                                                @Field("email") String email,
-                                               @Field("subject") String phone,
+                                               @Field("subject") String subject,
                                                @Field("message") String message
 
 
@@ -213,6 +193,25 @@ public interface Service {
 
     @POST("api/Catering/storeOrder")
     Single<Response<SingleOrderDataModel>> sendOrder(@Body CartOrderModel model);
+
+
+    @FormUrlEncoded
+    @POST("api/logout")
+    Single<Response<StatusResponse>> logout(@Header("AUTHORIZATION") String token,
+                                            @Field("api_key") String api_key,
+                                            @Field("phone_token") String phone_token
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/Catering/firebaseTokens")
+    Single<Response<StatusResponse>> updateFireBaseToken(@Field("token") String token,
+                                                         @Field("user_id") String user_id,
+                                                         @Field("type") String type
+
+
+    );
 
 
 }

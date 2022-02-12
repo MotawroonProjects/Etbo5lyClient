@@ -3,6 +3,7 @@ package com.apps.etbo5ly_client.uis.common_uis.activity_splash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -111,6 +112,7 @@ public class SplashActivity extends BaseActivity {
             } else {
 
                 if (getUserModel() != null) {
+                    Log.e("opt_id",getUserSettings().getOption_id()+"__");
                     if (!getUserSettings().getOption_id().isEmpty()) {
                         navigateToHomeActivity(getUserSettings().getOption_id());
                     } else {

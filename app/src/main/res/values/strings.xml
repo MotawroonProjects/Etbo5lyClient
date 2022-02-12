@@ -27,7 +27,7 @@
     <string name="prev">Previous</string>
     <string name="choose_your_language">Choose your language</string>
     <string name="next">Next</string>
-    <string name="notifications">notifications</string>
+    <string name="notifications">Notifications</string>
     <string name="sign_up">Sign up</string>
     <string name="update">Update</string>
     <string name="please_enter_code_sent_to">please enter code sent to</string>
@@ -35,7 +35,7 @@
     <string name="confirm">Confirm</string>
     <string name="confirmation_code">Confirmation code</string>
     <string name="field_required">field required</string>
-    <string name="inv_email">invaled email</string>
+    <string name="inv_email">invalid email</string>
     <string name="search">Search...</string>
     <string name="rate_app">Rate App</string>
     <string name="settings">Settings</string>
@@ -193,13 +193,17 @@
     <string name="no_orders">No orders to show</string>
     <string name="rate">Rate</string>
     <string name="completed">Completed</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="status">Status :</string>
     <string name="received_your_order">Received your order</string>
     <string name="delivering">Delivering</string>
     <string name="delivered">Delivered</string>
     <string name="done">Done</string>
     <string name="no_fav">No favorite items</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="order_approved">Your order has been approved from</string>
+    <string name="order_refused">Your order has been refused</string>
+    <string name="your_order_from">Your order from</string>
+    <string name="delivered2">delivered</string>
 
 </resources>

@@ -5,7 +5,7 @@
     <string name="search_key">AIzaSyAnjvMAJEmiAv3yeCDUXWv-PboXiT_uaoQ</string>
     <string name="name">الإسم</string>
     <string name="email">البريد الإلكترونى</string>
-    <string name="subject">العنوان</string>
+    <string name="subject">الموضوع</string>
     <string name="message">الرسالة</string>
     <string name="send">ارسال</string>
     <string name="home">الرئيسية</string>
@@ -200,5 +200,9 @@
     <string name="delivered">تم استلام الطلب</string>
     <string name="done">تم التجهيز</string>
     <string name="no_fav">لا توجد عناصر مفضلة</string>
+    <string name="order_approved">تم قبول طلبكم من </string>
+    <string name="order_refused">تم رفض طلبكم من </string>
+    <string name="your_order_from">طلبكم من </string>
+    <string name="delivered2">تم التسليم</string>
 
 </resources>

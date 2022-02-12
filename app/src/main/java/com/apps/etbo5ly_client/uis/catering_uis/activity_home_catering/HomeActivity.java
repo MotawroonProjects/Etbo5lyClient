@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import android.view.View;
 
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.adapters.common_adapter.MyPagerAdapter;
+import com.apps.etbo5ly_client.common.language.Language;
 import com.apps.etbo5ly_client.databinding.ActivityHomeClientBinding;
 import com.apps.etbo5ly_client.databinding.ItemMenuCartBinding;
 import com.apps.etbo5ly_client.model.ManageCartModel;
@@ -32,6 +34,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+
+import io.paperdb.Paper;
 
 public class HomeActivity extends BaseActivity implements ViewPager.OnPageChangeListener, NavigationBarView.OnItemSelectedListener {
     private ActivityHomeClientBinding binding;
@@ -83,6 +87,8 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
             }
         });
+
+        activityHomeGeneralMvvm.onTokenSuccess().observe(this, this::setUserModel);
         fragmentList = new ArrayList<>();
         stack = new Stack<>();
         map = new HashMap<>();
@@ -114,7 +120,14 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         itemView.addView(itemMenuCartBinding.getRoot());
         updateMenuCartItem(View.GONE);
 
+        activityHomeGeneralMvvm.updateToken(getUserModel());
 
+
+
+    }
+
+    public void updateFireBase(){
+        activityHomeGeneralMvvm.updateToken(getUserModel());
     }
 
     private void updateMenuCartItem(int visibility) {
@@ -172,6 +185,20 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             }
         }
         return position;
+    }
+
+    public void refreshActivity(String lang) {
+        Paper.book().write("lang", lang);
+        Language.setNewLocale(this, lang);
+        new Handler()
+                .postDelayed(() -> {
+
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }, 500);
+
+
     }
 
     @Override

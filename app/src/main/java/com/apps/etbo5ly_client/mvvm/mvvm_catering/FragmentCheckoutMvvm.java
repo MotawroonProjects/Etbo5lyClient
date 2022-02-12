@@ -202,6 +202,7 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
 
                         if (response.isSuccessful()) {
                             if (response.body() != null) {
+                                Log.e("codes", response.body().getStatus() + ""+response.body().getMessage());
                                 if (response.body().getStatus() == 200) {
                                     getOnOrderSuccess().setValue(response.body().getSingelOrder());
 
