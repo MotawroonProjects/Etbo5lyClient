@@ -67,6 +67,7 @@ public interface Service {
                                            @Part("longitude") RequestBody longitude,
                                            @Part("latitude") RequestBody latitude,
                                            @Part("type") RequestBody type,
+                                           @Part("software_type") RequestBody software_type,
                                            @Part MultipartBody.Part logo
 
 
@@ -196,10 +197,9 @@ public interface Service {
 
 
     @FormUrlEncoded
-    @POST("api/logout")
-    Single<Response<StatusResponse>> logout(@Header("AUTHORIZATION") String token,
-                                            @Field("api_key") String api_key,
-                                            @Field("phone_token") String phone_token
+    @POST("api/Catering/logout")
+    Single<Response<StatusResponse>> logout(@Field("user_id") String user_id,
+                                            @Field("token") String phone_token
 
 
     );
@@ -209,6 +209,24 @@ public interface Service {
     Single<Response<StatusResponse>> updateFireBaseToken(@Field("token") String token,
                                                          @Field("user_id") String user_id,
                                                          @Field("type") String type
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/Catering/status_Order")
+    Single<Response<StatusResponse>> reSendOrder(@Field("order_id") String order_id,
+                                                 @Field("status_order") String status_order
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/Catering/storeRate")
+    Single<Response<StatusResponse>> rateOrder(@Field("caterer_id") String caterer_id,
+                                               @Field("user_id") String user_id,
+                                               @Field("value") String value,
+                                               @Field("comment") String comment
 
 
     );

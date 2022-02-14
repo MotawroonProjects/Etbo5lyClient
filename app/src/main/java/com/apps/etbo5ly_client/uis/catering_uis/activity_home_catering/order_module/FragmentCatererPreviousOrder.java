@@ -2,6 +2,8 @@ package com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.order_mo
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +19,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.adapters.catering_adapters.CatererCurrentOrderAdapter;
 import com.apps.etbo5ly_client.adapters.catering_adapters.CatererPreviousOrderAdapter;
+import com.apps.etbo5ly_client.common.share.Common;
+import com.apps.etbo5ly_client.databinding.BottomSheetDialogBinding;
+import com.apps.etbo5ly_client.databinding.BottomSheetRateDialogBinding;
 import com.apps.etbo5ly_client.databinding.FragmentCurrentOrderBinding;
+import com.apps.etbo5ly_client.model.OrderModel;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.FragmentCatererCurrentOrderMvvm;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.FragmentCatererPreviousOrderMvvm;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseFragment;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 
 public class FragmentCatererPreviousOrder extends BaseFragment {
@@ -76,6 +83,12 @@ public class FragmentCatererPreviousOrder extends BaseFragment {
             binding.recViewLayout.swipeRefresh.setRefreshing(isLoading);
         });
 
+        mvvm.onResendSuccess().observe(activity, success -> {
+            if (success) {
+                activityHomeGeneralMvvm.onOrdersRefresh().setValue(true);
+            }
+        });
+
         mvvm.onDataSuccess().observe(activity, orderList -> {
             if (orderList.size() > 0) {
                 binding.recViewLayout.tvNoData.setVisibility(View.GONE);
@@ -99,5 +112,38 @@ public class FragmentCatererPreviousOrder extends BaseFragment {
 
     }
 
-   
+
+    public void reOrder(OrderModel orderModel) {
+        mvvm.resendOrder(activity, orderModel.getId());
+    }
+
+
+    public void openSheet(OrderModel model) {
+        BottomSheetDialog dialog = new BottomSheetDialog(activity);
+        BottomSheetRateDialogBinding dialogBinding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.bottom_sheet_rate_dialog, null, false);
+        dialog.setContentView(dialogBinding.getRoot());
+        dialog.setCanceledOnTouchOutside(false);
+        dialogBinding.setModel(model);
+
+        dialogBinding.btnAddRate.setOnClickListener(v -> {
+            float rate = dialogBinding.rateBar.getRating();
+            String comment = dialogBinding.edtComment.getText().toString();
+            if (!comment.isEmpty()) {
+                dialogBinding.edtComment.setError(null);
+                Common.CloseKeyBoard(activity, dialogBinding.edtComment);
+                mvvm.rateOrder(activity, getUserModel(), model.getCaterer_id(), rate + "", comment);
+
+            } else {
+                dialogBinding.edtComment.setError(getString(R.string.field_required));
+
+            }
+            dialog.dismiss();
+
+        });
+        dialog.show();
+
+
+    }
+
+
 }

@@ -30,6 +30,7 @@ import com.apps.etbo5ly_client.databinding.FragmentCheckoutBinding;
 import com.apps.etbo5ly_client.model.KitchenModel;
 import com.apps.etbo5ly_client.model.ManageCartModel;
 import com.apps.etbo5ly_client.model.SendOrderModel;
+import com.apps.etbo5ly_client.model.UserSettingsModel;
 import com.apps.etbo5ly_client.model.ZoneCover;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.FragmentCheckoutMvvm;
@@ -71,6 +72,9 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
                 calculateTotal();
             } else if (req == 2 && result.getResultCode() == Activity.RESULT_OK) {
                 //user logged in
+                UserSettingsModel userSettingsModel = getUserSettings();
+                userSettingsModel.setCanFinishLogin(true);
+                setUserSettings(userSettingsModel);
                 activityHomeGeneralMvvm.onUserDateRefresh().setValue(true);
                 activity.updateFireBase();
             }

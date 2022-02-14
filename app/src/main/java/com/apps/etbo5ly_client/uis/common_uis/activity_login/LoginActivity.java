@@ -33,12 +33,12 @@ public class LoginActivity extends BaseActivity {
     private boolean isAccepted = false;
     private int req;
     private ActivityResultLauncher<Intent> launcher;
-    private boolean isFromSplash = true;
+    private String isFromSplash = "";
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (getUserModel()!=null){
+        if (getUserSettings().isCanFinishLogin()&&getUserModel()!=null){
             finish();
         }
     }
@@ -55,14 +55,16 @@ public class LoginActivity extends BaseActivity {
     private void getDataFromIntent() {
         Intent intent = getIntent();
         if (intent.hasExtra("from")) {
-            isFromSplash = false;
+            isFromSplash = intent.getStringExtra("from");
+        } else {
+            isFromSplash = "splash";
         }
     }
 
     private void initView() {
         model = new LoginModel();
         binding.setModel(model);
-        if (!isFromSplash) {
+        if (!isFromSplash.equals("splash")) {
             binding.tvSkip.setVisibility(View.GONE);
         }
         binding.tvSkip.setPaintFlags(binding.tvSkip.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -104,23 +106,29 @@ public class LoginActivity extends BaseActivity {
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (req == 1 && result.getResultCode() == RESULT_OK) {
-                if (isFromSplash) {
-                    navigateToAppCategoryActivity("login");
+                if (isFromSplash.equals("splash")) {
+                    if (getUserSettings() != null && !getUserSettings().getOption_id().isEmpty()) {
+                        navigateToHomeActivity(getUserSettings().getOption_id());
+
+                    } else {
+                        navigateToAppCategoryActivity("login");
+
+                    }
 
                 } else {
                     setResult(RESULT_OK);
                     finish();
                 }
-            } else if (req == 2 && result.getResultCode() == RESULT_OK && result.getData() != null) {
-                String option_id = result.getData().getStringExtra("option_id");
+            } else if (req == 2 && result.getResultCode() == RESULT_OK) {
+
                 UserSettingsModel userSettingsModel = getUserSettings();
-                if (userSettingsModel==null){
-                    userSettingsModel = new UserSettingsModel();
+                if (userSettingsModel != null && !userSettingsModel.getOption_id().isEmpty()) {
+                    navigateToHomeActivity(getUserSettings().getOption_id());
+                } else {
+                    navigateToAppCategoryActivity("login");
+
                 }
-                userSettingsModel.setOption_id(option_id);
-                setUserSettings(userSettingsModel);
-                navigateToHomeActivity(option_id);
-                Log.e("opt",option_id);
+
             }
         });
     }
@@ -133,6 +141,14 @@ public class LoginActivity extends BaseActivity {
             finish();
         }
 
+    }
+
+    private void navigateToVerificationCodeActivity() {
+        req = 1;
+        Intent intent = new Intent(this, VerificationCodeActivity.class);
+        intent.putExtra("phone_code", model.getPhone_code());
+        intent.putExtra("phone", model.getPhone());
+        launcher.launch(intent);
     }
 
 
@@ -167,14 +183,6 @@ public class LoginActivity extends BaseActivity {
         dialog.show();
 
 
-    }
-
-    private void navigateToVerificationCodeActivity() {
-        req = 1;
-        Intent intent = new Intent(this, VerificationCodeActivity.class);
-        intent.putExtra("phone_code", model.getPhone_code());
-        intent.putExtra("phone", model.getPhone());
-        launcher.launch(intent);
     }
 
 

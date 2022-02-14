@@ -81,7 +81,7 @@
     <string name="ch_app_cuisine">إختر المطبخ الملائم لمناسبتك ان كان مطعم\n او طهاة مستقلين او عربات متنقلة</string>
     <string name="start">إبدأ</string>
     <string name="ch_city">إختر المدينة</string>
-    <string name="do_read_our_terms_of_use_and_privacy_policy"><![CDATA[هل قرأت <font color ="#4D94BE"><a href="https://www.google.com">شروط الاستخدام</a></font> و <font color ="#4D94BE"><a href="https://www.google.com">سياسة الخصوصية</a></font>]]></string>
+    <string name="do_read_our_terms_of_use_and_privacy_policy"><![CDATA[هل قرأت <font color ="#4D94BE"><a href="http://etbo5ly.coopq8.com/terms#1">شروط الاستخدام</a></font> و <font color ="#4D94BE"><a href="http://etbo5ly.coopq8.com/terms#2">سياسة الخصوصية</a></font>]]></string>
     <string name="yes_i_have_read_it_and_agree_to_it">نعم قراتها و أوافق عليها</string>
     <string name="cnt_login">لا يمكنك تسجيل الدخول دون الموافقة على شروط الاستخدام</string>
     <string name="ph_em_found">رقم الجوال او البريد الالكتروني موجود من قبل</string>
@@ -204,5 +204,6 @@
     <string name="order_refused">تم رفض طلبكم من </string>
     <string name="your_order_from">طلبكم من </string>
     <string name="delivered2">تم التسليم</string>
+    <string name="type_comment_here">إكتب تعليقك هنا...</string>
 
 </resources>

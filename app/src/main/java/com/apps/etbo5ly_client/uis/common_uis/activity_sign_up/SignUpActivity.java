@@ -81,8 +81,7 @@ public class SignUpActivity extends BaseActivity {
                 Picasso.get().load(Uri.parse(url)).into(binding.image);
                 model.setImage(url);
             }
-
-
+            
             binding.btnSignup.setText(getString(R.string.update));
         }
         binding.setModel(model);

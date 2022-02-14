@@ -58,7 +58,7 @@ public class GeneralMethod {
                         CircleImageView imageView = (CircleImageView) view;
                         RequestOptions options = new RequestOptions().override(view.getWidth(), view.getHeight());
                         Glide.with(view.getContext()).asBitmap()
-                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .load(Tags.base_url + imageUrl)
                                 .centerCrop()
                                 .apply(options)
@@ -67,7 +67,7 @@ public class GeneralMethod {
                         RoundedImageView imageView = (RoundedImageView) view;
                         RequestOptions options = new RequestOptions().override(view.getWidth(), view.getHeight());
                         Glide.with(view.getContext()).asBitmap()
-                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .load(Tags.base_url + imageUrl)
                                 .centerCrop()
                                 .apply(options)
@@ -77,7 +77,7 @@ public class GeneralMethod {
 
                         RequestOptions options = new RequestOptions().override(view.getWidth(), view.getHeight());
                         Glide.with(view.getContext()).asBitmap()
-                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .load(Tags.base_url + imageUrl)
                                 .centerCrop()
                                 .apply(options)

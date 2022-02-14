@@ -69,6 +69,7 @@ public class VerificationCodeActivity extends BaseActivity {
                 setUserModel(userModel);
                 setResult(RESULT_OK);
                 finish();
+
             }
         });
 

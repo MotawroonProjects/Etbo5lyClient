@@ -58,6 +58,7 @@ public class ActivitySignupMvvm extends AndroidViewModel {
         RequestBody lat_part = Common.getRequestBodyText("0.0");
         RequestBody lng_part = Common.getRequestBodyText("0.0");
         RequestBody type_part = Common.getRequestBodyText("client");
+        RequestBody software_part = Common.getRequestBodyText("android");
 
 
         MultipartBody.Part image = null;
@@ -66,7 +67,7 @@ public class ActivitySignupMvvm extends AndroidViewModel {
         }
 
 
-        Api.getService(Tags.base_url).signUp(name_part, phone_code_part, phone_part, email_part, lat_part, lng_part, type_part, image)
+        Api.getService(Tags.base_url).signUp(name_part, phone_code_part, phone_part, email_part, lat_part, lng_part, type_part,software_part, image)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response<UserModel>>() {

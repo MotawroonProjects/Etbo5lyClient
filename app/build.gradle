@@ -76,6 +76,7 @@ dependencies {
     implementation 'com.github.mmin18:realtimeblurview:1.2.1'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
+    implementation 'com.github.FlyingPumba:SimpleRatingBar:v0.1.5'
 
 
 }

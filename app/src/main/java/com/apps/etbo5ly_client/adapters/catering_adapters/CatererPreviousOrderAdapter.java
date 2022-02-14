@@ -15,6 +15,7 @@ import com.apps.etbo5ly_client.databinding.CatererCurrentOrderRowBinding;
 import com.apps.etbo5ly_client.databinding.CatererPreviousOrderRowBinding;
 import com.apps.etbo5ly_client.model.OrderModel;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.order_module.FragmentCatererCurrentOrder;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.order_module.FragmentCatererPreviousOrder;
 
 import java.util.List;
 
@@ -41,7 +42,19 @@ public class CatererPreviousOrderAdapter extends RecyclerView.Adapter<RecyclerVi
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
+        myHolder.binding.btnReOrder.setOnClickListener(v -> {
+            if (fragment instanceof FragmentCatererPreviousOrder){
+                FragmentCatererPreviousOrder fragmentCatererPreviousOrder = (FragmentCatererPreviousOrder) fragment;
+                fragmentCatererPreviousOrder.reOrder(list.get(myHolder.getAdapterPosition()));
+            }
+        });
 
+        myHolder.binding.btnRate.setOnClickListener(v -> {
+            if (fragment instanceof FragmentCatererPreviousOrder){
+                FragmentCatererPreviousOrder fragmentCatererPreviousOrder = (FragmentCatererPreviousOrder) fragment;
+                fragmentCatererPreviousOrder.openSheet(list.get(myHolder.getAdapterPosition()));
+            }
+        });
 
     }
 

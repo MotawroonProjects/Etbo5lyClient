@@ -63,16 +63,15 @@ public class FragmentCatererCurrentOrder extends BaseFragment {
                 mvvm.getOrders(getUserModel());
             }
         });
-
         activityHomeGeneralMvvm.onUserDateRefresh().observe(this, isRefreshed -> {
             if (isRefreshed) {
                 mvvm.getOrders(getUserModel());
             }
         });
+
         mvvm.getIsDataLoading().observe(activity, isLoading -> {
             binding.recViewLayout.swipeRefresh.setRefreshing(isLoading);
         });
-
         mvvm.onDataSuccess().observe(activity, orderList -> {
             if (orderList.size() > 0) {
                 binding.recViewLayout.tvNoData.setVisibility(View.GONE);
@@ -86,6 +85,12 @@ public class FragmentCatererCurrentOrder extends BaseFragment {
                 adapter.updateList(orderList);
             }
         });
+        mvvm.onResendSuccess().observe(activity, success -> {
+           if (success){
+               activityHomeGeneralMvvm.onOrdersRefresh();
+           }
+        });
+
         binding.recViewLayout.tvNoData.setText(R.string.no_orders);
         binding.recViewLayout.recView.setLayoutManager(new LinearLayoutManager(activity));
         adapter = new CatererCurrentOrderAdapter(activity, this);
@@ -98,5 +103,10 @@ public class FragmentCatererCurrentOrder extends BaseFragment {
         Bundle bundle = new Bundle();
         bundle.putString("order_id", order_id);
         Navigation.findNavController(v).navigate(R.id.fragmentOrderDetails, bundle);
+    }
+
+
+    public void resendOrder(String id) {
+        mvvm.resendOrder(activity, id);
     }
 }

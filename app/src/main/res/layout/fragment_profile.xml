@@ -191,7 +191,8 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingStart="16dp"
-                        android:paddingEnd="16dp">
+                        android:paddingEnd="16dp"
+                        android:visibility="@{model!=null?View.VISIBLE:View.GONE}">
 
                         <ImageView
                             android:layout_width="36dp"
@@ -231,7 +232,10 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="12dp"
-                        android:background="@color/gray4" />
+                        android:background="@color/gray4"
+                        android:visibility="@{model!=null?View.VISIBLE:View.GONE}"
+
+                        />
 
                     <LinearLayout
                         android:id="@+id/llNotifications"
@@ -377,15 +381,22 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="12dp"
-                        android:background="@color/gray4" />
+                        android:background="@color/gray4"
+                        android:visibility="@{model!=null?View.VISIBLE:View.GONE}"
+
+                        />
 
                     <LinearLayout
+                        android:id="@+id/llLogout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingStart="16dp"
-                        android:paddingEnd="16dp">
+                        android:paddingEnd="16dp"
+                        android:visibility="@{model!=null?View.VISIBLE:View.GONE}"
+
+                        >
 
                         <ImageView
                             android:layout_width="36dp"

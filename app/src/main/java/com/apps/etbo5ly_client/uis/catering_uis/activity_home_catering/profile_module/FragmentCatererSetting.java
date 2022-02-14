@@ -118,6 +118,24 @@ public class FragmentCatererSetting extends BaseFragment {
 
         });
 
+        binding.llTerms.setOnClickListener(v -> {
+            String url = "http://etbo5ly.coopq8.com/terms#1";
+            navigateToWebViewFragment(v,url);
+
+        });
+
+        binding.llPrivacy.setOnClickListener(v -> {
+            String url = "http://etbo5ly.coopq8.com/terms#2";
+            navigateToWebViewFragment(v,url);
+
+
+        });
+    }
+
+    private void navigateToWebViewFragment(View v,String url) {
+        Bundle bundle = new Bundle();
+        bundle.putString("url",url);
+        Navigation.findNavController(v).navigate(R.id.fragmentWebView,bundle);
     }
 
     private void navigateToMapActivity() {

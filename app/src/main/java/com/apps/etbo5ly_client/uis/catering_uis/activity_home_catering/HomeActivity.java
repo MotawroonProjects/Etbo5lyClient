@@ -22,9 +22,11 @@ import com.apps.etbo5ly_client.common.language.Language;
 import com.apps.etbo5ly_client.databinding.ActivityHomeClientBinding;
 import com.apps.etbo5ly_client.databinding.ItemMenuCartBinding;
 import com.apps.etbo5ly_client.model.ManageCartModel;
+import com.apps.etbo5ly_client.model.UserSettingsModel;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.uis.FragmentBaseNavigation;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseActivity;
+import com.apps.etbo5ly_client.uis.common_uis.activity_login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -88,6 +90,18 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             }
         });
 
+
+        activityHomeGeneralMvvm.onLoggedOutSuccess().observe(this, isLoggedOut -> {
+            if (isLoggedOut) {
+                UserSettingsModel userSettingsModel = getUserSettings();
+                userSettingsModel.setCanFinishLogin(false);
+                setUserSettings(userSettingsModel);
+                clearUserData();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         activityHomeGeneralMvvm.onTokenSuccess().observe(this, this::setUserModel);
         fragmentList = new ArrayList<>();
         stack = new Stack<>();
@@ -123,10 +137,9 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         activityHomeGeneralMvvm.updateToken(getUserModel());
 
 
-
     }
 
-    public void updateFireBase(){
+    public void updateFireBase() {
         activityHomeGeneralMvvm.updateToken(getUserModel());
     }
 
@@ -215,6 +228,11 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
             }
         }
+
+    }
+
+    public void logout() {
+        activityHomeGeneralMvvm.logout(getUserModel(), this);
 
     }
 }

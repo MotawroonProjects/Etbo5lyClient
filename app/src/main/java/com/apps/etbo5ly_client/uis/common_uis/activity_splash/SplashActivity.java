@@ -112,7 +112,6 @@ public class SplashActivity extends BaseActivity {
             } else {
 
                 if (getUserModel() != null) {
-                    Log.e("opt_id",getUserSettings().getOption_id()+"__");
                     if (!getUserSettings().getOption_id().isEmpty()) {
                         navigateToHomeActivity(getUserSettings().getOption_id());
                     } else {

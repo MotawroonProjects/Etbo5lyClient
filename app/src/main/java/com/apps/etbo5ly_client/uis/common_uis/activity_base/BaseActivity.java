@@ -62,6 +62,11 @@ public class BaseActivity extends AppCompatActivity {
         preferences.createUpdateUserData(this, userModel);
     }
 
+    protected void clearUserData() {
+        Preferences preferences = Preferences.getInstance();
+        preferences.clearUserData(this);
+    }
+
 
     public void setUserSettings(UserSettingsModel userSettingsModel) {
         Preferences preferences = Preferences.getInstance();

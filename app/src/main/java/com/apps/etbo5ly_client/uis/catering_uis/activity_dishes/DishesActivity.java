@@ -62,6 +62,7 @@ public class DishesActivity extends BaseActivity {
             }
         });
 
+
         mvvm.onDataSuccess().observe(this, categories -> {
             if (categories.size() > 0) {
                 updateUi();
@@ -96,7 +97,7 @@ public class DishesActivity extends BaseActivity {
             if (cartDishes.size() > 0) {
 
                 for (DishModel model : cartDishes) {
-                    SendOrderModel.Details item = new SendOrderModel.Details("", model.getId(), "", "", model.getCaterer_id(), model.getAmount() + "", model.getPhoto(), model.getTitel(), model.getPrice(),DISH);
+                    SendOrderModel.Details item = new SendOrderModel.Details("", model.getId(), "", "", model.getCaterer_id(), model.getAmount() + "", model.getPhoto(), model.getTitel(), model.getPrice(), DISH);
                     manageCartModel.addItemToCart(this, item, model.getCaterer_id());
                 }
 

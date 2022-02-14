@@ -40,7 +40,7 @@ public class FragmentProfile extends BaseFragment {
         super.onAttach(context);
         activity = (HomeActivity) context;
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (req==1&&result.getResultCode()==Activity.RESULT_OK){
+            if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
                 UserModel userModel = getUserModel();
                 binding.setModel(userModel);
             }
@@ -91,10 +91,14 @@ public class FragmentProfile extends BaseFragment {
         });
 
         binding.llUpdateProfile.setOnClickListener(v -> {
-           req = 1;
-           Intent intent = new Intent(activity, SignUpActivity.class);
-           launcher.launch(intent);
+            req = 1;
+            Intent intent = new Intent(activity, SignUpActivity.class);
+            launcher.launch(intent);
 
+        });
+
+        binding.llLogout.setOnClickListener(v -> {
+            activity.logout();
         });
     }
 }

@@ -9,6 +9,7 @@ public class UserSettingsModel implements Serializable {
     private SelectedLocation location;
     private String option_id = "";
     private boolean canSendNotifications = true;
+    private boolean canFinishLogin = false;
 
     public boolean isFirstTime() {
         return isFirstTime;
@@ -56,5 +57,13 @@ public class UserSettingsModel implements Serializable {
 
     public void setCanSendNotifications(boolean canSendNotifications) {
         this.canSendNotifications = canSendNotifications;
+    }
+
+    public boolean isCanFinishLogin() {
+        return canFinishLogin;
+    }
+
+    public void setCanFinishLogin(boolean canFinishLogin) {
+        this.canFinishLogin = canFinishLogin;
     }
 }

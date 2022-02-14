@@ -45,9 +45,15 @@ public class CatererCurrentOrderAdapter extends RecyclerView.Adapter<RecyclerVie
         MyHolder myHolder = (MyHolder) holder;
         myHolder.binding.setModel(list.get(position));
         myHolder.binding.btnFollow.setOnClickListener(v -> {
-            if (fragment instanceof FragmentCatererCurrentOrder){
+            if (fragment instanceof FragmentCatererCurrentOrder) {
+                OrderModel orderModel = list.get(myHolder.getAdapterPosition());
                 FragmentCatererCurrentOrder fragmentCatererCurrentOrder = (FragmentCatererCurrentOrder) fragment;
-                fragmentCatererCurrentOrder.navigateToFragmentOrderDetails(v,list.get(myHolder.getAdapterPosition()).getId());
+                if (orderModel.getStatus_order().equals("refusal")) {
+                    fragmentCatererCurrentOrder.resendOrder(orderModel.getId());
+                } else {
+                    fragmentCatererCurrentOrder.navigateToFragmentOrderDetails(v, orderModel.getId());
+                }
+
             }
         });
 

@@ -1,13 +1,17 @@
 package com.apps.etbo5ly_client.mvvm.mvvm_catering;
 
 import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.common.remote.Api;
+import com.apps.etbo5ly_client.common.share.Common;
 import com.apps.etbo5ly_client.common.tags.Tags;
 import com.apps.etbo5ly_client.model.OrderModel;
 import com.apps.etbo5ly_client.model.StatusResponse;
@@ -37,7 +41,7 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> onOrdersRefresh;
     private MutableLiveData<Boolean> onFavoriteRefresh;
     private MutableLiveData<UserModel> onTokenSuccess;
-
+    private MutableLiveData<Boolean> onLoggedOutSuccess;
 
 
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -122,6 +126,14 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
     }
 
 
+    public MutableLiveData<Boolean> onLoggedOutSuccess() {
+        if (onLoggedOutSuccess == null) {
+            onLoggedOutSuccess = new MutableLiveData<>();
+        }
+
+        return onLoggedOutSuccess;
+    }
+
 
     public void setOnRefreshSuccess(boolean refresh) {
         onDataRefresh().setValue(refresh);
@@ -136,16 +148,15 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
     }
 
 
-
-    public void updateToken(UserModel userModel){
-        if (userModel==null){
+    public void updateToken(UserModel userModel) {
+        if (userModel == null) {
             return;
         }
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
+            if (task.isSuccessful()) {
                 String token = task.getResult();
                 Api.getService(Tags.base_url)
-                        .updateFireBaseToken(token,userModel.getData().getId(),"android")
+                        .updateFireBaseToken(token, userModel.getData().getId(), "android")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new SingleObserver<Response<StatusResponse>>() {
@@ -163,7 +174,7 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
                                         if (response.body().getStatus() == 200) {
                                             userModel.setFireBaseToken(token);
                                             onTokenSuccess().setValue(userModel);
-                                            Log.e("token","updated");
+                                            Log.e("token", "updated");
 
                                         }
                                     }
@@ -180,7 +191,7 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
 
                             @Override
                             public void onError(@NonNull Throwable e) {
-                               Log.e("token",e.toString());
+                                Log.e("token", e.toString());
 
                             }
                         });
@@ -189,5 +200,60 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
 
 
     }
+
+    public void logout(UserModel userModel, Context context) {
+        if (userModel == null) {
+            return;
+        }
+        Log.e("token", userModel.getFireBaseToken());
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getString(R.string.wait));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.show();
+
+        Api.getService(Tags.base_url)
+                .logout(userModel.getData().getId(), userModel.getFireBaseToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<StatusResponse>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<StatusResponse> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            Log.e("status", response.body().getStatus() + "");
+                            if (response.body() != null) {
+                                if (response.body().getStatus() == 200) {
+                                    onLoggedOutSuccess().setValue(true);
+
+                                }
+                            }
+
+                        } else {
+                            try {
+                                Log.e("error", response.errorBody().string() + "__" + response.code());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dialog.dismiss();
+
+                        Log.e("token", e.toString());
+
+                    }
+                });
+
+
+    }
+
 
 }
