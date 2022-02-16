@@ -4,6 +4,7 @@ import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -62,7 +63,6 @@ public class FragmentCatererPreviousOrderMvvm extends AndroidViewModel {
     }
 
 
-
     public void getOrders(UserModel userModel) {
         if (userModel == null) {
             getIsDataLoading().setValue(false);
@@ -118,9 +118,15 @@ public class FragmentCatererPreviousOrderMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<StatusResponse> response) {
                         dialog.dismiss();
                         if (response.isSuccessful()) {
-                            if (response.body() != null && response.body().getStatus() == 200) {
-                                onResendSuccess().setValue(true);
+                            if (response.body() != null) {
 
+                                if (response.body().getStatus() == 200) {
+                                    onResendSuccess().setValue(true);
+
+                                } else if (response.body().getStatus() == 406) {
+                                    Toast.makeText(context, R.string.sorry_cnt_make_order, Toast.LENGTH_LONG).show();
+
+                                }
                             }
                         } else {
 
@@ -135,12 +141,12 @@ public class FragmentCatererPreviousOrderMvvm extends AndroidViewModel {
                 });
     }
 
-    public void rateOrder(Context context, UserModel userModel,String caterer_id,String rate ,String comment) {
-        ProgressDialog dialog = Common.createProgressDialog(context,context.getString(R.string.wait) );
+    public void rateOrder(Context context, UserModel userModel, String order_id, String caterer_id, String rate, String comment) {
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getString(R.string.wait));
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
         dialog.show();
-        Api.getService(Tags.base_url).rateOrder(caterer_id,userModel.getData().getId(),rate,comment)
+        Api.getService(Tags.base_url).rateOrder(caterer_id, order_id, userModel.getData().getId(), rate, comment)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<StatusResponse>>() {
@@ -154,7 +160,7 @@ public class FragmentCatererPreviousOrderMvvm extends AndroidViewModel {
                         dialog.dismiss();
                         if (response.isSuccessful()) {
                             if (response.body() != null && response.body().getStatus() == 200) {
-                              getOrders(userModel);
+                                getOrders(userModel);
 
                             }
                         } else {

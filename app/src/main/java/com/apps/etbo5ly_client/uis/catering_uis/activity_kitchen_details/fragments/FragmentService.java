@@ -105,18 +105,23 @@ public class FragmentService extends BaseFragment {
     private void navigateToBuffetActivity() {
         Intent intent = new Intent(activity, BuffetsActivity.class);
         intent.putExtra("kitchen_id", model.getId());
+        intent.putExtra("kitchen_status",model.getStatus());
         startActivity(intent);
     }
 
     private void navigateToFeastsActivity() {
         Intent intent = new Intent(activity, FeastsActivity.class);
         intent.putExtra("kitchen_id", model.getId());
+        intent.putExtra("kitchen_status",model.getStatus());
+
         startActivity(intent);
     }
 
     private void navigateToDishesActivity() {
         Intent intent = new Intent(activity, DishesActivity.class);
         intent.putExtra("kitchen_id", model.getId());
+        intent.putExtra("kitchen_status",model.getStatus());
+
         startActivity(intent);
     }
 }

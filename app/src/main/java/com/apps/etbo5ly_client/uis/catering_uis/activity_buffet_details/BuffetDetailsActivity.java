@@ -28,6 +28,8 @@ public class BuffetDetailsActivity extends BaseActivity {
     private BuffetModel model;
     private BuffetMenuAdapter adapter;
     private ManageCartModel manageCartModel;
+    private String kitchen_status = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +42,15 @@ public class BuffetDetailsActivity extends BaseActivity {
     private void getDataFromIntent() {
         Intent intent = getIntent();
         model = (BuffetModel) intent.getSerializableExtra("data");
+        kitchen_status = intent.getStringExtra("kitchen_status");
+
     }
 
     private void initView() {
         manageCartModel = ManageCartModel.newInstance();
         binding.setLang(getLang());
         binding.setModel(model);
+        binding.setKitchenStatus(kitchen_status);
         adapter = new BuffetMenuAdapter(this);
         binding.recView.setLayoutManager(new LinearLayoutManager(this));
         adapter.updateList(model.getCategor_dishes());

@@ -82,6 +82,7 @@
                     android:text='@{"("+model.rates_val+")"}'
                     android:textColor="@color/rate"
                     android:textSize="12sp"
+                    android:maxLength="5"
 
                     />
 

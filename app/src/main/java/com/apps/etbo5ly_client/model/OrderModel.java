@@ -18,6 +18,7 @@ public class OrderModel implements Serializable {
     private String cancel_by;
     private Object why_cancel;
     private String is_pay;
+    private String is_rate;
     private String paid_type;
     private String created_at;
     private String updated_at;
@@ -108,6 +109,14 @@ public class OrderModel implements Serializable {
 
     public List<OrderDetail> getOrder_details() {
         return order_details;
+    }
+
+    public String getIs_rate() {
+        return is_rate;
+    }
+
+    public void setIs_rate(String is_rate) {
+        this.is_rate = is_rate;
     }
 
     public static class OrderDetail implements Serializable {

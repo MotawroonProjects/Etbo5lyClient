@@ -25,6 +25,8 @@ public class FeastsActivity extends BaseActivity {
     private BuffetsAdapter adapter;
     private ActivityFeastsMvvm mvvm;
     private String kitchen_id = "";
+    private String kitchen_status = "";
+
     private int req;
     private ActivityResultLauncher<Intent> launcher;
 
@@ -39,6 +41,8 @@ public class FeastsActivity extends BaseActivity {
     private void getDataFromIntent() {
         Intent intent = getIntent();
         kitchen_id = intent.getStringExtra("kitchen_id");
+        kitchen_status = intent.getStringExtra("kitchen_status");
+
     }
 
     private void initView() {
@@ -95,6 +99,8 @@ public class FeastsActivity extends BaseActivity {
 
         Intent intent = new Intent(this, FeastDetailsActivity.class);
         intent.putExtra("data", feastsModel);
+        intent.putExtra("kitchen_status", kitchen_status);
+
         launcher.launch(intent);
 
     }

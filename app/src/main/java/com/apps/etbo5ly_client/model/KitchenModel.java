@@ -19,6 +19,7 @@ public class KitchenModel implements Serializable {
     private String longitude;
     private String latitude;
     private String address;
+    private String status;
     private String start_work;
     private String end_work;
     private String tax = "0.0";
@@ -178,6 +179,10 @@ public class KitchenModel implements Serializable {
 
     public List<ZoneCover> getZone_cover() {
         return zone_cover;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public static class Photo implements Serializable {

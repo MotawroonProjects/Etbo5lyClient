@@ -202,12 +202,15 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
 
                         if (response.isSuccessful()) {
                             if (response.body() != null) {
-                                Log.e("codes", response.body().getStatus() + ""+response.body().getMessage());
+                                Log.e("codes", response.body().getStatus() + "" + response.body().getMessage());
                                 if (response.body().getStatus() == 200) {
                                     getOnOrderSuccess().setValue(response.body().getSingelOrder());
 
                                 } else if (response.body().getStatus() == 409) {
                                     Toast.makeText(context, R.string.cnt_book_time, Toast.LENGTH_SHORT).show();
+
+                                } else if (response.body().getStatus() == 406) {
+                                    Toast.makeText(context, R.string.sorry_cnt_make_order, Toast.LENGTH_LONG).show();
 
                                 }
                             }

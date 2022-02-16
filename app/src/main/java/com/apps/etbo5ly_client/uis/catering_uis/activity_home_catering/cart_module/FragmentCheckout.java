@@ -110,6 +110,7 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
             }
         });
 
+
         mvvm.getOnCouponDataSuccess().observe(activity, couponModel -> {
             model.setCoupon_value(couponModel.getAmount());
             model.setCopon(couponModel.getName());

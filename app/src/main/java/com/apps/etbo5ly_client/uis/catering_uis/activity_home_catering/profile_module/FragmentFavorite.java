@@ -88,7 +88,7 @@ public class FragmentFavorite extends BaseFragment {
             adapter.notifyItemRemoved(itemPos);
 
 
-            if (mvvm.onFavoriteSuccess().getValue()!=null&&mvvm.onFavoriteSuccess().getValue().size() == 0) {
+            if (mvvm.onFavoriteSuccess().getValue() != null && mvvm.onFavoriteSuccess().getValue().size() == 0) {
                 binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
             } else {
                 binding.recViewLayout.tvNoData.setVisibility(View.GONE);

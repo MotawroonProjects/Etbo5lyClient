@@ -71,7 +71,7 @@ public class FragmentContactUs extends BaseFragment {
 
         binding.btnSend.setOnClickListener(v -> {
             Common.CloseKeyBoard(activity, binding.edtName);
-            mvvm.contactUs(model,activity);
+            mvvm.contactUs(model, activity);
         });
     }
 }

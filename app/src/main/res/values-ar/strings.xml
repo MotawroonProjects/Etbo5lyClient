@@ -205,5 +205,8 @@
     <string name="your_order_from">طلبكم من </string>
     <string name="delivered2">تم التسليم</string>
     <string name="type_comment_here">إكتب تعليقك هنا...</string>
+    <string name="busy">مشغول</string>
+    <string name="offline">مغلق</string>
+    <string name="sorry_cnt_make_order">عفوا! لايمكنك الطلب من هذا المطعم الان ربما يكون المطعم مغلق او مشغول</string>
 
 </resources>

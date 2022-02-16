@@ -31,6 +31,8 @@ import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActiv
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.util.ArrayList;
+
 
 public class FragmentCatererPreviousOrder extends BaseFragment {
     private HomeActivity activity;
@@ -75,6 +77,9 @@ public class FragmentCatererPreviousOrder extends BaseFragment {
 
         activityHomeGeneralMvvm.onUserDateRefresh().observe(this, isRefreshed -> {
             if (isRefreshed) {
+                if (adapter != null) {
+                    adapter.updateList(new ArrayList<>());
+                }
                 mvvm.getOrders(getUserModel());
             }
         });
@@ -85,6 +90,10 @@ public class FragmentCatererPreviousOrder extends BaseFragment {
 
         mvvm.onResendSuccess().observe(activity, success -> {
             if (success) {
+                if (adapter != null) {
+                    adapter.updateList(new ArrayList<>());
+                }
+                mvvm.getOrders(getUserModel());
                 activityHomeGeneralMvvm.onOrdersRefresh().setValue(true);
             }
         });
@@ -107,7 +116,11 @@ public class FragmentCatererPreviousOrder extends BaseFragment {
         binding.recViewLayout.recView.setLayoutManager(new LinearLayoutManager(activity));
         adapter = new CatererPreviousOrderAdapter(activity, this);
         binding.recViewLayout.recView.setAdapter(adapter);
-        binding.recViewLayout.swipeRefresh.setOnRefreshListener(() -> mvvm.getOrders(getUserModel()));
+        binding.recViewLayout.swipeRefresh.setOnRefreshListener(() -> {
+            adapter.updateList(new ArrayList<>());
+            binding.recViewLayout.tvNoData.setVisibility(View.GONE);
+            mvvm.getOrders(getUserModel());
+        });
         mvvm.getOrders(getUserModel());
 
     }
@@ -128,16 +141,11 @@ public class FragmentCatererPreviousOrder extends BaseFragment {
         dialogBinding.btnAddRate.setOnClickListener(v -> {
             float rate = dialogBinding.rateBar.getRating();
             String comment = dialogBinding.edtComment.getText().toString();
-            if (!comment.isEmpty()) {
-                dialogBinding.edtComment.setError(null);
-                Common.CloseKeyBoard(activity, dialogBinding.edtComment);
-                mvvm.rateOrder(activity, getUserModel(), model.getCaterer_id(), rate + "", comment);
-
-            } else {
-                dialogBinding.edtComment.setError(getString(R.string.field_required));
-
-            }
+            dialogBinding.edtComment.setError(null);
+            Common.CloseKeyBoard(activity, dialogBinding.edtComment);
+            mvvm.rateOrder(activity, getUserModel(), model.getCaterer_id(), model.getId(), rate + "", comment);
             dialog.dismiss();
+
 
         });
         dialog.show();

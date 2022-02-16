@@ -133,6 +133,7 @@
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="13sp"
+                        android:visibility='@{model.is_rate.equals("no")?View.VISIBLE:View.GONE}'
 
                         />
                 </LinearLayout>

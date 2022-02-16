@@ -86,9 +86,9 @@ public class FragmentCatererCurrentOrder extends BaseFragment {
             }
         });
         mvvm.onResendSuccess().observe(activity, success -> {
-           if (success){
-               activityHomeGeneralMvvm.onOrdersRefresh();
-           }
+            if (success) {
+                activityHomeGeneralMvvm.onOrdersRefresh();
+            }
         });
 
         binding.recViewLayout.tvNoData.setText(R.string.no_orders);

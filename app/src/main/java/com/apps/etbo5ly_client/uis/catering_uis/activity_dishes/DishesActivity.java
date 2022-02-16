@@ -30,7 +30,7 @@ public class DishesActivity extends BaseActivity {
     private BuffetDishesAdapter dishesAdapter;
     private ActivityDishesMvvm mvvm;
     private String kitchen_id = "";
-
+    private String kitchen_status = "";
     private ManageCartModel manageCartModel;
     private List<DishModel> cartDishes = new ArrayList<>();
 
@@ -45,6 +45,8 @@ public class DishesActivity extends BaseActivity {
     private void getDataFromIntent() {
         Intent intent = getIntent();
         kitchen_id = intent.getStringExtra("kitchen_id");
+        kitchen_status = intent.getStringExtra("kitchen_status");
+
     }
 
 

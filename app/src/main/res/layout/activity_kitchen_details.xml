@@ -12,6 +12,8 @@
         <variable
             name="lang"
             type="String" />
+
+        <import type="android.view.View" />
     </data>
 
     <FrameLayout
@@ -63,6 +65,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/gradient_bottom_white" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/black_trans"
+                            android:visibility='@{model.status.equals("online")?View.GONE:View.VISIBLE,default=gone}'>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text='@{model.status.equals("offline")?@string/offline:@string/busy}'
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+                        </FrameLayout>
 
                         <ImageView
                             android:id="@+id/imageFav"
@@ -200,6 +218,7 @@
                             android:text='@{"("+model.rates_val+")"}'
                             android:textColor="@color/rate"
                             android:textSize="12sp"
+                            android:maxLength="5"
 
 
                             />

@@ -86,7 +86,6 @@ public class FragmentHomeCatering extends BaseFragment {
         });
 
 
-
         mvvm.getIsSliderDataLoading().observe(activity, isLoading -> {
             if (isLoading) {
                 binding.loader.startShimmer();
@@ -297,10 +296,10 @@ public class FragmentHomeCatering extends BaseFragment {
     private void navigateToFilterActivity(String type, String category_id) {
         req = 1;
         FilterModel filterModel = new FilterModel();
-        filterModel.setLatitude(getUserSettings().getLocation().getLat()+"");
-        filterModel.setLongitude(getUserSettings().getLocation().getLng()+"");
+        filterModel.setLatitude(getUserSettings().getLocation().getLat() + "");
+        filterModel.setLongitude(getUserSettings().getLocation().getLng() + "");
 
-        if (getUserModel()!=null){
+        if (getUserModel() != null) {
             filterModel.setUser_id(getUserModel().getData().getId());
         }
         if (!category_id.isEmpty()) {

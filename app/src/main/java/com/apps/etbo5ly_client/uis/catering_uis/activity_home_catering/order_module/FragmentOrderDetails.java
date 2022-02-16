@@ -250,8 +250,8 @@ public class FragmentOrderDetails extends BaseFragment {
         binding.step2.tvDateDone.setText(getDate(orderModel.getUpdated_at()));
 
     }
-    
-    private String getDate(String updateAt){
+
+    private String getDate(String updateAt) {
         String date = "";
         if (updateAt != null) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
@@ -259,7 +259,7 @@ public class FragmentOrderDetails extends BaseFragment {
             try {
                 Date d = simpleDateFormat.parse(updateAt);
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd\nhh:mm aa",Locale.ENGLISH);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd\nhh:mm aa", Locale.ENGLISH);
                 dateFormat.setTimeZone(TimeZone.getDefault());
                 date = dateFormat.format(d);
             } catch (ParseException e) {
@@ -267,8 +267,7 @@ public class FragmentOrderDetails extends BaseFragment {
             }
 
 
-
-    }
+        }
         return date;
     }
 

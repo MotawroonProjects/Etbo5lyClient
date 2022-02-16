@@ -224,6 +224,7 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/Catering/storeRate")
     Single<Response<StatusResponse>> rateOrder(@Field("caterer_id") String caterer_id,
+                                               @Field("order_id") String order_id,
                                                @Field("user_id") String user_id,
                                                @Field("value") String value,
                                                @Field("comment") String comment
