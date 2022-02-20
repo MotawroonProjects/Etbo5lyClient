@@ -23,6 +23,7 @@ public class AddressActivity extends BaseActivity {
     private AddressAdapter adapter;
     private ActivityAddressesMvvm mvvm;
     private String type;
+    private int pos = -1;
 
 
     @Override
@@ -41,7 +42,7 @@ public class AddressActivity extends BaseActivity {
 
 
     private void initView() {
-        setUpToolbar(binding.toolbar,getString(R.string.address),R.color.colorPrimary,R.color.white);
+        setUpToolbar(binding.toolbar, getString(R.string.address), R.color.colorPrimary, R.color.white);
         mvvm = ViewModelProviders.of(this).get(ActivityAddressesMvvm.class);
         mvvm.getIsLoading().observe(this, isLoading -> {
             binding.recViewLayout.swipeRefresh.setRefreshing(isLoading);
@@ -60,6 +61,15 @@ public class AddressActivity extends BaseActivity {
             }
         });
 
+        mvvm.onDeleteSuccess().observe(this, addressModel -> {
+
+            Intent intent = getIntent();
+            intent.putExtra("action", "delete");
+            intent.putExtra("data", addressModel);
+            setResult(RESULT_OK, intent);
+            finish();
+        });
+
 
         binding.recViewLayout.tvNoData.setText(R.string.no_addresses);
         adapter = new AddressAdapter(this, getLang());
@@ -76,8 +86,14 @@ public class AddressActivity extends BaseActivity {
 
     public void setItemData(AddressModel addressModel) {
         Intent intent = getIntent();
+        intent.putExtra("action", "add");
         intent.putExtra("data", addressModel);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    public void deleteAddress(AddressModel addressModel, int adapterPosition) {
+        pos = adapterPosition;
+        mvvm.deleteAddress(addressModel,this);
     }
 }

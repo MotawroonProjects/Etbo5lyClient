@@ -215,5 +215,6 @@
     <string name="home2">المنزل</string>
     <string name="work">العمل</string>
     <string name="no_addresses">لا يوجد عناوين لعرضها</string>
+    <string name="delete">حذف</string>
 
 </resources>

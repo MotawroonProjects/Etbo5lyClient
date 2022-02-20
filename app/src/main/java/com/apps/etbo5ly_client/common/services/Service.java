@@ -249,4 +249,11 @@ public interface Service {
 
     );
 
+    @FormUrlEncoded
+    @POST("api/Catering/deleteAddress")
+    Single<Response<StatusResponse>> deleteAddress(@Field("address_id") String address_id
+
+
+    );
+
 }

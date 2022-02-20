@@ -85,14 +85,31 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
                 activity.updateFireBase();
             } else if (req == 3 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
 
-                this.addressModel = (AddressModel) result.getData().getSerializableExtra("data");
-                model.setZone(addressModel.getZone_cover().getZone().getTitel());
-                model.setDelivery_cost(addressModel.getZone_cover().getZone_cost());
-                model.setZone_id(addressModel.getZone_cover().getZone_id());
-                model.setAddress(addressModel.getAddress());
-                binding.setModel(model);
-                calculateTotal();
-                binding.imageAddressFav.setImageResource(R.drawable.ic_start_fill);
+                String action = result.getData().getStringExtra("action");
+                if (action.equals("add")){
+                    this.addressModel = (AddressModel) result.getData().getSerializableExtra("data");
+                    model.setZone(addressModel.getZone_cover().getZone().getTitel());
+                    model.setDelivery_cost(addressModel.getZone_cover().getZone_cost());
+                    model.setZone_id(addressModel.getZone_cover().getZone_id());
+                    model.setAddress(addressModel.getAddress());
+                    binding.setModel(model);
+                    calculateTotal();
+                    binding.imageAddressFav.setImageResource(R.drawable.ic_start_fill);
+                }else if (action.equals("delete")){
+                    AddressModel m = (AddressModel) result.getData().getSerializableExtra("data");
+                    if (addressModel!=null&&m.getId().equals(addressModel.getId())){
+                        model.setZone("");
+                        model.setDelivery_cost("0.0");
+                        model.setZone_id("");
+                        model.setAddress("");
+                        binding.setModel(model);
+                        calculateTotal();
+                        this.addressModel = null;
+                        binding.imageAddressFav.setImageResource(R.drawable.ic_star);
+
+                    }
+                }
+
             }
 
         });

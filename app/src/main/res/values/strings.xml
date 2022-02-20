@@ -216,5 +216,6 @@
     <string name="home2">Home</string>
     <string name="work">Work</string>
     <string name="no_addresses">No address to show</string>
+    <string name="delete">Delete</string>
 
 </resources>

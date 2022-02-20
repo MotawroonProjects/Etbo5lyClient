@@ -50,6 +50,10 @@ public class AddressAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         });
 
+        myHolder.binding.llDelete.setOnClickListener(v -> {
+            activity.deleteAddress(list.get(myHolder.getAdapterPosition()),myHolder.getAdapterPosition());
+
+        });
 
 
     }

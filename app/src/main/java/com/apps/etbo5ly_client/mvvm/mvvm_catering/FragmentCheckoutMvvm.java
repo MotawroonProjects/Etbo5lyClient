@@ -248,7 +248,6 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
     }
 
     public void addAddress(String user_id, String address, String zone_id, String type, Context context) {
-        Log.e("dada", user_id + "_" + address + "_" + zone_id + "_" + type);
         ProgressDialog dialog = Common.createProgressDialog(context, context.getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
@@ -286,6 +285,8 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
                         dialog.dismiss();
                     }
                 });
+
+
     }
 
 

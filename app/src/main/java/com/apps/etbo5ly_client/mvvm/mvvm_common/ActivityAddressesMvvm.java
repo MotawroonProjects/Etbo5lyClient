@@ -1,18 +1,23 @@
 package com.apps.etbo5ly_client.mvvm.mvvm_common;
 
 import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.common.remote.Api;
+import com.apps.etbo5ly_client.common.share.Common;
 import com.apps.etbo5ly_client.common.tags.Tags;
 import com.apps.etbo5ly_client.model.AddressModel;
 import com.apps.etbo5ly_client.model.AddressesDataModel;
 import com.apps.etbo5ly_client.model.KitchenDataModel;
 import com.apps.etbo5ly_client.model.KitchenModel;
+import com.apps.etbo5ly_client.model.SingleAddress;
 import com.apps.etbo5ly_client.model.StatusResponse;
 import com.apps.etbo5ly_client.model.UserModel;
 
@@ -34,6 +39,8 @@ import retrofit2.Response;
 public class ActivityAddressesMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> isLoading;
     private MutableLiveData<List<AddressModel>> onDataSuccess;
+    private MutableLiveData<AddressModel> onDeleteSuccess;
+
     private CompositeDisposable disposable = new CompositeDisposable();
 
 
@@ -55,6 +62,12 @@ public class ActivityAddressesMvvm extends AndroidViewModel {
         return onDataSuccess;
     }
 
+    public MutableLiveData<AddressModel> onDeleteSuccess() {
+        if (onDeleteSuccess == null) {
+            onDeleteSuccess = new MutableLiveData<>();
+        }
+        return onDeleteSuccess;
+    }
 
 
     public void getAddresses(String type, UserModel userModel) {
@@ -63,7 +76,6 @@ public class ActivityAddressesMvvm extends AndroidViewModel {
             onDataSuccess().setValue(new ArrayList<>());
             return;
         }
-        Log.e("type",type);
         getIsLoading().setValue(true);
         Api.getService(Tags.base_url).getAddresses(userModel.getData().getId())
                 .subscribeOn(Schedulers.io())
@@ -102,7 +114,45 @@ public class ActivityAddressesMvvm extends AndroidViewModel {
             }
         });
     }
+    public void deleteAddress(AddressModel model, Context context){
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .deleteAddress(model.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<StatusResponse>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
 
+                    @Override
+                    public void onSuccess(@NonNull Response<StatusResponse> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                if (response.body().getStatus() == 200) {
+                                    onDeleteSuccess().setValue(model);
+                                }
+                            }
+                        } else {
+                            try {
+                                Log.e("errorAddAddress", response.code() + "__" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("errorDeleteAddre", "Error", e);
+                        dialog.dismiss();
+                    }
+                });
+    }
 
     @Override
     protected void onCleared() {

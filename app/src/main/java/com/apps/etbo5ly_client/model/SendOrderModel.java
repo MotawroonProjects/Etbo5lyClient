@@ -113,7 +113,6 @@ public class SendOrderModel extends BaseObservable implements Serializable {
                 }
             }
 
-            Log.e("6", "6");
             setValid(false);
 
 
