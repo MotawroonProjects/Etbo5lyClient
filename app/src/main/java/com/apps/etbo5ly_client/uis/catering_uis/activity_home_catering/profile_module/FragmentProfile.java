@@ -24,6 +24,7 @@ import com.apps.etbo5ly_client.model.UserModel;
 import com.apps.etbo5ly_client.model.ZoneCover;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActivity;
+import com.apps.etbo5ly_client.uis.common_uis.activity_app_category.AppCategoryActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseFragment;
 import com.apps.etbo5ly_client.uis.common_uis.activity_sign_up.SignUpActivity;
 
@@ -43,6 +44,8 @@ public class FragmentProfile extends BaseFragment {
             if (req == 1 && result.getResultCode() == Activity.RESULT_OK) {
                 UserModel userModel = getUserModel();
                 binding.setModel(userModel);
+            } else if (req == 2 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                activityHomeGeneralMvvm.getOptionId().setValue(getUserSettings().getOption_id());
             }
         });
 
@@ -95,6 +98,13 @@ public class FragmentProfile extends BaseFragment {
             Intent intent = new Intent(activity, SignUpActivity.class);
             launcher.launch(intent);
 
+        });
+
+        binding.llService.setOnClickListener(v -> {
+            req = 2;
+            Intent intent = new Intent(activity, AppCategoryActivity.class);
+            intent.putExtra("action", "profile");
+            launcher.launch(intent);
         });
 
         binding.llLogout.setOnClickListener(v -> {

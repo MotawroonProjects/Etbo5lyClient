@@ -26,6 +26,9 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.common_uis.activity_address.AddressActivity"
+            android:exported="false" />
+        <activity
             android:name=".uis.catering_uis.activity_zone_cover.ZoneCoverActivity"
             android:exported="false" />
         <activity
@@ -115,7 +118,6 @@
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-       
         <activity
             android:name=".uis.common_uis.activity_splash.SplashActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
@@ -132,10 +134,10 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <service android:name=".common.notifications.FireBaseNotifications"
-            android:stopWithTask="false"
+        <service
+            android:name=".common.notifications.FireBaseNotifications"
             android:exported="false"
-            />
+            android:stopWithTask="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

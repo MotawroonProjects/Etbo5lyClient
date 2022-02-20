@@ -15,6 +15,8 @@
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/ic_cart2.xml" value="0.2169230769230769" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/ic_close2.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/ic_close3.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/ic_star.xml" value="0.2203125" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/ic_start_fill.xml" value="0.2203125" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/ic_tag.xml" value="0.2169230769230769" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/ic_user.xml" value="0.2169230769230769" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/rounded_color4.xml" value="0.2203125" />
@@ -25,6 +27,7 @@
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/small_stroke_gray4.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/small_stroke_white.xml" value="0.2203125" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/drawable/tab_bg.xml" value="0.2169230769230769" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_address.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_buffet_details.xml" value="0.22" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_buffet_dishes.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_buffets.xml" value="0.19692307692307692" />
@@ -41,6 +44,7 @@
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_sign_up.xml" value="0.3811659192825112" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/activity_zone_cover.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/address_row.xml" value="0.33" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/bottom_sheet_rate_dialog.xml" value="0.25" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/buffet_menu_row.xml" value="0.2" />
@@ -48,12 +52,15 @@
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/cart_row.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/caterer_current_order_row.xml" value="0.33" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/caterer_previous_order_row.xml" value="0.4734848484848485" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/choose_address_type_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/choose_dialog.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/comment_row.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/dish_buffet_row.xml" value="0.5" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/dish_buffet_row2.xml" value="0.25" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/dishes_loader.xml" value="0.25" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/favorite_row.xml" value="0.33" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/filter_kitchen_row.xml" value="0.2" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_addresses.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_app.xml" value="0.20102564102564102" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_base_cart_navigations.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_base_home_navigations.xml" value="0.20416666666666666" />
@@ -62,7 +69,7 @@
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_cart.xml" value="0.22" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_caterer_offer.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_caterer_setting.xml" value="0.22" />
-        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_checkout.xml" value="0.2" />
+        <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_checkout.xml" value="0.36731634182908546" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_contact_us.xml" value="0.2" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_current_order.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Arb Develpor/Desktop/emad/Projects/CookMe/Etbo5lyClient/app/src/main/res/layout/fragment_favorite.xml" value="0.18611111111111112" />

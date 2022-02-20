@@ -1,6 +1,7 @@
 package com.apps.etbo5ly_client.common.services;
 
 
+import com.apps.etbo5ly_client.model.AddressesDataModel;
 import com.apps.etbo5ly_client.model.BuffetsDataModel;
 import com.apps.etbo5ly_client.model.CartOrderModel;
 import com.apps.etbo5ly_client.model.CategoryDataModel;
@@ -14,6 +15,7 @@ import com.apps.etbo5ly_client.model.OrderDataModel;
 import com.apps.etbo5ly_client.model.PlaceGeocodeData;
 import com.apps.etbo5ly_client.model.PlaceMapDetailsData;
 import com.apps.etbo5ly_client.model.SendOrderModel;
+import com.apps.etbo5ly_client.model.SingleAddress;
 import com.apps.etbo5ly_client.model.SingleKitchenDataModel;
 import com.apps.etbo5ly_client.model.SingleOrderDataModel;
 import com.apps.etbo5ly_client.model.StatusResponse;
@@ -232,5 +234,19 @@ public interface Service {
 
     );
 
+
+    @GET("api/Catering/indexAddress")
+    Single<Response<AddressesDataModel>> getAddresses(@Query(value = "user_id") String user_id);
+
+
+    @FormUrlEncoded
+    @POST("api/Catering/storeAddress")
+    Single<Response<SingleAddress>> addAddress(@Field("user_id") String user_id,
+                                               @Field("address") String address,
+                                               @Field("zone_id") String zone_id,
+                                               @Field("type") String type
+
+
+    );
 
 }

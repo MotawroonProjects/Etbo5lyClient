@@ -6,18 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
@@ -26,7 +23,9 @@ import androidx.navigation.Navigation;
 
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.common.share.Common;
+import com.apps.etbo5ly_client.databinding.ChooseAddressTypeDialogBinding;
 import com.apps.etbo5ly_client.databinding.FragmentCheckoutBinding;
+import com.apps.etbo5ly_client.model.AddressModel;
 import com.apps.etbo5ly_client.model.KitchenModel;
 import com.apps.etbo5ly_client.model.ManageCartModel;
 import com.apps.etbo5ly_client.model.SendOrderModel;
@@ -36,13 +35,13 @@ import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.FragmentCheckoutMvvm;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActivity;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_zone_cover.ZoneCoverActivity;
+import com.apps.etbo5ly_client.uis.common_uis.activity_address.AddressActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseFragment;
 import com.apps.etbo5ly_client.uis.common_uis.activity_login.LoginActivity;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class FragmentCheckout extends BaseFragment implements DatePickerDialog.OnDateSetListener {
@@ -57,6 +56,7 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
     private ActivityResultLauncher<Intent> launcher;
     private DatePickerDialog datePickerDialog;
     private double finalTotal = 0.0;
+    private AddressModel addressModel;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -68,8 +68,14 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
                 model.setZone(zoneCover.getZone().getTitel());
                 model.setDelivery_cost(zoneCover.getZone_cost());
                 model.setZone_id(zoneCover.getZone_id());
+                model.setAddress("");
                 binding.setModel(model);
+
                 calculateTotal();
+                addressModel = null;
+                binding.imageAddressFav.setImageResource(R.drawable.ic_star);
+
+
             } else if (req == 2 && result.getResultCode() == Activity.RESULT_OK) {
                 //user logged in
                 UserSettingsModel userSettingsModel = getUserSettings();
@@ -77,6 +83,16 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
                 setUserSettings(userSettingsModel);
                 activityHomeGeneralMvvm.onUserDateRefresh().setValue(true);
                 activity.updateFireBase();
+            } else if (req == 3 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+
+                this.addressModel = (AddressModel) result.getData().getSerializableExtra("data");
+                model.setZone(addressModel.getZone_cover().getZone().getTitel());
+                model.setDelivery_cost(addressModel.getZone_cover().getZone_cost());
+                model.setZone_id(addressModel.getZone_cover().getZone_id());
+                model.setAddress(addressModel.getAddress());
+                binding.setModel(model);
+                calculateTotal();
+                binding.imageAddressFav.setImageResource(R.drawable.ic_start_fill);
             }
 
         });
@@ -97,6 +113,7 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
     }
 
     private void initView() {
+
         mvvm = ViewModelProviders.of(this).get(FragmentCheckoutMvvm.class);
         activityHomeGeneralMvvm = ViewModelProviders.of(activity).get(ActivityHomeGeneralMvvm.class);
         mvvm.getIsLoading().observe(activity, isLoading -> {
@@ -125,6 +142,12 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
             if (kitchenModel != null) {
                 binding.llData.setVisibility(View.VISIBLE);
                 model.setHasZone(kitchenModel.getZone_cover().size() > 0);
+                if (getUserModel() != null && kitchenModel.getZone_cover().size() > 0) {
+                    binding.setCanFav(true);
+                } else {
+                    binding.setCanFav(false);
+
+                }
             }
 
         });
@@ -141,6 +164,12 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
             navController.navigate(R.id.fragmentOrderSuccess, bundle);
 
         });
+
+        mvvm.onAddressAdded().observe(activity, addressModel1 -> {
+            this.addressModel = addressModel1;
+            binding.imageAddressFav.setImageResource(R.drawable.ic_start_fill);
+        });
+
 
         createDateDialog();
         manageCartModel = ManageCartModel.newInstance();
@@ -221,6 +250,18 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
             }
         });
 
+        binding.cardViewMyAddress.setOnClickListener(v -> {
+            createAddressDialog(null, "", "", "");
+        });
+
+        binding.imageAddressFav.setOnClickListener(v -> {
+            if (addressModel == null) {
+                if (model != null && !model.getAddress().isEmpty() && !model.getZone_id().isEmpty()) {
+                    createAddressDialog("addAddress", getUserModel().getData().getId(), model.getAddress(), model.getZone_id());
+
+                }
+            }
+        });
 
         mvvm.getZone(model.getCaterer_id());
 
@@ -283,4 +324,48 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
 
 
     }
+
+
+    private void createAddressDialog(String action, String user_id, String address, String zone_id) {
+        AlertDialog dialog = new AlertDialog.Builder(activity).create();
+        ChooseAddressTypeDialogBinding addressBinding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.choose_address_type_dialog, null, false);
+        addressBinding.setLang(getLang());
+
+        addressBinding.llHome.setOnClickListener(v -> {
+            if (action != null) {
+                mvvm.addAddress(user_id, address, zone_id, "home", activity);
+            } else {
+                navigateToActivityAddresses("home");
+            }
+            dialog.cancel();
+
+        });
+
+        addressBinding.llWork.setOnClickListener(v -> {
+            if (action != null) {
+                mvvm.addAddress(user_id, address, zone_id, "work", activity);
+
+            } else {
+                navigateToActivityAddresses("work");
+
+            }
+
+            dialog.cancel();
+        });
+
+        dialog.setView(addressBinding.getRoot());
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_style_bg);
+        dialog.show();
+
+
+    }
+
+    private void navigateToActivityAddresses(String type) {
+        req = 3;
+        Intent intent = new Intent(activity, AddressActivity.class);
+        intent.putExtra("type", type);
+        launcher.launch(intent);
+    }
+
 }

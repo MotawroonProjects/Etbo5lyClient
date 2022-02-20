@@ -14,14 +14,17 @@ import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.common.remote.Api;
 import com.apps.etbo5ly_client.common.share.Common;
 import com.apps.etbo5ly_client.common.tags.Tags;
+import com.apps.etbo5ly_client.model.AddressModel;
 import com.apps.etbo5ly_client.model.CartOrderModel;
 import com.apps.etbo5ly_client.model.CouponDataModel;
 import com.apps.etbo5ly_client.model.CouponModel;
 import com.apps.etbo5ly_client.model.KitchenModel;
 import com.apps.etbo5ly_client.model.OrderModel;
 import com.apps.etbo5ly_client.model.SendOrderModel;
+import com.apps.etbo5ly_client.model.SingleAddress;
 import com.apps.etbo5ly_client.model.SingleKitchenDataModel;
 import com.apps.etbo5ly_client.model.SingleOrderDataModel;
+import com.apps.etbo5ly_client.model.StatusResponse;
 import com.apps.etbo5ly_client.model.UserModel;
 import com.apps.etbo5ly_client.model.ZoneCover;
 
@@ -41,6 +44,7 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
     private MutableLiveData<KitchenModel> onDataSuccess;
     private MutableLiveData<CouponModel> onCouponDataSuccess;
     private MutableLiveData<OrderModel> onOrderSuccess;
+    private MutableLiveData<AddressModel> onAddressAdded;
 
     private MutableLiveData<Boolean> isLoadingLivData;
 
@@ -80,6 +84,15 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
         }
         return isLoadingLivData;
     }
+
+    public MutableLiveData<AddressModel> onAddressAdded() {
+        if (onAddressAdded == null) {
+            onAddressAdded = new MutableLiveData<>();
+        }
+        return onAddressAdded;
+    }
+
+
 
     //_________________________hitting api_________________________________
 
@@ -212,6 +225,9 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
                                 } else if (response.body().getStatus() == 406) {
                                     Toast.makeText(context, R.string.sorry_cnt_make_order, Toast.LENGTH_LONG).show();
 
+                                } else if (response.body().getStatus() == 407) {
+                                    Toast.makeText(context, R.string.area_not_covered, Toast.LENGTH_LONG).show();
+
                                 }
                             }
                         } else {
@@ -230,6 +246,48 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
                     }
                 });
     }
+
+    public void addAddress(String user_id, String address, String zone_id, String type, Context context) {
+        Log.e("dada", user_id + "_" + address + "_" + zone_id + "_" + type);
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .addAddress(user_id, address, zone_id, type)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<SingleAddress>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        disposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<SingleAddress> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                if (response.body().getStatus() == 200) {
+                                    onAddressAdded.setValue(response.body().getData());
+                                }
+                            }
+                        } else {
+                            try {
+                                Log.e("errorAddAddress", response.code() + "__" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d(TAG, "Error", e);
+                        dialog.dismiss();
+                    }
+                });
+    }
+
 
     @Override
     protected void onCleared() {

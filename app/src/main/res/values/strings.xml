@@ -203,11 +203,18 @@
     <string name="order_refused">Your order has been refused</string>
     <string name="your_order_from">Your order from</string>
     <string name="delivered2">delivered</string>
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="type_comment_here">Type comment here...</string>
     <string name="busy">Busy</string>
     <string name="offline">Offline</string>
     <string name="sorry_cnt_make_order">Sorry! you cannot make order now ,this kitchen maybe closed or busy</string>
+    <string name="change_service">Change service</string>
+    <string name="address">Address</string>
+    <string name="area_not_covered">This kitchen don\'t cover this area</string>
+    <string name="select_your_address">Select your address</string>
+    <string name="home2">Home</string>
+    <string name="work">Work</string>
+    <string name="no_addresses">No address to show</string>
 
 </resources>

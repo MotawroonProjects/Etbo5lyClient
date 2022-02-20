@@ -208,5 +208,12 @@
     <string name="busy">مشغول</string>
     <string name="offline">مغلق</string>
     <string name="sorry_cnt_make_order">عفوا! لايمكنك الطلب من هذا المطعم الان ربما يكون المطعم مغلق او مشغول</string>
+    <string name="change_service">تغيير الخدمة</string>
+    <string name="address">عناويني</string>
+    <string name="area_not_covered">عفوا ! هذا المطعم لا يغطي هذه المنطقة</string>
+    <string name="select_your_address">اختر العنوان</string>
+    <string name="home2">المنزل</string>
+    <string name="work">العمل</string>
+    <string name="no_addresses">لا يوجد عناوين لعرضها</string>
 
 </resources>

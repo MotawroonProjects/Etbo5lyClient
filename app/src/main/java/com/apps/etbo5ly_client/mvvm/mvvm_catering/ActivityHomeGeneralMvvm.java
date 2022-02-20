@@ -13,6 +13,7 @@ import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.common.remote.Api;
 import com.apps.etbo5ly_client.common.share.Common;
 import com.apps.etbo5ly_client.common.tags.Tags;
+import com.apps.etbo5ly_client.model.AddressModel;
 import com.apps.etbo5ly_client.model.OrderModel;
 import com.apps.etbo5ly_client.model.StatusResponse;
 import com.apps.etbo5ly_client.model.UserModel;
@@ -42,6 +43,7 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> onFavoriteRefresh;
     private MutableLiveData<UserModel> onTokenSuccess;
     private MutableLiveData<Boolean> onLoggedOutSuccess;
+    private MutableLiveData<AddressModel> onMyAddressSelected;
 
 
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -132,6 +134,14 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
         }
 
         return onLoggedOutSuccess;
+    }
+
+    public MutableLiveData<AddressModel> onMyAddressSelected() {
+        if (onMyAddressSelected == null) {
+            onMyAddressSelected = new MutableLiveData<>();
+        }
+
+        return onMyAddressSelected;
     }
 
 
