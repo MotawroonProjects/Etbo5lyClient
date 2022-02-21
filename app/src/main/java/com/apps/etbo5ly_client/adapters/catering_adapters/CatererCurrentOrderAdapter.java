@@ -57,6 +57,15 @@ public class CatererCurrentOrderAdapter extends RecyclerView.Adapter<RecyclerVie
             }
         });
 
+        myHolder.binding.btnCall.setOnClickListener(v -> {
+            if (fragment instanceof FragmentCatererCurrentOrder) {
+                OrderModel orderModel = list.get(myHolder.getAdapterPosition());
+                FragmentCatererCurrentOrder fragmentCatererCurrentOrder = (FragmentCatererCurrentOrder) fragment;
+               fragmentCatererCurrentOrder.navigateToChatActivity(orderModel);
+
+            }
+        });
+
     }
 
     @Override

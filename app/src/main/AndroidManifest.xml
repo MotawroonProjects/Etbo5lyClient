@@ -26,29 +26,51 @@
         tools:ignore="AllowBackup"
         tools:targetApi="q">
         <activity
+            android:name=".uis.common_uis.activity_chat.ChatActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            />
+        <activity
             android:name=".uis.common_uis.activity_address.AddressActivity"
-            android:exported="false" />
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".uis.catering_uis.activity_zone_cover.ZoneCoverActivity"
-            android:exported="false" />
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity
             android:name=".uis.catering_uis.activity_feast_details.FeastDetailsActivity"
-            android:exported="false" />
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".uis.catering_uis.activity_feasts.FeastsActivity"
-            android:exported="false" />
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".uis.catering_uis.activity_dishes.DishesActivity"
-            android:exported="false" />
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".uis.catering_uis.activity_buffet_details.BuffetDetailsActivity"
-            android:exported="false" />
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".uis.catering_uis.activity_buffets.BuffetsActivity"
-            android:exported="false" />
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".uis.catering_uis.activity_kitchen_details.KitchenDetailsActivity"
-            android:exported="false" />
+            android:configChanges="keyboardHidden|screenSize|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity
             android:name=".uis.catering_uis.activity_filter.FilterActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
@@ -138,6 +160,24 @@
             android:name=".common.notifications.FireBaseNotifications"
             android:exported="false"
             android:stopWithTask="false" />
+
+        <service
+            android:name=".common.chat_service.ChatService"
+            android:exported="false"
+            android:stopWithTask="false" />
+
+
+        <provider
+            android:authorities="${applicationId}.provider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider"
+                />
+        </provider>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -33,7 +33,7 @@ public class FireBaseNotifications extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         map = remoteMessage.getData();
-        if (getNotificationStatus()){
+        if (getNotificationStatus()) {
             manageNotification(map);
         }
 
@@ -107,7 +107,7 @@ public class FireBaseNotifications extends FirebaseMessagingService {
 
     }
 
-    public boolean getNotificationStatus(){
+    public boolean getNotificationStatus() {
         Preferences preferences = Preferences.getInstance();
         return preferences.getUserSettings(this).isCanSendNotifications();
     }

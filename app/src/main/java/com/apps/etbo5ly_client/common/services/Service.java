@@ -10,6 +10,7 @@ import com.apps.etbo5ly_client.model.CouponDataModel;
 import com.apps.etbo5ly_client.model.DishesDataModel;
 import com.apps.etbo5ly_client.model.FilterModel;
 import com.apps.etbo5ly_client.model.KitchenDataModel;
+import com.apps.etbo5ly_client.model.MessagesDataModel;
 import com.apps.etbo5ly_client.model.NotificationDataModel;
 import com.apps.etbo5ly_client.model.OrderDataModel;
 import com.apps.etbo5ly_client.model.PlaceGeocodeData;
@@ -17,6 +18,7 @@ import com.apps.etbo5ly_client.model.PlaceMapDetailsData;
 import com.apps.etbo5ly_client.model.SendOrderModel;
 import com.apps.etbo5ly_client.model.SingleAddress;
 import com.apps.etbo5ly_client.model.SingleKitchenDataModel;
+import com.apps.etbo5ly_client.model.SingleMessageModel;
 import com.apps.etbo5ly_client.model.SingleOrderDataModel;
 import com.apps.etbo5ly_client.model.StatusResponse;
 import com.apps.etbo5ly_client.model.UserModel;
@@ -256,4 +258,18 @@ public interface Service {
 
     );
 
+
+    @FormUrlEncoded
+    @POST("api/one_chatRoom")
+    Single<Response<MessagesDataModel>> getChatMessages(@Field(value = "order_id") String order_id);
+
+    @Multipart
+    @POST("api/send_message")
+    Single<Response<SingleMessageModel>> sendMessages(@Part("order_id") RequestBody order_id,
+                                                      @Part("from_user_id") RequestBody from_user_id,
+                                                      @Part("to_user_id") RequestBody to_user_id,
+                                                      @Part("type") RequestBody type,
+                                                      @Part("message") RequestBody message,
+                                                      @Part MultipartBody.Part image
+    );
 }

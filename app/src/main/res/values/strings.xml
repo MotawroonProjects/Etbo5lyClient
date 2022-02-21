@@ -217,5 +217,6 @@
     <string name="work">Work</string>
     <string name="no_addresses">No address to show</string>
     <string name="delete">Delete</string>
+    <string name="type_a_message">Type a message...</string>
 
 </resources>

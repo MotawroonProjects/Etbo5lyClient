@@ -101,7 +101,7 @@ public class GeneralMethod {
                 Glide.with(view.getContext()).asBitmap()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .placeholder(R.drawable.circle_avatar)
-                        .load(Uri.parse(Tags.base_url+imageUrl))
+                        .load(Uri.parse(Tags.base_url + imageUrl))
                         .centerCrop()
                         .into(imageView);
 
@@ -114,7 +114,7 @@ public class GeneralMethod {
                 Glide.with(view.getContext()).asBitmap()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .placeholder(R.drawable.circle_avatar)
-                        .load(Uri.parse(Tags.base_url+imageUrl))
+                        .load(Uri.parse(Tags.base_url + imageUrl))
                         .centerCrop()
                         .into(imageView);
 
@@ -127,7 +127,7 @@ public class GeneralMethod {
                 Glide.with(view.getContext()).asBitmap()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .placeholder(R.drawable.circle_avatar)
-                        .load(Uri.parse(Tags.base_url+imageUrl))
+                        .load(Uri.parse(Tags.base_url + imageUrl))
                         .centerCrop()
                         .into(imageView);
             }

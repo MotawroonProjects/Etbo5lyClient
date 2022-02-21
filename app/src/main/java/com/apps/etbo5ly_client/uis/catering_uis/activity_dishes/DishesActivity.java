@@ -54,7 +54,7 @@ public class DishesActivity extends BaseActivity {
         manageCartModel = ManageCartModel.newInstance();
         mvvm = ViewModelProviders.of(this).get(ActivityDishesMvvm.class);
         setUpToolbar(binding.toolbar, getString(R.string.dishes), R.color.colorPrimary, R.color.white);
-
+        binding.setKitchenStatus(kitchen_status);
         mvvm.getIsDataLoading().observe(this, isLoading -> {
             if (isLoading) {
                 binding.progBar.setVisibility(View.VISIBLE);

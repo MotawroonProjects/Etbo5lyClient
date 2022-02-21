@@ -1,6 +1,7 @@
 package com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.order_module;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,10 +18,14 @@ import android.view.ViewGroup;
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.adapters.catering_adapters.CatererCurrentOrderAdapter;
 import com.apps.etbo5ly_client.databinding.FragmentCurrentOrderBinding;
+import com.apps.etbo5ly_client.model.ChatUserModel;
+import com.apps.etbo5ly_client.model.OrderModel;
+import com.apps.etbo5ly_client.model.UserModel;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.FragmentCatererCurrentOrderMvvm;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_home_catering.HomeActivity;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseFragment;
+import com.apps.etbo5ly_client.uis.common_uis.activity_chat.ChatActivity;
 
 
 public class FragmentCatererCurrentOrder extends BaseFragment {
@@ -108,5 +113,15 @@ public class FragmentCatererCurrentOrder extends BaseFragment {
 
     public void resendOrder(String id) {
         mvvm.resendOrder(activity, id);
+    }
+
+    public void navigateToChatActivity(OrderModel orderModel) {
+        UserModel.Data user = orderModel.getUser();
+        UserModel.Data catererUser = orderModel.getCaterer().getUser();
+
+        ChatUserModel model = new ChatUserModel(user.getId(), user.getName(), user.getPhone_code() + user.getPhone(), user.getPhoto(), orderModel.getCaterer().getId(), catererUser.getName(), catererUser.getPhone_code() + catererUser.getPhone(), catererUser.getPhoto(), orderModel.getCaterer().getAddress(), orderModel.getCaterer().getLatitude(), orderModel.getCaterer().getLongitude(), orderModel.getId(), orderModel.getTotal());
+        Intent intent = new Intent(activity, ChatActivity.class);
+        intent.putExtra("data", model);
+        startActivity(intent);
     }
 }

@@ -216,5 +216,6 @@
     <string name="work">العمل</string>
     <string name="no_addresses">لا يوجد عناوين لعرضها</string>
     <string name="delete">حذف</string>
+    <string name="type_a_message">إكتب رسالتك....</string>
 
 </resources>
