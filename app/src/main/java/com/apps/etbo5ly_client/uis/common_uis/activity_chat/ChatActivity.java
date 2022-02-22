@@ -79,6 +79,8 @@ public class ChatActivity extends BaseActivity {
             }
         });
 
+
+        binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
         binding.setModel(model);
         binding.setLang(getLang());
         binding.edtMessage.addTextChangedListener(new TextWatcher() {
@@ -132,6 +134,9 @@ public class ChatActivity extends BaseActivity {
             binding.edtMessage.setText(null);
 
         });
+
+        setRoomId(model.getOrder_id());
+
 
     }
 
@@ -206,6 +211,7 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        clearRoomId();
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }

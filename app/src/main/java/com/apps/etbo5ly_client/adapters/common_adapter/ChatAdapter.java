@@ -113,12 +113,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return list != null ? list.size() : 0;
     }
 
-    public void addMessage(MessageModel messageModel) {
-        if (list!=null){
-            list.add(messageModel);
-        }
-        notifyItemChanged(list.size());
-    }
+
 
 
     public class HolderMsgLeft extends RecyclerView.ViewHolder {
@@ -162,7 +157,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemViewType(int position) {
 
         MessageModel messageModel = list.get(position);
-
         if (messageModel.getType().equals("message")) {
 
             if (messageModel.getFrom_user().getId().equals(current_user_id)) {
@@ -185,7 +179,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public void updateList(List<MessageModel> list) {
-        if (this.list != null) {
+        if (list != null) {
             this.list = list;
 
         }
@@ -193,6 +187,12 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
 
     }
+    public void addMessage(MessageModel messageModel) {
+        if (list != null) {
+            list.add(messageModel);
+            notifyItemChanged(list.size());
 
+        }
+    }
 
 }

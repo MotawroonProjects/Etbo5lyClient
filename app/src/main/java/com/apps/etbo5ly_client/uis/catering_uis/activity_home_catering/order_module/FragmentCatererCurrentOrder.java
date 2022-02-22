@@ -119,7 +119,7 @@ public class FragmentCatererCurrentOrder extends BaseFragment {
         UserModel.Data user = orderModel.getUser();
         UserModel.Data catererUser = orderModel.getCaterer().getUser();
 
-        ChatUserModel model = new ChatUserModel(user.getId(), user.getName(), user.getPhone_code() + user.getPhone(), user.getPhoto(), orderModel.getCaterer().getId(), catererUser.getName(), catererUser.getPhone_code() + catererUser.getPhone(), catererUser.getPhoto(), orderModel.getCaterer().getAddress(), orderModel.getCaterer().getLatitude(), orderModel.getCaterer().getLongitude(), orderModel.getId(), orderModel.getTotal());
+        ChatUserModel model = new ChatUserModel(user.getId(), user.getName(), user.getPhone_code() + user.getPhone(), user.getPhoto(), catererUser.getId(), catererUser.getName(), catererUser.getPhone_code() + catererUser.getPhone(), catererUser.getPhoto(), orderModel.getCaterer().getAddress(), orderModel.getCaterer().getLatitude(), orderModel.getCaterer().getLongitude(), orderModel.getId(), orderModel.getTotal());
         Intent intent = new Intent(activity, ChatActivity.class);
         intent.putExtra("data", model);
         startActivity(intent);

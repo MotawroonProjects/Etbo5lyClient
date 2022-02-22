@@ -218,5 +218,6 @@
     <string name="no_addresses">No address to show</string>
     <string name="delete">Delete</string>
     <string name="type_a_message">Type a message...</string>
+    <string name="attach_sent">attachment sent</string>
 
 </resources>

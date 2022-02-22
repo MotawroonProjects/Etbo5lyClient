@@ -61,9 +61,9 @@ public class ActivityChatMvvm extends AndroidViewModel {
     }
 
 
-
     public void getChatMessages(String order_id) {
 
+        Log.e("id", order_id);
         getIsLoading().setValue(true);
         Api.getService(Tags.base_url).getChatMessages(order_id)
                 .subscribeOn(Schedulers.io())
@@ -78,9 +78,15 @@ public class ActivityChatMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<MessagesDataModel> response) {
                         getIsLoading().setValue(false);
 
-                        if (response.isSuccessful()){
-                            if (response.body()!=null&&response.body().getStatus()==200){
+                        if (response.isSuccessful()) {
+                            if (response.body() != null && response.body().getStatus() == 200) {
                                 onDataSuccess().setValue(response.body().getData());
+                            }
+                        } else {
+                            try {
+                                Log.e("error", response.code() + "" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
                         }
 
@@ -88,12 +94,11 @@ public class ActivityChatMvvm extends AndroidViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e("chatError",e.toString());
+                        Log.e("chatError", e.toString());
                     }
                 });
 
     }
-
 
 
     @Override

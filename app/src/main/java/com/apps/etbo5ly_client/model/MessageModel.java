@@ -17,6 +17,24 @@ public class MessageModel implements Serializable {
     private UserModel.Data from_user;
     private UserModel.Data to_user;
 
+    public MessageModel() {
+    }
+
+    public MessageModel(String id, String order_id, String from_user_id, String to_user_id, String type, String message, String voice, String image, String is_read, String created_at, String updated_at, UserModel.Data from_user, UserModel.Data to_user) {
+        this.id = id;
+        this.order_id = order_id;
+        this.from_user_id = from_user_id;
+        this.to_user_id = to_user_id;
+        this.type = type;
+        this.message = message;
+        this.voice = voice;
+        this.image = image;
+        this.is_read = is_read;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.from_user = from_user;
+        this.to_user = to_user;
+    }
 
     public String getId() {
         return id;

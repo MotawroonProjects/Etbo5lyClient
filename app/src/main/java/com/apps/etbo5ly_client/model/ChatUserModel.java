@@ -9,6 +9,7 @@ public class ChatUserModel implements Serializable {
     private String user_image;
 
 
+    // user_id of caterer لو حصل فيها مشكلة علي الي قايل كده انتوا حرين بقا مليش فيه
     private String caterer_id;
     private String caterer_name;
     private String caterer_phone;
