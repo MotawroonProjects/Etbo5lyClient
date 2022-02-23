@@ -29,9 +29,11 @@
         <activity
             android:name=".uis.common_uis.activity_chat.ChatActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
+            android:excludeFromRecents="true"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-            />
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".uis.common_uis.activity_address.AddressActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
@@ -41,7 +43,7 @@
             android:name=".uis.catering_uis.activity_zone_cover.ZoneCoverActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".uis.catering_uis.activity_feast_details.FeastDetailsActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
@@ -71,7 +73,7 @@
             android:name=".uis.catering_uis.activity_kitchen_details.KitchenDetailsActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".uis.catering_uis.activity_filter.FilterActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
@@ -94,7 +96,10 @@
         <activity
             android:name=".uis.catering_uis.activity_home_catering.HomeActivity"
             android:configChanges="keyboardHidden|screenSize|orientation"
+            android:excludeFromRecents="true"
             android:exported="false"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".uis.common_uis.activity_app_category.AppCategoryActivity"
@@ -160,7 +165,11 @@
         <service
             android:name=".common.notifications.FireBaseNotifications"
             android:exported="false"
-            android:stopWithTask="false" />
+            android:stopWithTask="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <service
             android:name=".common.chat_service.ChatService"
@@ -169,16 +178,16 @@
 
 
         <provider
-            android:authorities="${applicationId}.provider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true"
-            >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_provider"
-                />
+                android:resource="@xml/file_provider" />
         </provider>
+
+        <receiver android:name=".common.notifications.BroadcastCancelNotification" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

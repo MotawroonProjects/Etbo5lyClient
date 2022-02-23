@@ -157,6 +157,27 @@ public class GeneralMethod {
 
     }
 
+    @BindingAdapter("createAtMsg")
+    public static void dateCreateAtMsg(TextView textView, String s) {
+        if (s != null) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            try {
+                Date date = simpleDateFormat.parse(s);
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm aa", Locale.ENGLISH);
+                dateFormat.setTimeZone(TimeZone.getDefault());
+                String d = dateFormat.format(date);
+                textView.setText(d);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+    }
+
 
     @BindingAdapter("providerType")
     public static void providerType(TextView textView, String type) {

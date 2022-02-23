@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "1016646159807-odhf7bsmli5s1se0dalqspt1brbh414d.apps.googleusercontent.com",
+              "client_id": "1016646159807-4259ju48nni41j1dofve1rq82t8419cf.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "creativeShare.Etbkhly"
+                "bundle_id": "creativeShare.Etbkhly-Provider"
               }
             }
           ]
@@ -51,18 +51,18 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1016646159807:android:2a6126ff4c95e939fe250a",
+        "mobilesdk_app_id": "1:1016646159807:android:b3b2a46ad7f508a3fe250a",
         "android_client_info": {
-          "package_name": "com.etbakhly"
+          "package_name": "com.etbakhly_provider"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1016646159807-ibjckmcnr438vuct8r701e70gb83qh94.apps.googleusercontent.com",
+          "client_id": "1016646159807-ghon7uokbcsk1e4urmv747d6fgjer00b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.etbakhly",
-            "certificate_hash": "ba044b357b15948a4405b7ca973962ca23fb7a81"
+            "package_name": "com.etbakhly_provider",
+            "certificate_hash": "02234e9655300f70fcb3d1f946434728fcb0fcea"
           }
         },
         {
@@ -83,10 +83,10 @@
               "client_type": 3
             },
             {
-              "client_id": "1016646159807-odhf7bsmli5s1se0dalqspt1brbh414d.apps.googleusercontent.com",
+              "client_id": "1016646159807-4259ju48nni41j1dofve1rq82t8419cf.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "creativeShare.Etbkhly"
+                "bundle_id": "creativeShare.Etbkhly-Provider"
               }
             }
           ]

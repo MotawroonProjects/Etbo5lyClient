@@ -85,9 +85,14 @@ public class FragmentNotification extends BaseFragment {
                 adapter.updateList(notificationModelList);
             }
         });
-       /* activityHomeGeneralMvvm.getOptionId().observe(activity, option_id -> {
-            mvvm.getFavorite(option_id, getUserModel());
-        });*/
+
+        activityHomeGeneralMvvm.onNotificationRefresh().observe(activity, refresh -> {
+            if (refresh) {
+                mvvm.getNotification(getUserSettings().getOption_id(), getUserModel());
+
+            }
+        });
+
 
         binding.recViewLayout.tvNoData.setText(R.string.no_notifications_to_show);
         adapter = new CatererNotificationAdapter(activity, this);

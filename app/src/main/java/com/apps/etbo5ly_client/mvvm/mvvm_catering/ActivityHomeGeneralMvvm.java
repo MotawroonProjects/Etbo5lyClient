@@ -44,6 +44,8 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
     private MutableLiveData<UserModel> onTokenSuccess;
     private MutableLiveData<Boolean> onLoggedOutSuccess;
     private MutableLiveData<AddressModel> onMyAddressSelected;
+    private MutableLiveData<Boolean> displayFragmentNotification;
+    private MutableLiveData<Boolean> onNotificationRefresh;
 
 
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -118,6 +120,14 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
         return onOrderRefresh;
     }
 
+    public MutableLiveData<Boolean> onNotificationRefresh() {
+        if (onNotificationRefresh == null) {
+            onNotificationRefresh = new MutableLiveData<>();
+        }
+
+        return onNotificationRefresh;
+    }
+
 
     public MutableLiveData<UserModel> onTokenSuccess() {
         if (onTokenSuccess == null) {
@@ -142,6 +152,14 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
         }
 
         return onMyAddressSelected;
+    }
+
+    public MutableLiveData<Boolean> getDisplayFragmentNotification() {
+        if (displayFragmentNotification == null) {
+            displayFragmentNotification = new MutableLiveData<>();
+        }
+
+        return displayFragmentNotification;
     }
 
 

@@ -74,6 +74,14 @@ public class FragmentProfile extends BaseFragment {
         });
         binding.setLang(getLang());
         binding.setModel(getUserModel());
+
+        activityHomeGeneralMvvm.getDisplayFragmentNotification().observe(activity, display -> {
+            if (display) {
+                Navigation.findNavController(binding.getRoot()).navigate(R.id.fragmentNotification);
+
+            }
+        });
+
         binding.llOrders.setOnClickListener(v -> {
             activity.displaySpecificPage(3);
         });

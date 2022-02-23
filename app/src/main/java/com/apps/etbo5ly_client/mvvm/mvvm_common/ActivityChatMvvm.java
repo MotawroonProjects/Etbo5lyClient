@@ -100,6 +100,10 @@ public class ActivityChatMvvm extends AndroidViewModel {
 
     }
 
+    public void addNewMessage(MessageModel messageModel){
+        onDataSuccess().getValue().add(messageModel);
+    }
+
 
     @Override
     protected void onCleared() {

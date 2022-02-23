@@ -71,8 +71,9 @@ public class ChatService extends Service {
                     public void onSuccess(@NonNull Response<SingleMessageModel> response) {
                         if (response.isSuccessful()) {
                             if (response.body() != null && response.body().getStatus() == 200) {
-                                stopSelf();
                                 EventBus.getDefault().post(response.body().getData());
+                                stopSelf();
+
                             }
                         }
 

@@ -8,9 +8,9 @@
     <data>
 
 
-       <variable
-           name="model"
-           type="com.apps.etbo5ly_client.model.MessageModel" />
+        <variable
+            name="model"
+            type="com.apps.etbo5ly_client.model.MessageModel" />
 
         <import type="android.view.View" />
 
@@ -28,8 +28,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,19 +41,16 @@
                 tools:ignore="RtlCompat,UnusedAttribute">
 
 
-
                 <LinearLayout
                     android:layout_width="234dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/msg_left_image_bg"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
 
 
                         >
@@ -67,16 +64,17 @@
                             android:layout_marginTop="2dp"
                             android:layout_marginEnd="12dp"
                             android:layout_marginBottom="2dp"
+                            android:scaleType="centerCrop"
                             app:riv_border_color="@color/transparent"
                             app:riv_border_width="0dp"
                             app:riv_corner_radius="5dp"
-                            android:scaleType="centerCrop"
 
 
                             />
 
                         <TextView
                             android:id="@+id/tv_time"
+                            createAtMsg="@{model.created_at}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end|bottom"
@@ -84,9 +82,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_marginBottom="5dp"
                             android:textColor="@color/gray2"
-                            android:textSize="12sp"
-                            createAt="@{model.created_at}"
-                            />
+                            android:textSize="12sp" />
 
 
                     </FrameLayout>
@@ -98,30 +94,32 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
+
                 <androidx.legacy.widget.Space
                     android:layout_width="10dp"
-                    android:layout_height="0dp"/>
+                    android:layout_height="0dp" />
+
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageUser"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
-                    app:civ_circle_background_color="@color/gray2"
                     android:src="@drawable/circle_avatar"
+                    app:civ_circle_background_color="@color/gray2"
 
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:text="@{model.from_user.name}"
                     android:textColor="@color/gray11"
                     android:textSize="12sp"
-                    android:text="@{model.from_user.name}"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>

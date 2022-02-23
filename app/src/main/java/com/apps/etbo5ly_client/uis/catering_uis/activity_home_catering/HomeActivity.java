@@ -22,6 +22,7 @@ import com.apps.etbo5ly_client.common.language.Language;
 import com.apps.etbo5ly_client.databinding.ActivityHomeClientBinding;
 import com.apps.etbo5ly_client.databinding.ItemMenuCartBinding;
 import com.apps.etbo5ly_client.model.ManageCartModel;
+import com.apps.etbo5ly_client.model.NotiFire;
 import com.apps.etbo5ly_client.model.UserSettingsModel;
 import com.apps.etbo5ly_client.mvvm.mvvm_catering.ActivityHomeGeneralMvvm;
 import com.apps.etbo5ly_client.uis.FragmentBaseNavigation;
@@ -30,6 +31,9 @@ import com.apps.etbo5ly_client.uis.common_uis.activity_login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,6 +53,8 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private ActivityHomeGeneralMvvm activityHomeGeneralMvvm;
     private ItemMenuCartBinding itemMenuCartBinding;
     private ManageCartModel manageCartModel;
+    private String order_id = "";// is from firebase notification
+    private boolean isFromFireBase = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +79,10 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private void getDataFromIntent() {
         Intent intent = getIntent();
         option_id = intent.getStringExtra("option_id");
+        if (intent.hasExtra("firebase")) {
+            isFromFireBase = true;
+            order_id = intent.getStringExtra("firebase");
+        }
 
     }
 
@@ -123,6 +133,10 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         if (stack.isEmpty()) {
             stack.push(0);
         }
+        if (isFromFireBase) {
+            setItemPos(4);
+            activityHomeGeneralMvvm.getDisplayFragmentNotification().setValue(true);
+        }
         binding.pager.setOffscreenPageLimit(fragmentList.size());
         binding.pager.addOnPageChangeListener(this);
         binding.bottomNavigation.setOnItemSelectedListener(this);
@@ -137,6 +151,12 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
         activityHomeGeneralMvvm.updateToken(getUserModel());
 
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onNewDataRefresh(NotiFire notiFire) {
+        activityHomeGeneralMvvm.onNotificationRefresh().setValue(true);
+        activityHomeGeneralMvvm.onOrdersRefresh().setValue(true);
     }
 
     public void updateFireBase() {

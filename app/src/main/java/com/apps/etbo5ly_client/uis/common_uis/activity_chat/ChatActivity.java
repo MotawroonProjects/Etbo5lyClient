@@ -11,6 +11,7 @@ import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -73,11 +74,7 @@ public class ChatActivity extends BaseActivity {
         mvvm.getIsLoading().observe(this, isLoading -> {
             binding.swipeRefresh.setRefreshing(isLoading);
         });
-        mvvm.onDataSuccess().observe(this, list -> {
-            if (adapter != null) {
-                adapter.updateList(list);
-            }
-        });
+
 
 
         binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
@@ -104,9 +101,17 @@ public class ChatActivity extends BaseActivity {
                 }
             }
         });
-        adapter = new ChatAdapter(this, getUserModel().getData().getId());
-        binding.recView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ChatAdapter(this, getUserModel().getData().getId(),model.getCaterer_image(),binding.recView);
+        binding.recView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         binding.recView.setAdapter(adapter);
+
+        mvvm.onDataSuccess().observe(this, list -> {
+            if (adapter != null) {
+                adapter.updateList(list);
+            }
+        });
+
+
 
         binding.imageCamera.setOnClickListener(v -> {
             checkCameraFilePermission();
@@ -135,6 +140,15 @@ public class ChatActivity extends BaseActivity {
 
         });
 
+        binding.cardLastMsg.setOnClickListener(v -> {
+            binding.setMsg("");
+            binding.cardLastMsg.setVisibility(View.GONE);
+            binding.recView.scrollToPosition(mvvm.onDataSuccess().getValue().size()-1);
+            adapter.notifyDataSetChanged();
+            //binding.recView.post(() -> );
+        });
+
+        binding.swipeRefresh.setOnRefreshListener(() -> mvvm.getChatMessages(model.getOrder_id()));
         setRoomId(model.getOrder_id());
 
 
@@ -151,7 +165,9 @@ public class ChatActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onNewMessage(MessageModel messageModel) {
         imagePath = "";
+        mvvm.addNewMessage(messageModel);
         adapter.addMessage(messageModel);
+
     }
 
     private void checkCameraFilePermission() {
@@ -215,5 +231,21 @@ public class ChatActivity extends BaseActivity {
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
+    }
+
+    public void displayLastMessage(MessageModel messageModel) {
+        if (messageModel.getType().equals("image")){
+            binding.setMsg(getString(R.string.attach_sent));
+        }else {
+            binding.setMsg(messageModel.getMessage());
+        }
+        binding.cardLastMsg.setVisibility(View.VISIBLE);
+
+
+    }
+
+    public void hideLastMessageView() {
+        binding.setMsg("");
+        binding.cardLastMsg.setVisibility(View.GONE);
     }
 }

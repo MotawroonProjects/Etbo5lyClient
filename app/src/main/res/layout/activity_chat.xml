@@ -1,208 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="model"
             type="com.apps.etbo5ly_client.model.ChatUserModel" />
+
+        <variable
+            name="msg"
+            type="String" />
+
         <variable
             name="lang"
             type="String" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".uis.common_uis.activity_chat.ChatActivity"
         android:orientation="vertical"
-        >
+        tools:context=".uis.common_uis.activity_chat.ChatActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:background="@color/transparent"
             app:elevation="0dp"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:contentInsetStart="0dp"
-                app:contentInsetEnd="0dp"
                 android:background="@color/colorPrimary"
-                >
+                app:contentInsetEnd="0dp"
+                app:contentInsetStart="0dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    >
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/imageBack"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_back_arrow"
-                        app:tint="@color/white"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:rotation='@{lang.equals("ar")?180:0}'
-                        />
+                        android:src="@drawable/ic_back_arrow"
+                        app:tint="@color/white" />
+
                     <de.hdodenhof.circleimageview.CircleImageView
+                        user_image="@{model.caterer_image}"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@drawable/circle_avatar"
-                        user_image="@{model.caterer_image}"
-                        />
+                        android:src="@drawable/circle_avatar" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="14sp"
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="12dp"
+                        android:ellipsize="end"
                         android:lines="1"
                         android:maxEms="6"
-                        android:ellipsize="end"
                         android:text="@{model.caterer_name}"
-                        />
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
             </androidx.appcompat.widget.Toolbar>
 
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:background="@color/primaryTrans"
-               android:padding="8dp"
-               android:orientation="horizontal"
-               >
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textColor="@color/white"
-                   android:textSize="15sp"
-                   android:text="@string/order_num"
-                   />
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textColor="@color/white"
-                   android:textSize="15sp"
-                   android:text='@{"#"+model.order_id}'
-                   android:layout_marginStart="5dp"
-                   android:layout_marginEnd="5dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primaryTrans"
+                android:orientation="horizontal"
+                android:padding="8dp">
 
-                   />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_num"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
 
-               <androidx.legacy.widget.Space
-                   android:layout_width="0dp"
-                   android:layout_height="0dp"
-                   android:layout_weight="1"
-                   />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:text='@{"#"+model.order_id}'
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
 
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textColor="@color/white"
-                   android:textSize="15sp"
-                   android:text="@string/total"
-                   />
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:textColor="@color/colorPrimary"
-                   android:textSize="18sp"
-                   android:text='@{model.total+" "+@string/sar}'
-                   android:layout_marginStart="5dp"
-                   android:layout_marginEnd="5dp"
+                    />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:text='@{model.total+" "+@string/sar}'
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
 
 
-                   />
+                    />
 
-           </LinearLayout>
+            </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            >
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recView"
+            android:layout_weight="1">
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+
+                    />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardLastMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_margin="16dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    android:visibility="gone"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center_vertical"
+                        >
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/circle_avatar"
+                            user_image="@{model.caterer_image}"
+                            />
+                        <androidx.legacy.widget.Space
+                            android:layout_width="8dp"
+                            android:layout_height="0dp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lines="1"
+                            android:textColor="@color/white"
+                            android:text='@{msg??""}'
+                            android:maxEms="4"
+                            android:ellipsize="end"
+
+
+                            />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
-            >
+            android:orientation="horizontal">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
                 android:minHeight="50dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="30dp"
                 app:cardElevation="3dp"
-                app:cardBackgroundColor="@color/white"
-                android:layout_margin="8dp"
 
                 >
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="50dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="2dp"
-                    >
+                    android:minHeight="50dp">
 
                     <EditText
                         android:id="@+id/edtMessage"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:inputType="textMultiLine"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:hint="@string/type_a_message"
-                        android:textColorHint="@color/gray5"
                         android:layout_gravity="center_vertical"
-                        android:padding="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:hint="@string/type_a_message"
+                        android:inputType="textMultiLine"
                         android:maxLines="3"
-                        />
+                        android:padding="5dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray5"
+                        android:textSize="14sp" />
+
                     <androidx.legacy.widget.Space
                         android:layout_width="8dp"
-                        android:layout_height="0dp"
-                        />
+                        android:layout_height="0dp" />
+
                     <ImageView
                         android:id="@+id/imageCamera"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_camera"
-                        app:tint="@color/colorPrimary"
-                        />
+                        app:tint="@color/colorPrimary" />
+
                     <androidx.legacy.widget.Space
                         android:layout_width="8dp"
-                        android:layout_height="0dp"
-                        />
+                        android:layout_height="0dp" />
                 </LinearLayout>
-
 
 
             </androidx.cardview.widget.CardView>
@@ -211,17 +261,16 @@
                 android:id="@+id/send"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_send"
-                app:tint="@color/white"
-                android:visibility="gone"
                 android:background="@drawable/circle_primary"
                 android:padding="12dp"
                 android:rotation='@{lang.equals("ar")?180:0}'
-                />
+                android:src="@drawable/ic_send"
+                android:visibility="gone"
+                app:tint="@color/white" />
+
             <androidx.legacy.widget.Space
                 android:layout_width="8dp"
-                android:layout_height="0dp"
-                />
+                android:layout_height="0dp" />
         </LinearLayout>
 
     </LinearLayout>

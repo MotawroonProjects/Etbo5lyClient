@@ -1,20 +1,14 @@
 package com.apps.etbo5ly_client.adapters.common_adapter;
 
 import android.content.Context;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Handler;
 import android.util.Log;
-import android.util.SparseArray;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apps.etbo5ly_client.R;
@@ -25,13 +19,10 @@ import com.apps.etbo5ly_client.databinding.ChatMessageLeftRowBinding;
 import com.apps.etbo5ly_client.databinding.ChatMessageRightRowBinding;
 import com.apps.etbo5ly_client.model.MessageModel;
 import com.apps.etbo5ly_client.uis.common_uis.activity_chat.ChatActivity;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int msg_left = 1;
@@ -43,14 +34,65 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<MessageModel> list;
     private Context context;
     private String current_user_id;
+    private String chat_image;
     private ChatActivity activity;
+    private RecyclerView recyclerView;
+    private boolean isScrolledUp = false;
 
 
-    public ChatAdapter(Context context, String current_user_id) {
+    public ChatAdapter(Context context, String current_user_id, String chat_image, RecyclerView recView) {
         this.context = context;
         this.current_user_id = current_user_id;
+        this.chat_image = chat_image;
         inflater = LayoutInflater.from(context);
         activity = (ChatActivity) context;
+        this.recyclerView = recView;
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (list!=null&&list.size()>0){
+                    int currentItemPos =((LinearLayoutManager) recView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                    Log.e("pos",currentItemPos+"__"+dy);
+                    if (dy>0){
+                        Log.e("3","3");
+
+                        if (currentItemPos<=list.size()-5) {
+                            isScrolledUp = false;
+
+                            Log.e("4","4");
+
+                        }else if (currentItemPos==list.size()-1){
+                            Log.e("5","5");
+
+                            isScrolledUp = false;
+                            activity.hideLastMessageView();
+
+                        }
+                    }else {
+
+                        if (list.size()>5&&currentItemPos<list.size()-5){
+                            Log.e("6","6");
+
+                            isScrolledUp = true;
+                        }else {
+                            Log.e("7","7");
+
+                            isScrolledUp = false;
+                        }
+
+
+                    }
+                }
+
+            }
+        });
+        recyclerView.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+            if (bottom<oldBottom){
+                recyclerView.scrollBy(0,oldBottom-bottom);
+            }
+        });
 
 
     }
@@ -88,6 +130,11 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             HolderMsgLeft holderMsgLeft = (HolderMsgLeft) holder;
             holderMsgLeft.binding.setModel(model);
 
+            Glide.with(context)
+                    .load(Uri.parse(Tags.base_url + chat_image))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holderMsgLeft.binding.imageUser);
+
         } else if (holder instanceof HolderMsgRight) {
             HolderMsgRight holderMsgRight = (HolderMsgRight) holder;
             holderMsgRight.binding.setModel(model);
@@ -96,12 +143,23 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (holder instanceof HolderImageLeft) {
             HolderImageLeft holderImageLeft = (HolderImageLeft) holder;
             holderImageLeft.binding.setModel(model);
-            Picasso.get().load(Uri.parse(Tags.base_url + model.getImage())).into(holderImageLeft.binding.imageChat);
+            Glide.with(context)
+                    .load(Uri.parse(Tags.base_url + model.getImage()))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holderImageLeft.binding.imageChat);
+
+
+            Glide.with(context)
+                    .load(Uri.parse(Tags.base_url + chat_image))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holderImageLeft.binding.imageUser);
 
         } else if (holder instanceof HolderImageRight) {
             HolderImageRight holderImageRight = (HolderImageRight) holder;
-            Picasso.get().load(Uri.parse(Tags.base_url + model.getImage())).into(holderImageRight.binding.image);
-
+            Glide.with(context)
+                    .load(Uri.parse(Tags.base_url + model.getImage()))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holderImageRight.binding.image);
 
         }
 
@@ -112,8 +170,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public int getItemCount() {
         return list != null ? list.size() : 0;
     }
-
-
 
 
     public class HolderMsgLeft extends RecyclerView.ViewHolder {
@@ -184,13 +240,43 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         }
 
-        notifyDataSetChanged();
+        if (this.list != null) {
+            recyclerView.scrollToPosition(this.list.size()-1);
+            notifyDataSetChanged();
+
+        }
+
+
 
     }
+
     public void addMessage(MessageModel messageModel) {
         if (list != null) {
             list.add(messageModel);
             notifyItemChanged(list.size());
+
+            recyclerView.post(() -> {
+                if (this.list != null) {
+
+
+                    if (!isScrolledUp){
+
+                        recyclerView.scrollToPosition(this.list.size()-1);
+                        notifyDataSetChanged();
+
+                    }else {
+                        if (!messageModel.getFrom_user_id().equals(current_user_id)){
+                            activity.displayLastMessage(messageModel);
+
+                        }else {
+                            recyclerView.scrollToPosition(this.list.size()-1);
+                            notifyDataSetChanged();
+
+                        }
+                    }
+
+                }
+            });
 
         }
     }

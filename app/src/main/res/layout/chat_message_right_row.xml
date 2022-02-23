@@ -61,7 +61,7 @@
                     android:layout_marginBottom="5dp"
                     android:textColor="@color/white"
                     android:textSize="12sp"
-                    createAt="@{model.created_at}"
+                    createAtMsg="@{model.created_at}"
 
                     />
             </LinearLayout>
