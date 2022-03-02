@@ -128,11 +128,15 @@ public interface Service {
     );
 
     @GET("api/Catering/CatererBuffets")
-    Single<Response<BuffetsDataModel>> getBuffets(@Query(value = "Caterer_id") String caterer_id);
+    Single<Response<BuffetsDataModel>> getBuffets(@Query(value = "Caterer_id") String caterer_id,
+                                                  @Query(value = "user_type") String user_type
+                                                  );
 
 
     @GET("api/Catering/CatererFeasts")
-    Single<Response<BuffetsDataModel>> getFeasts(@Query(value = "Caterer_id") String caterer_id);
+    Single<Response<BuffetsDataModel>> getFeasts(@Query(value = "Caterer_id") String caterer_id,
+                                                 @Query(value = "user_type") String user_type
+                                                 );
 
 
     @GET("api/Catering/indexCategoryDishes")

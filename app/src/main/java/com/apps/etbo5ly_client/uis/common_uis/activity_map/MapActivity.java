@@ -108,7 +108,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
                     setResult(RESULT_OK, intent);
                 }
                 finish();
-            }else {
+            } else {
                 Toast.makeText(MapActivity.this, R.string.ch_address, Toast.LENGTH_SHORT).show();
             }
 

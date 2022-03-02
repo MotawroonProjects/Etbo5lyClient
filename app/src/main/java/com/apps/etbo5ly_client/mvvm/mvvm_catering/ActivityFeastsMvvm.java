@@ -59,7 +59,7 @@ public class ActivityFeastsMvvm extends AndroidViewModel {
 
     public void getFeasts(String kitchen_id, Context context) {
         getIsDataLoading().setValue(true);
-        Api.getService(Tags.base_url).getFeasts(kitchen_id)
+        Api.getService(Tags.base_url).getFeasts(kitchen_id,"client")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<BuffetsDataModel>>() {
