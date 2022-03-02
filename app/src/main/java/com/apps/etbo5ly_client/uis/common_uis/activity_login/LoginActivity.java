@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (getUserSettings().isCanFinishLogin()&&getUserModel()!=null){
+        if (getUserSettings().isCanFinishLogin() && getUserModel() != null) {
             finish();
         }
     }

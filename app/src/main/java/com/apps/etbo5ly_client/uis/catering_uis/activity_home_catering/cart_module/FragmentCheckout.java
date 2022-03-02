@@ -86,7 +86,7 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
             } else if (req == 3 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
 
                 String action = result.getData().getStringExtra("action");
-                if (action.equals("add")){
+                if (action.equals("add")) {
                     this.addressModel = (AddressModel) result.getData().getSerializableExtra("data");
                     model.setZone(addressModel.getZone_cover().getZone().getTitel());
                     model.setDelivery_cost(addressModel.getZone_cover().getZone_cost());
@@ -95,9 +95,9 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
                     binding.setModel(model);
                     calculateTotal();
                     binding.imageAddressFav.setImageResource(R.drawable.ic_start_fill);
-                }else if (action.equals("delete")){
+                } else if (action.equals("delete")) {
                     AddressModel m = (AddressModel) result.getData().getSerializableExtra("data");
-                    if (addressModel!=null&&m.getId().equals(addressModel.getId())){
+                    if (addressModel != null && m.getId().equals(addressModel.getId())) {
                         model.setZone("");
                         model.setDelivery_cost("0.0");
                         model.setZone_id("");

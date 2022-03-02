@@ -98,13 +98,20 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
             return false;
         });
         binding.btnSelect.setOnClickListener(view -> {
-            SelectedLocation selectedLocation = new SelectedLocation(lat, lng, address);
-            Intent intent = getIntent();
-            if (intent != null) {
-                intent.putExtra("location", selectedLocation);
-                setResult(RESULT_OK, intent);
+            address = binding.edtSearch.getText().toString();
+            if (!address.isEmpty()) {
+                SelectedLocation selectedLocation = new SelectedLocation(lat, lng, address);
+                Intent intent = getIntent();
+
+                if (intent != null) {
+                    intent.putExtra("location", selectedLocation);
+                    setResult(RESULT_OK, intent);
+                }
+                finish();
+            }else {
+                Toast.makeText(MapActivity.this, R.string.ch_address, Toast.LENGTH_SHORT).show();
             }
-            finish();
+
         });
 
 

@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,10 +25,12 @@ import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.common.share.Common;
 import com.apps.etbo5ly_client.common.tags.Tags;
 import com.apps.etbo5ly_client.databinding.ActivitySignUpBinding;
+import com.apps.etbo5ly_client.model.SelectedLocation;
 import com.apps.etbo5ly_client.model.SignUpModel;
 import com.apps.etbo5ly_client.model.UserModel;
 import com.apps.etbo5ly_client.mvvm.mvvm_common.ActivitySignupMvvm;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseActivity;
+import com.apps.etbo5ly_client.uis.common_uis.activity_map.MapActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -81,36 +84,48 @@ public class SignUpActivity extends BaseActivity {
                 Picasso.get().load(Uri.parse(url)).into(binding.image);
                 model.setImage(url);
             }
-            
+
             binding.btnSignup.setText(getString(R.string.update));
         }
         binding.setModel(model);
         binding.setLang(getLang());
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                if (selectedReq == READ_REQ) {
+            if (selectedReq == 3 && result.getResultCode() == RESULT_OK && result.getData() != null) {
+                SelectedLocation location = (SelectedLocation) result.getData().getSerializableExtra("location");
+                model.setAddress(location.getAddress());
+                model.setLat(location.getLat() + "");
+                model.setLng(location.getLng() + "");
+                binding.setModel(model);
+                Log.e("sda","asda");
 
-                    uri = result.getData().getData();
-                    model.setImage(uri.toString());
 
-                    File file = new File(Common.getImagePath(this, uri));
-                    Picasso.get().load(file).fit().into(binding.image);
+            } else {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    if (selectedReq == READ_REQ) {
 
-                } else if (selectedReq == CAMERA_REQ) {
-                    Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
-                    uri = getUriFromBitmap(bitmap);
-                    if (uri != null) {
-                        String path = Common.getImagePath(this, uri);
+                        uri = result.getData().getData();
                         model.setImage(uri.toString());
-                        if (path != null) {
-                            Picasso.get().load(new File(path)).fit().into(binding.image);
 
-                        } else {
-                            Picasso.get().load(uri).fit().into(binding.image);
+                        File file = new File(Common.getImagePath(this, uri));
+                        Picasso.get().load(file).fit().into(binding.image);
 
+                    } else if (selectedReq == CAMERA_REQ) {
+                        Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
+                        uri = getUriFromBitmap(bitmap);
+                        if (uri != null) {
+                            String path = Common.getImagePath(this, uri);
+                            model.setImage(uri.toString());
+                            if (path != null) {
+                                Picasso.get().load(new File(path)).fit().into(binding.image);
+
+                            } else {
+                                Picasso.get().load(uri).fit().into(binding.image);
+
+                            }
                         }
                     }
                 }
+
             }
         });
 
@@ -148,6 +163,14 @@ public class SignUpActivity extends BaseActivity {
             }
         });
 
+        binding.cardAddress.setOnClickListener(view -> navigateToMapActivity());
+
+    }
+
+    private void navigateToMapActivity() {
+        selectedReq = 3;
+        Intent intent = new Intent(this, MapActivity.class);
+        launcher.launch(intent);
     }
 
     public void openSheet() {

@@ -218,5 +218,7 @@
     <string name="delete">حذف</string>
     <string name="type_a_message">إكتب رسالتك....</string>
     <string name="attach_sent">تم إرفاق صورة</string>
+    <string name="address2">العنوان</string>
+    <string name="ch_address">حدد عنوانك</string>
 
 </resources>

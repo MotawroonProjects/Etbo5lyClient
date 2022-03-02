@@ -43,7 +43,7 @@ public class AppCategoryActivity extends BaseActivity {
 
     private void navigateToActivity(String option_id) {
         UserSettingsModel userSettingsModel = getUserSettings();
-        if (userSettingsModel==null){
+        if (userSettingsModel == null) {
             userSettingsModel = new UserSettingsModel();
         }
         userSettingsModel.setOption_id(option_id);

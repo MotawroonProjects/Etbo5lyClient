@@ -68,7 +68,6 @@ public class DishesActivity extends BaseActivity {
         mvvm.onDataSuccess().observe(this, categories -> {
             if (categories.size() > 0) {
                 updateUi();
-                binding.tvNoData.setVisibility(View.GONE);
 
             } else {
                 binding.cardViewTotal.setVisibility(View.GONE);
@@ -138,7 +137,6 @@ public class DishesActivity extends BaseActivity {
         if (category.getDishes_buffet().size() > 0) {
             binding.tvNoData.setVisibility(View.GONE);
         } else {
-
             binding.tvNoData.setVisibility(View.VISIBLE);
         }
         dishesAdapter.updateList(category.getDishes_buffet());

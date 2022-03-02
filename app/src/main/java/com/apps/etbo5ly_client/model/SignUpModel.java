@@ -17,20 +17,26 @@ public class SignUpModel extends BaseObservable {
     private String phone;
     private String name;
     private String email;
+    private String lat;
+    private String lng;
+    private String address;
 
 
     public ObservableField<String> error_name = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
+    public ObservableField<String> error_address = new ObservableField<>();
 
 
     public boolean isDataValid(Context context) {
         if (!name.isEmpty() &&
                 !email.isEmpty() &&
+                !address.isEmpty() &&
                 Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
         ) {
             error_name.set(null);
             error_email.set(null);
+            error_address.set(null);
 
             return true;
         } else {
@@ -52,6 +58,13 @@ public class SignUpModel extends BaseObservable {
                 error_email.set(null);
 
             }
+            if (address.isEmpty()) {
+                error_address.set(context.getString(R.string.field_required));
+
+            } else {
+                error_address.set(null);
+
+            }
 
 
             return false;
@@ -63,6 +76,8 @@ public class SignUpModel extends BaseObservable {
         setPhone(phone);
         setName("");
         setEmail("");
+        setAddress("");
+
 
 
     }
@@ -110,5 +125,32 @@ public class SignUpModel extends BaseObservable {
         this.email = email;
         notifyPropertyChanged(BR.email);
 
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
+
+
+    @Bindable
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+        notifyPropertyChanged(BR.address);
     }
 }

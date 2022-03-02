@@ -68,6 +68,7 @@ public interface Service {
                                            @Part("phone_code") RequestBody phone_code,
                                            @Part("phone") RequestBody phone,
                                            @Part("email") RequestBody email,
+                                           @Part("address") RequestBody address,
                                            @Part("longitude") RequestBody longitude,
                                            @Part("latitude") RequestBody latitude,
                                            @Part("type") RequestBody type,
@@ -136,7 +137,10 @@ public interface Service {
 
     @GET("api/Catering/indexCategoryDishes")
     Single<Response<DishesDataModel>> getCategoryDishes(@Query(value = "category_dishes_id") String category_dishes_id,
-                                                        @Query(value = "Caterer_id") String Caterer_id
+                                                        @Query(value = "Caterer_id") String Caterer_id,
+                                                        @Query(value = "type") String type
+
+
 
     );
 

@@ -211,11 +211,11 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
                     @Override
                     public void onSuccess(@NonNull Response<SingleOrderDataModel> response) {
                         dialog.dismiss();
-                        Log.e("code", response.code() + "__");
+                        Log.e("code", response.code() + "__"+response.toString());
 
                         if (response.isSuccessful()) {
                             if (response.body() != null) {
-                                Log.e("codes", response.body().getStatus() + "" + response.body().getMessage());
+                                Log.e("codes", response.body().getStatus() + "" );
                                 if (response.body().getStatus() == 200) {
                                     getOnOrderSuccess().setValue(response.body().getSingelOrder());
 

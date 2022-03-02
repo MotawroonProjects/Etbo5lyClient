@@ -219,5 +219,7 @@
     <string name="delete">Delete</string>
     <string name="type_a_message">Type a message...</string>
     <string name="attach_sent">attachment sent</string>
+    <string name="address2">Address</string>
+    <string name="ch_address">Choose address</string>
 
 </resources>
