@@ -19,6 +19,7 @@ import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.fragmen
 import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.fragments.FragmentComments;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.fragments.FragmentGallery;
 import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.fragments.FragmentService;
+import com.apps.etbo5ly_client.uis.catering_uis.activity_kitchen_details.fragments.FragmentServiceTruck;
 import com.apps.etbo5ly_client.uis.common_uis.activity_base.BaseActivity;
 
 import java.util.ArrayList;
@@ -112,7 +113,13 @@ public class KitchenDetailsActivity extends BaseActivity {
 
         binding.setModel(model);
 
-        fragmentList.add(FragmentService.newInstance(model));
+        if (getUserSettings().getOption_id().equals("3")){
+            fragmentList.add(FragmentServiceTruck.newInstance(model));
+
+        }else {
+            fragmentList.add(FragmentService.newInstance(model));
+
+        }
         fragmentList.add(FragmentCatererOffer.newInstance(model));
         fragmentList.add(FragmentGallery.newInstance(model));
         fragmentList.add(FragmentComments.newInstance(model));

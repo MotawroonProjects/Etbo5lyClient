@@ -45,7 +45,11 @@ public class BuffetsActivity extends BaseActivity {
     }
 
     private void initView() {
-        setUpToolbar(binding.toolbar, getString(R.string.buffets), R.color.colorPrimary, R.color.white);
+        String title = getString(R.string.buffets);
+        if (getUserSettings().getOption_id().equals("3")) {
+            title = getString(R.string.packages);
+        }
+        setUpToolbar(binding.toolbar, title, R.color.colorPrimary, R.color.white);
         mvvm = ViewModelProviders.of(this).get(ActivityBuffetsMvvm.class);
         mvvm.getIsDataLoading().observe(this, isLoading -> {
             binding.recViewLayout.swipeRefresh.setRefreshing(isLoading);
@@ -96,7 +100,7 @@ public class BuffetsActivity extends BaseActivity {
 
         Intent intent = new Intent(this, BuffetDetailsActivity.class);
         intent.putExtra("data", buffetModel);
-        intent.putExtra("kitchen_status",kitchen_status);
+        intent.putExtra("kitchen_status", kitchen_status);
         launcher.launch(intent);
     }
 }

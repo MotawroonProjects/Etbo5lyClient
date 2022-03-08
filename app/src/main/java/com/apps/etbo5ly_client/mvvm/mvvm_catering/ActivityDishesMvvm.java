@@ -74,7 +74,7 @@ public class ActivityDishesMvvm extends AndroidViewModel {
 
     public void getDishes(List<SendOrderModel.Details> cartDishesList, String kitchen_id) {
         getIsDataLoading().setValue(true);
-        Api.getService(Tags.base_url).getCategoryDishes("all", kitchen_id, "dishe")
+        Api.getService(Tags.base_url).getCategoryDishes("all", kitchen_id, "dishe","all",null)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<DishesDataModel>>() {

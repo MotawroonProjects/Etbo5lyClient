@@ -94,9 +94,9 @@
     <string name="select_location_on_map">حدد موقعك على الخريطة</string>
     <string name="categories">التصنيفات</string>
     <string name="the_most_popular_in_your_area">الأشهر في منطقتك</string>
-    <string name="kitchens_provide_free_delivery">مطابخ توفر توصيل مجاني</string>
-    <string name="show_all_kitchen">جميع المطابخ</string>
-    <string name="featured_kitchens">مطابخ مميزة</string>
+    <string name="kitchens_provide_free_delivery">توفر توصيل مجاني</string>
+    <string name="show_all_kitchen">عرض الجميع</string>
+    <string name="featured_kitchens">المميزة</string>
     <string name="booking">الحجز</string>
     <string name="day">يوم</string>
     <string name="days">يوم</string>
@@ -220,5 +220,7 @@
     <string name="attach_sent">تم إرفاق صورة</string>
     <string name="address2">العنوان</string>
     <string name="ch_address">حدد عنوانك</string>
+    <string name="packages">باكج جاهز</string>
+    <string name="we_offer_you_a_food_cart">نقدم لكم عربة طعام لجميع المناسبات الخاصة والعامة</string>
 
 </resources>

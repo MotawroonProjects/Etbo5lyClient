@@ -92,9 +92,9 @@ public class ActivityVerificationMvvm extends AndroidViewModel {
     }
 
     public void sendSmsCode(String lang, String phone_code, String phone, VerificationCodeActivity activity) {
-
+        Log.e("rr", "rr");
         startTimer();
-        login(activity,phone_code,phone);
+        login(activity, phone_code, phone);
       /*  mAuth.setLanguageCode(lang);
         PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -205,7 +205,6 @@ public class ActivityVerificationMvvm extends AndroidViewModel {
     }
 
     private void login(Context context, String phone_code, String phone) {
-        Log.e("asdas", "asda");
         ProgressDialog dialog = Common.createProgressDialog(context, context.getResources().getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();

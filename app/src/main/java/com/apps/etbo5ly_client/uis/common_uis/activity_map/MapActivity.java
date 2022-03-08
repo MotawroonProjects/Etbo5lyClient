@@ -72,13 +72,21 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
     private LocationCallback locationCallback;
     private final String fineLocPerm = Manifest.permission.ACCESS_FINE_LOCATION;
     private final int loc_req = 1225;
-
+    private String from ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_map);
+        getDataFromIntent();
         initView();
+    }
+
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        if (intent.hasExtra("from")){
+            from = intent.getStringExtra("from");
+        }
     }
 
     private void initView() {
@@ -388,6 +396,8 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
 
     @Override
     public void onBackPressed() {
-
+        if (from!=null&&!from.isEmpty()){
+            super.onBackPressed();
+        }
     }
 }

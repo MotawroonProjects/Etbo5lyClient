@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.databinding.ActivityVerificationCodeBinding;
@@ -74,7 +75,7 @@ public class VerificationCodeActivity extends BaseActivity {
         });
 
         mvvm.sendSmsCode(getLang(), phone_code, phone, this);
-
+        Log.e("e","e");
         binding.tvResend.setEnabled(false);
         binding.tvResend.setOnClickListener(view -> mvvm.sendSmsCode(getLang(), phone_code, phone, this));
         binding.setPhone(phone_code + phone);

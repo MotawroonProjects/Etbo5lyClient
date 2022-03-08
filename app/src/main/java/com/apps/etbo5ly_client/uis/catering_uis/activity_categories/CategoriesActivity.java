@@ -54,11 +54,11 @@ public class CategoriesActivity extends BaseActivity {
 
         mvvm.onCategoryDataSuccess().observe(this, categoryList -> {
             if (categoryList.size() > 0) {
-                binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
+                binding.recViewLayout.tvNoData.setVisibility(View.GONE);
 
 
             } else {
-                binding.recViewLayout.tvNoData.setVisibility(View.GONE);
+                binding.recViewLayout.tvNoData.setVisibility(View.VISIBLE);
 
             }
             if (adapter != null) {
@@ -91,6 +91,7 @@ public class CategoriesActivity extends BaseActivity {
     private void navigateToFilterActivity(String type, String category_id) {
         req = 1;
         FilterModel filterModel = new FilterModel();
+        filterModel.setOption_id(getUserSettings().getOption_id());
         if (!category_id.isEmpty()) {
             List<String> ids = filterModel.getCategory_id();
             ids.add(category_id);

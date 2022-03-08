@@ -42,10 +42,13 @@ public class FilterActivity extends BaseActivity {
     private void getDataFromIntent() {
         Intent intent = getIntent();
         filterModel = (FilterModel) intent.getSerializableExtra("filter");
+
         if (filterModel == null) {
             filterModel = new FilterModel();
+            filterModel.setOption_id(getUserSettings().getOption_id());
             if (getUserModel()!=null){
                 filterModel.setUser_id(getUserModel().getData().getId());
+
 
             }
             filterModel.setLatitude(getUserSettings().getLocation().getLat()+"");

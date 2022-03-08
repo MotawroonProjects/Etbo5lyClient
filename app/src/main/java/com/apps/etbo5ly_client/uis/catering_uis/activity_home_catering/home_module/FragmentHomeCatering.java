@@ -296,6 +296,7 @@ public class FragmentHomeCatering extends BaseFragment {
     private void navigateToFilterActivity(String type, String category_id) {
         req = 1;
         FilterModel filterModel = new FilterModel();
+        filterModel.setOption_id(getUserSettings().getOption_id());
         filterModel.setLatitude(getUserSettings().getLocation().getLat() + "");
         filterModel.setLongitude(getUserSettings().getLocation().getLng() + "");
 

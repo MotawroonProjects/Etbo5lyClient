@@ -116,6 +116,7 @@ public class FragmentBaseNavigation extends BaseFragment {
         llLocation.setOnClickListener(v -> {
             req = 1;
             Intent intent = new Intent(activity, MapActivity.class);
+            intent.putExtra("from","home");
             launcher.launch(intent);
         });
 

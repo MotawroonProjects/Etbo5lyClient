@@ -93,9 +93,9 @@
     <string name="select_location_on_map">Select location on map</string>
     <string name="categories">Categories</string>
     <string name="the_most_popular_in_your_area">The most popular in your area</string>
-    <string name="kitchens_provide_free_delivery">Kitchens provide free delivery</string>
-    <string name="show_all_kitchen">Show all kitchen</string>
-    <string name="featured_kitchens">Featured Kitchens</string>
+    <string name="kitchens_provide_free_delivery">Provides free delivery</string>
+    <string name="show_all_kitchen">Show all</string>
+    <string name="featured_kitchens">Featured</string>
     <string name="booking">Booking</string>
     <string name="day">Day</string>
     <string name="days">Days</string>
@@ -221,5 +221,7 @@
     <string name="attach_sent">attachment sent</string>
     <string name="address2">Address</string>
     <string name="ch_address">Choose address</string>
+    <string name="packages">Packages</string>
+    <string name="we_offer_you_a_food_cart">We offer you a food cart for all occasions private and public</string>
 
 </resources>

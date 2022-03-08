@@ -130,20 +130,21 @@ public interface Service {
     @GET("api/Catering/CatererBuffets")
     Single<Response<BuffetsDataModel>> getBuffets(@Query(value = "Caterer_id") String caterer_id,
                                                   @Query(value = "user_type") String user_type
-                                                  );
+    );
 
 
     @GET("api/Catering/CatererFeasts")
     Single<Response<BuffetsDataModel>> getFeasts(@Query(value = "Caterer_id") String caterer_id,
                                                  @Query(value = "user_type") String user_type
-                                                 );
+    );
 
 
     @GET("api/Catering/indexCategoryDishes")
     Single<Response<DishesDataModel>> getCategoryDishes(@Query(value = "category_dishes_id") String category_dishes_id,
                                                         @Query(value = "Caterer_id") String Caterer_id,
-                                                        @Query(value = "type") String type
-
+                                                        @Query(value = "type") String type,
+                                                        @Query(value = "category_type") String category_type,
+                                                        @Query(value = "category_type_id") String category_type_id
 
 
     );

@@ -73,6 +73,8 @@ public class ActivityBuffetsMvvm extends AndroidViewModel {
                         if (response.isSuccessful()) {
                             if (response.body() != null && response.body().getStatus() == 200 && response.body().getData() != null) {
                                 updateData(response.body().getData(), context);
+                            }else {
+                                Log.e("error",response.body().getMessage().toString()+"");
                             }
                         } else {
 
@@ -81,7 +83,7 @@ public class ActivityBuffetsMvvm extends AndroidViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("error", e.getMessage());
+                        Log.e("error", e.getMessage());
                     }
                 });
     }

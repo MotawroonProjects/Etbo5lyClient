@@ -59,7 +59,7 @@ public class ActivityFilterMvvm extends AndroidViewModel {
     }
 
     public void getData(FilterModel filterModel) {
-        Log.e("lat",filterModel.getLatitude());
+
         getIsDataLoading().setValue(true);
         Api.getService(Tags.base_url).filterKitchen(filterModel)
                 .subscribeOn(Schedulers.io())
