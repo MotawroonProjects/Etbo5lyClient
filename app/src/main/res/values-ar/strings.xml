@@ -188,6 +188,10 @@
     <string name="status_accepted">تمت الموافقة</string>
     <string name="status_pending">قيد التنفيذ</string>
     <string name="status_refused">مرفوض</string>
+    <string name="received_your_order">استلمنا طلبك</string>
+    <string name="delivering">طلبك بالطريق</string>
+    <string name="delivered">تم استلام الطلب</string>
+    <string name="done">تم التجهيز</string>
     <string name="call">تواصل</string>
     <string name="follow">تتبع</string>
     <string name="reorder">إعادة الطلب</string>
@@ -195,10 +199,7 @@
     <string name="rate">تقييم</string>
     <string name="completed">مكتملة</string>
     <string name="status">الحالة :</string>
-    <string name="received_your_order">استلمنا طلبك</string>
-    <string name="delivering">طلبك بالطريق</string>
-    <string name="delivered">تم استلام الطلب</string>
-    <string name="done">تم التجهيز</string>
+
     <string name="no_fav">لا توجد عناصر مفضلة</string>
     <string name="order_approved">تم قبول طلبكم من </string>
     <string name="order_refused">تم رفض طلبكم من </string>

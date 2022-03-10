@@ -186,7 +186,11 @@
     <string name="status_new">New</string>
     <string name="status_accepted">Accepted</string>
     <string name="status_pending">Pending</string>
+    <string name="delivering">Delivering</string>
+
     <string name="status_refused">Refused</string>
+    <string name="delivered">Delivered</string>
+    <string name="done">Done</string>
     <string name="call">Call</string>
     <string name="follow">Follow</string>
     <string name="reorder">Re-Order</string>
@@ -195,16 +199,13 @@
     <string name="completed">Completed</string>
     <string name="status">Status :</string>
     <string name="received_your_order">Received your order</string>
-    <string name="delivering">Delivering</string>
-    <string name="delivered">Delivered</string>
-    <string name="done">Done</string>
+
     <string name="no_fav">No favorite items</string>
     <string name="order_approved">Your order has been approved from</string>
     <string name="order_refused">Your order has been refused</string>
     <string name="your_order_from">Your order from</string>
     <string name="delivered2">delivered</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="type_comment_here">Type comment here...</string>
     <string name="busy">Busy</string>
     <string name="offline">Offline</string>
