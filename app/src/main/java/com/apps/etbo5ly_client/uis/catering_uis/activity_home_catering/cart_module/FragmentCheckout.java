@@ -113,6 +113,8 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
             }
 
         });
+
+
     }
 
 
@@ -163,6 +165,7 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
                     binding.setCanFav(true);
                 } else {
                     binding.setCanFav(false);
+                    calculateTotal();
 
                 }
             }
@@ -311,7 +314,11 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
     private void calculateTotal() {
         double total = manageCartModel.getTotal(activity);
         double tax = Double.parseDouble(kitchenModel.getTax());
-        double delivery = Double.parseDouble(model.getDelivery_cost());
+
+        double delivery = 0.0;
+        if (kitchenModel != null && kitchenModel.getIs_delivry().equals("delivry")) {
+            delivery = Double.parseDouble(model.getDelivery_cost());
+        }
         double service_cost = Double.parseDouble(kitchenModel.getCustomers_service());
         double discount = Double.parseDouble(kitchenModel.getDiscount());
         double coupon = Double.parseDouble(model.getCoupon_value());

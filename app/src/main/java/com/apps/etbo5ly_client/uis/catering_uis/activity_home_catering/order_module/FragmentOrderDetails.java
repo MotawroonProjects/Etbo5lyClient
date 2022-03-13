@@ -93,6 +93,12 @@ public class FragmentOrderDetails extends BaseFragment {
             }
         });
 
+        activityHomeGeneralMvvm.getOnFragmentOrderDetailsRefresh().observe(activity, refresh -> {
+            if (refresh) {
+                mvvm.getOrders(order_id);
+            }
+        });
+
         mvvm.getOrders(order_id);
 
     }

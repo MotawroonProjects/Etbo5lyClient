@@ -32,6 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -150,6 +151,9 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
 
         activityHomeGeneralMvvm.updateToken(getUserModel());
 
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
 
     }
 
@@ -157,6 +161,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     public void onNewDataRefresh(NotiFire notiFire) {
         activityHomeGeneralMvvm.onNotificationRefresh().setValue(true);
         activityHomeGeneralMvvm.onOrdersRefresh().setValue(true);
+        activityHomeGeneralMvvm.getOnFragmentOrderDetailsRefresh().setValue(true);
     }
 
     public void updateFireBase() {
@@ -249,6 +254,14 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             }
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     public void logout() {

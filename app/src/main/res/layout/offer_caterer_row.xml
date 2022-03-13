@@ -45,17 +45,16 @@
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
+                    android:alpha=".7"
                     android:src="@color/black"
+                    android:visibility='@{model.inCart?View.VISIBLE:View.GONE,default=gone}'
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1.2:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:alpha=".7"
-                    android:visibility='@{model.inCart?View.VISIBLE:View.GONE,default=gone}'
 
                     />
-
 
 
                 <FrameLayout

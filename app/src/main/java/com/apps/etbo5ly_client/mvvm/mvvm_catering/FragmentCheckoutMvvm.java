@@ -214,6 +214,7 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
                         Log.e("code", response.code() + "__"+response.toString());
 
                         if (response.isSuccessful()) {
+                            Log.e("msg",response.body().getMessage().toString());
                             if (response.body() != null) {
                                 Log.e("codes", response.body().getStatus() + "" );
                                 if (response.body().getStatus() == 200) {
