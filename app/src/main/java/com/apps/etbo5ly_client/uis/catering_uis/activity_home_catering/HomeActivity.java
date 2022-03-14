@@ -114,7 +114,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             }
         });
         activityHomeGeneralMvvm.onTokenSuccess().observe(this, this::setUserModel);
-        activityHomeGeneralMvvm.getOnServiceChanged().observe(this,isChanged->{
+        activityHomeGeneralMvvm.getOnServiceChanged().observe(this, isChanged -> {
             setItemPos(0);
         });
         fragmentList = new ArrayList<>();
