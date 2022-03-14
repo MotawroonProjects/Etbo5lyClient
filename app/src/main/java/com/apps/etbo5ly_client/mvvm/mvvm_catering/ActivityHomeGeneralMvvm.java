@@ -47,6 +47,7 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
     private MutableLiveData<Boolean> displayFragmentNotification;
     private MutableLiveData<Boolean> onNotificationRefresh;
     private MutableLiveData<Boolean> onFragmentOrderDetailsRefresh;
+    private MutableLiveData<Boolean> onServiceChanged;
 
 
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -102,6 +103,14 @@ public class ActivityHomeGeneralMvvm extends AndroidViewModel {
         }
 
         return onUserDataRefresh;
+    }
+
+    public MutableLiveData<Boolean> getOnServiceChanged() {
+        if (onServiceChanged == null) {
+            onServiceChanged = new MutableLiveData<>();
+        }
+
+        return onServiceChanged;
     }
 
     public MutableLiveData<Boolean> onFavoriteRefresh() {

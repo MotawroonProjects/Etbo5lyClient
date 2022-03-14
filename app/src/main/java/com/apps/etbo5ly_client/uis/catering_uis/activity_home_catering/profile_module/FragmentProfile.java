@@ -46,6 +46,7 @@ public class FragmentProfile extends BaseFragment {
                 binding.setModel(userModel);
             } else if (req == 2 && result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                 activityHomeGeneralMvvm.getOptionId().setValue(getUserSettings().getOption_id());
+                activityHomeGeneralMvvm.getOnServiceChanged().setValue(true);
             }
         });
 

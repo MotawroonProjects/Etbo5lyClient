@@ -114,6 +114,9 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
             }
         });
         activityHomeGeneralMvvm.onTokenSuccess().observe(this, this::setUserModel);
+        activityHomeGeneralMvvm.getOnServiceChanged().observe(this,isChanged->{
+            setItemPos(0);
+        });
         fragmentList = new ArrayList<>();
         stack = new Stack<>();
         map = new HashMap<>();
@@ -249,6 +252,7 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
                 binding.pager.setCurrentItem(stack.peek());
 
             } else {
+
                 super.onBackPressed();
 
             }
