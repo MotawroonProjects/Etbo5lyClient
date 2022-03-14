@@ -112,7 +112,13 @@ public class FragmentCatererOffer extends BaseFragment {
 
     public void addToCart(OfferModel model) {
         SendOrderModel.Details item = new SendOrderModel.Details(model.getId(), "", "", "", model.getCaterer_id(), "1", model.getPhoto(), model.getTitle(), model.getPrice(), BaseActivity.OFFER);
-        manageCartModel.addItemToCart(activity, item, model.getCaterer_id());
-        Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+        if (manageCartModel.getSendOrderModel(activity).getCaterer_id().isEmpty() || manageCartModel.getSendOrderModel(activity).getCaterer_id().equals(item.getCaterer_id())) {
+            manageCartModel.addItemToCart(activity, item, model.getCaterer_id());
+            Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(activity, R.string.make_from_only, Toast.LENGTH_SHORT).show();
+
+        }
+
     }
 }

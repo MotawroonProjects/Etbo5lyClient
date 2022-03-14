@@ -9,12 +9,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.apps.etbo5ly_client.R;
+import com.apps.etbo5ly_client.adapters.catering_adapters.OrderDetailsAdapter;
 import com.apps.etbo5ly_client.adapters.common_adapter.MyPagerAdapter;
 import com.apps.etbo5ly_client.databinding.FragmentOrderDetailsBinding;
 import com.apps.etbo5ly_client.model.OrderModel;
@@ -40,6 +42,7 @@ public class FragmentOrderDetails extends BaseFragment {
     private FragmentOrderDetailsMvvm mvvm;
     private String order_id = "";
     private OrderModel orderModel;
+    private OrderDetailsAdapter adapter;
 
 
     @Override
@@ -99,11 +102,17 @@ public class FragmentOrderDetails extends BaseFragment {
             }
         });
 
+        binding.recView.setLayoutManager(new GridLayoutManager(activity,2));
+        adapter = new OrderDetailsAdapter(activity);
+        binding.recView.setAdapter(adapter);
+
         mvvm.getOrders(order_id);
 
     }
 
     private void updateUi() {
+        adapter.updateList(orderModel.getOrder_details());
+
         if (orderModel.getCaterer().getIs_delivry().equals("delivry")) {
             updateStateHasDelivery();
         } else {

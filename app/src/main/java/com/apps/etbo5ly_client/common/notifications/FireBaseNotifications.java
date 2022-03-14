@@ -86,7 +86,7 @@ public class FireBaseNotifications extends FirebaseMessagingService {
 
         NotificationCompat.Builder notificationCompat = new NotificationCompat.Builder(this, App.CHANNEL_ID)
                 .setAutoCancel(true)
-                .setOngoing(true)
+                .setOngoing(false)
                 .setChannelId(App.CHANNEL_ID)
                 .setDeleteIntent(cancelPending)
                 .setSmallIcon(R.mipmap.ic_launcher_round)

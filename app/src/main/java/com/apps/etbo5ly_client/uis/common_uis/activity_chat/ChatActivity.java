@@ -76,7 +76,6 @@ public class ChatActivity extends BaseActivity {
         });
 
 
-
         binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
         binding.setModel(model);
         binding.setLang(getLang());
@@ -101,8 +100,8 @@ public class ChatActivity extends BaseActivity {
                 }
             }
         });
-        adapter = new ChatAdapter(this, getUserModel().getData().getId(),model.getCaterer_image(),binding.recView);
-        binding.recView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        adapter = new ChatAdapter(this, getUserModel().getData().getId(), model.getCaterer_image(), binding.recView);
+        binding.recView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.recView.setAdapter(adapter);
 
         mvvm.onDataSuccess().observe(this, list -> {
@@ -110,7 +109,6 @@ public class ChatActivity extends BaseActivity {
                 adapter.updateList(list);
             }
         });
-
 
 
         binding.imageCamera.setOnClickListener(v -> {
@@ -143,7 +141,7 @@ public class ChatActivity extends BaseActivity {
         binding.cardLastMsg.setOnClickListener(v -> {
             binding.setMsg("");
             binding.cardLastMsg.setVisibility(View.GONE);
-            binding.recView.scrollToPosition(mvvm.onDataSuccess().getValue().size()-1);
+            binding.recView.scrollToPosition(mvvm.onDataSuccess().getValue().size() - 1);
             adapter.notifyDataSetChanged();
             //binding.recView.post(() -> );
         });
@@ -166,7 +164,7 @@ public class ChatActivity extends BaseActivity {
     public void onNewMessage(MessageModel messageModel) {
         imagePath = "";
         mvvm.addNewMessage(messageModel);
-        adapter.addMessage(messageModel);
+        adapter.notifyItemInserted(mvvm.onDataSuccess().getValue().size() - 1);
 
     }
 
@@ -234,9 +232,9 @@ public class ChatActivity extends BaseActivity {
     }
 
     public void displayLastMessage(MessageModel messageModel) {
-        if (messageModel.getType().equals("image")){
+        if (messageModel.getType().equals("image")) {
             binding.setMsg(getString(R.string.attach_sent));
-        }else {
+        } else {
             binding.setMsg(messageModel.getMessage());
         }
         binding.cardLastMsg.setVisibility(View.VISIBLE);

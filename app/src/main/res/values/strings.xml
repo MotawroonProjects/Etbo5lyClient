@@ -224,5 +224,7 @@
     <string name="ch_address">Choose address</string>
     <string name="packages">Packages</string>
     <string name="we_offer_you_a_food_cart">We offer you a food cart for all occasions private and public</string>
+    <string name="make_from_only">Make order from only one store</string>
+    <string name="order_details">Order details</string>
 
 </resources>

@@ -223,5 +223,7 @@
     <string name="ch_address">حدد عنوانك</string>
     <string name="packages">باكج جاهز</string>
     <string name="we_offer_you_a_food_cart">نقدم لكم عربة طعام لجميع المناسبات الخاصة والعامة</string>
+    <string name="make_from_only">لا يمكنك ارسال طلب لاكثر من متجر</string>
+    <string name="order_details">تفاصيل الطلب</string>
 
 </resources>

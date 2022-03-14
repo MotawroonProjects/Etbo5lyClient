@@ -78,7 +78,7 @@ public class BuffetDetailsActivity extends BaseActivity {
                     setResult(RESULT_OK,intent);
                     finish();
                 } else {
-                    Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.make_from_only, Toast.LENGTH_SHORT).show();
 
                 }
             }

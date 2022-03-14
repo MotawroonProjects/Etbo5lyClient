@@ -16,6 +16,7 @@ import com.apps.etbo5ly_client.R;
 
 import com.apps.etbo5ly_client.common.tags.Tags;
 import com.apps.etbo5ly_client.model.NotificationModel;
+import com.apps.etbo5ly_client.model.OrderModel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -179,6 +180,8 @@ public class GeneralMethod {
     }
 
 
+
+
     @BindingAdapter("providerType")
     public static void providerType(TextView textView, String type) {
         if (type != null) {
@@ -231,6 +234,92 @@ public class GeneralMethod {
 
             }
         }
+
+    }
+
+    @BindingAdapter("orderDetailsImage")
+    public static void orderDetailsImage(View view, OrderModel.OrderDetail model) {
+        if (model != null) {
+
+            String imageUrl = "";
+            if (model.getBuffet() != null) {
+                imageUrl = model.getBuffet().getPhoto();
+            } else if (model.getFeast() != null) {
+                imageUrl = model.getFeast().getPhoto();
+
+            } else if (model.getOffer() != null) {
+                imageUrl = model.getOffer().getPhoto();
+            } else if (model.getDishes() != null) {
+                imageUrl = model.getDishes().getPhoto();
+            }
+
+            String imageUrl1 = Tags.base_url + imageUrl;
+
+            view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+
+                    if (view instanceof CircleImageView) {
+                        CircleImageView imageView = (CircleImageView) view;
+                        RequestOptions options = new RequestOptions().override(view.getWidth(), view.getHeight());
+                        Glide.with(view.getContext()).asBitmap()
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .load(imageUrl1)
+                                .centerCrop()
+                                .apply(options)
+                                .into(imageView);
+                    } else if (view instanceof RoundedImageView) {
+                        RoundedImageView imageView = (RoundedImageView) view;
+
+                        RequestOptions options = new RequestOptions().override(view.getWidth(), view.getHeight());
+                        Glide.with(view.getContext()).asBitmap()
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .load(imageUrl1)
+                                .centerCrop()
+                                .apply(options)
+                                .into(imageView);
+                    } else if (view instanceof ImageView) {
+                        ImageView imageView = (ImageView) view;
+
+                        RequestOptions options = new RequestOptions().override(view.getWidth(), view.getHeight());
+                        Glide.with(view.getContext()).asBitmap()
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .load(imageUrl1)
+                                .centerCrop()
+                                .apply(options)
+                                .into(imageView);
+                    }
+
+                }
+            });
+        }
+
+
+    }
+
+
+    @BindingAdapter("orderDetailsTitle")
+    public static void orderDetailsTitle(TextView textView, OrderModel.OrderDetail model) {
+        if (model != null) {
+
+            String title = "";
+            if (model.getBuffet() != null) {
+                title = model.getBuffet().getTitel();
+            } else if (model.getFeast() != null) {
+                title = model.getFeast().getTitel();
+
+            } else if (model.getOffer() != null) {
+                title = model.getOffer().getTitle();
+            } else if (model.getDishes() != null) {
+                title = model.getDishes().getTitel();
+            }
+
+            textView.setText(title);
+
+        }
+
 
     }
 

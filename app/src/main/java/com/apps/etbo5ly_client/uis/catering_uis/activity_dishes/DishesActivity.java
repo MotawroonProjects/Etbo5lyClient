@@ -156,19 +156,26 @@ public class DishesActivity extends BaseActivity {
 
     private void addUpdateItem(DishModel dishModel) {
         DishModel model = new DishModel(dishModel.getId(), dishModel.getCategory_dishes_id(), dishModel.getCaterer_id(), dishModel.getBuffets_id(), dishModel.getFeast_id(), dishModel.getTitel(), dishModel.getPhoto(), dishModel.getPrice(), dishModel.getDetails(), dishModel.getQty(), dishModel.getCreated_at(), dishModel.getUpdated_at(), dishModel.getAmount());
-        if (cartDishes.size() > 0) {
-            int pos = getItemPos(model.getId());
-            if (pos == -1) {
-                cartDishes.add(model);
-            } else {
+        if (manageCartModel.getSendOrderModel(this).getCaterer_id().isEmpty() || manageCartModel.getSendOrderModel(this).getCaterer_id().equals(model.getCaterer_id())){
+            if (cartDishes.size() > 0) {
+                int pos = getItemPos(model.getId());
+                if (pos == -1) {
+                    cartDishes.add(model);
+                } else {
 
-                cartDishes.set(pos, model);
+                    cartDishes.set(pos, model);
+                }
+            } else {
+                cartDishes.add(model);
             }
-        } else {
-            cartDishes.add(model);
+
+            calculateTotalAndAmount();
+        }else {
+            Toast.makeText(this, R.string.make_from_only, Toast.LENGTH_SHORT).show();
+
         }
 
-        calculateTotalAndAmount();
+
 
 
     }
