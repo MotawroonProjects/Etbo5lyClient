@@ -15,7 +15,7 @@ public class FeastModel implements Serializable {
     private String caterer_id;
     private String created_at;
     private String updated_at;
-    private CategoryDishes categor_dishes;
+    private List<CategoryDishes> categor_dishes;
 
 
     public static class CategoryDishes implements Serializable {
