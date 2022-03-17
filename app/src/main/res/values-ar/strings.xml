@@ -143,7 +143,7 @@
     <string name="dishes">أطباق</string>
     <string name="feasts">الولائم</string>
     <string name="people2">عدد الاشخاص</string>
-    <string name="menu">قائمة الطعام</string>
+    <string name="menu">القائمة</string>
     <string name="amount">الكمية</string>
     <string name="feasts_menu">قائمة الولائم</string>
     <string name="favorite">المفضلة</string>
@@ -225,5 +225,6 @@
     <string name="we_offer_you_a_food_cart">نقدم لكم عربة طعام لجميع المناسبات الخاصة والعامة</string>
     <string name="make_from_only">لا يمكنك ارسال طلب لاكثر من متجر</string>
     <string name="order_details">تفاصيل الطلب</string>
+    <string name="package_menu">قائمة الباكجات</string>
 
 </resources>

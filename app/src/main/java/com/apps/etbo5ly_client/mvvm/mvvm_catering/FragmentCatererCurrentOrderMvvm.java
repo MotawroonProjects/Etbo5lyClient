@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.apps.etbo5ly_client.R;
 import com.apps.etbo5ly_client.common.remote.Api;
 import com.apps.etbo5ly_client.common.share.Common;
 import com.apps.etbo5ly_client.common.tags.Tags;
@@ -103,7 +104,7 @@ public class FragmentCatererCurrentOrderMvvm extends AndroidViewModel {
     }
 
     public void resendOrder(Context context, String order_id) {
-        ProgressDialog dialog = Common.createProgressDialog(context, order_id);
+        ProgressDialog dialog = Common.createProgressDialog(context, context.getString(R.string.wait));
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
         dialog.show();

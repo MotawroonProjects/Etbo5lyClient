@@ -175,7 +175,7 @@ public class FragmentCheckoutMvvm extends AndroidViewModel {
 
         CartOrderModel model = new CartOrderModel(sendOrderModel.getUser_id(), sendOrderModel.getOption_id(), sendOrderModel.getCaterer_id(), sendOrderModel.getTotal(), sendOrderModel.getNotes(), sendOrderModel.getBooking_date(), sendOrderModel.getZone_id(), sendOrderModel.getAddress(), sendOrderModel.getCopon(), sendOrderModel.getPaid_type(), sendOrderModel.getDetails());
 
-        Log.e("user_id", model.getUser_id());
+        Log.e("user_id", sendOrderModel.getUser_id());
         Log.e("option_id", model.getOption_id());
         Log.e("caterer_id", model.getCaterer_id());
         Log.e("total", model.getTotal());

@@ -169,7 +169,8 @@ public class FireBaseNotifications extends FirebaseMessagingService {
 
             }
 
-        } else if (notification_type.equals("order")) {
+        }
+        else if (notification_type.equals("order")) {
             String order_id = map.get("order_id");
             String from_user_id = map.get("from_user_id");
 
@@ -178,14 +179,17 @@ public class FireBaseNotifications extends FirebaseMessagingService {
 
             String caterer_name = "";
 
+            if (from_user_id!=null){
+                if (from_user_id.equals(getUserModel().getData().getId())) {
+                    caterer_name = toUser.getName();
 
-            if (from_user_id.equals(getUserModel().getData().getId())) {
-                caterer_name = toUser.getName();
+                } else {
+                    caterer_name = fromUser.getName();
 
-            } else {
-                caterer_name = fromUser.getName();
-
+                }
             }
+
+
             String text = "";
             if (body.equals("approval")) {
                 text = getString(R.string.order_approved) + " " + caterer_name + "\n" + getString(R.string.order_num) + " #" + order_id;

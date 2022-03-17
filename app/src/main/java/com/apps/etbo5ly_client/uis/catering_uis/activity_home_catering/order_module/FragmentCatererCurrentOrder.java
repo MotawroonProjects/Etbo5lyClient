@@ -92,6 +92,7 @@ public class FragmentCatererCurrentOrder extends BaseFragment {
         });
         mvvm.onResendSuccess().observe(activity, success -> {
             if (success) {
+                mvvm.getOrders(getUserModel());
                 activityHomeGeneralMvvm.onOrdersRefresh();
             }
         });

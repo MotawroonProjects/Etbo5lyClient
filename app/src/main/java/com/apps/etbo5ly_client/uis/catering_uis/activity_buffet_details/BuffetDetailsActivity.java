@@ -47,6 +47,12 @@ public class BuffetDetailsActivity extends BaseActivity {
     }
 
     private void initView() {
+        String title = getString(R.string.buffets_menu);
+
+        if (getUserSettings().getOption_id().equals("3")) {
+            title = getString(R.string.package_menu);
+        }
+        binding.tvTitle.setText(title);
         manageCartModel = ManageCartModel.newInstance();
         binding.setLang(getLang());
         binding.setModel(model);

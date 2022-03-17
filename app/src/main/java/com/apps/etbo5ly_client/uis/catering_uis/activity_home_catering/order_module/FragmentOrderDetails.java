@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +103,7 @@ public class FragmentOrderDetails extends BaseFragment {
             }
         });
 
-        binding.recView.setLayoutManager(new GridLayoutManager(activity,2));
+        binding.recView.setLayoutManager(new GridLayoutManager(activity, 2));
         adapter = new OrderDetailsAdapter(activity);
         binding.recView.setAdapter(adapter);
 
@@ -111,6 +112,7 @@ public class FragmentOrderDetails extends BaseFragment {
     }
 
     private void updateUi() {
+        Log.e("ddss", orderModel.getOrder_details().size() + "");
         adapter.updateList(orderModel.getOrder_details());
 
         if (orderModel.getCaterer().getIs_delivry().equals("delivry")) {

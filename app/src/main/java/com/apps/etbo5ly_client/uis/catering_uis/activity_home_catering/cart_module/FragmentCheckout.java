@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -260,6 +261,7 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
 
         binding.btnSend.setOnClickListener(v -> {
             if (getUserModel() != null) {
+                Log.e("user_id",getUserModel().getData().getId());
                 model.setUser_id(getUserModel().getData().getId());
                 model.setOption_id(getUserSettings().getOption_id());
                 model.setTotal(finalTotal + "");

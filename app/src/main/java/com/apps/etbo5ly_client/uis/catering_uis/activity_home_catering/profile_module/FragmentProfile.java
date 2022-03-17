@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +79,7 @@ public class FragmentProfile extends BaseFragment {
 
         activityHomeGeneralMvvm.getDisplayFragmentNotification().observe(activity, display -> {
             if (display) {
-                Navigation.findNavController(binding.getRoot()).navigate(R.id.fragmentNotification);
+                new Handler().postDelayed(() -> Navigation.findNavController(binding.getRoot()).navigate(R.id.fragmentNotification),2000);
 
             }
         });
