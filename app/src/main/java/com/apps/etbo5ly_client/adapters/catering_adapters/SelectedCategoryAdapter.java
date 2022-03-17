@@ -1,6 +1,7 @@
 package com.apps.etbo5ly_client.adapters.catering_adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -53,7 +54,8 @@ public class SelectedCategoryAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
             list.set(myHolder.getAdapterPosition(),model);
             notifyItemChanged(myHolder.getAdapterPosition());
-            if (appCompatActivity instanceof CategoriesActivity) {
+            if (appCompatActivity instanceof FilterSettingActivity) {
+
                 FilterSettingActivity activity = (FilterSettingActivity) appCompatActivity;
                 activity.add_remove_item(model);
             }

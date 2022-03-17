@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.apps.etbo5ly_client.R;
@@ -150,6 +151,16 @@ public class FilterSettingActivity extends BaseActivity {
     public void add_remove_item(CategoryModel model) {
         int itemPos = getCategoryIdPos(model);
         List<String> ids = filterModel.getCategory_id();
+
+        Log.e("cat_id",model.getId()+"itemPos"+itemPos);
+        for (String id:ids){
+            Log.e("id",id);
+
+        }
+
+
+
+
         if (itemPos != -1) {
             if (model.isSelected()) {
                 ids.add(model.getId());
