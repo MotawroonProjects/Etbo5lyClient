@@ -59,14 +59,7 @@ public class ActivityFilterMvvm extends AndroidViewModel {
     }
 
     public void getData(FilterModel filterModel) {
-        Log.e("istype",filterModel.getIs_type()+"");
-        Log.e("dele",filterModel.getIs_delivry()+"");
-        Log.e("opt",filterModel.getOption_id()+"");
-        Log.e("sort",filterModel.getSort_by()+"");
-        Log.e("lat",filterModel.getLatitude()+"");
-        Log.e("lng",filterModel.getLongitude()+"");
-        Log.e("cat",filterModel.getCategory_id().size()+"");
-        Log.e("user_id",filterModel.getUser_id());
+
 
         getIsDataLoading().setValue(true);
         Api.getService(Tags.base_url).filterKitchen(filterModel)
@@ -80,7 +73,7 @@ public class ActivityFilterMvvm extends AndroidViewModel {
 
                     @Override
                     public void onSuccess(@NonNull Response<KitchenDataModel> response) {
-                        Log.e("Emad",response.body().getMessage().toString());
+                        Log.e("Emad", response.body().getMessage().toString());
 
                         getIsDataLoading().setValue(false);
                         if (response.isSuccessful()) {
@@ -102,7 +95,6 @@ public class ActivityFilterMvvm extends AndroidViewModel {
                     }
                 });
     }
-
 
 
     public void addRemoveFavorite(UserModel userModel, int itemPos) {
