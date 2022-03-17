@@ -72,6 +72,7 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
                 model.setAddress("");
                 binding.setModel(model);
 
+
                 calculateTotal();
                 addressModel = null;
                 binding.imageAddressFav.setImageResource(R.drawable.ic_star);
@@ -160,6 +161,9 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
             kitchenModel = m;
             binding.setKitchen(kitchenModel);
             if (kitchenModel != null) {
+                String bookingNote = getString(R.string.booking) +" "+getString(R.string.in_advance)+ " " + kitchenModel.getNumber_of_reservation_days() + " " + getString(R.string.day);
+                binding.tvBookingNote.setText(bookingNote);
+
                 binding.llData.setVisibility(View.VISIBLE);
                 model.setHasZone(kitchenModel.getZone_cover().size() > 0);
                 if (getUserModel() != null && kitchenModel.getZone_cover().size() > 0) {
@@ -261,7 +265,6 @@ public class FragmentCheckout extends BaseFragment implements DatePickerDialog.O
 
         binding.btnSend.setOnClickListener(v -> {
             if (getUserModel() != null) {
-                Log.e("user_id",getUserModel().getData().getId());
                 model.setUser_id(getUserModel().getData().getId());
                 model.setOption_id(getUserSettings().getOption_id());
                 model.setTotal(finalTotal + "");
