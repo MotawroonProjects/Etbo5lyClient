@@ -75,6 +75,7 @@ public class ActivityFilterMvvm extends AndroidViewModel {
                     public void onSuccess(@NonNull Response<KitchenDataModel> response) {
                         Log.e("Emad", response.body().getMessage().toString());
 
+
                         getIsDataLoading().setValue(false);
                         if (response.isSuccessful()) {
                             if (response.body() != null && response.body().getData() != null) {
