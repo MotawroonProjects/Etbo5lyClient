@@ -4,6 +4,7 @@ import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -230,6 +231,9 @@ public class ActivityVerificationMvvm extends AndroidViewModel {
                                     getUserData().setValue(response.body());
                                 } else if (response.body().getStatus() == 404) {
                                     getUserData().setValue(null);
+
+                                } else if (response.body().getStatus() == 405) {
+                                    Toast.makeText(context, R.string.cont_log, Toast.LENGTH_LONG).show();
 
                                 }
                             }

@@ -226,5 +226,6 @@
     <string name="make_from_only">لا يمكنك ارسال طلب لاكثر من متجر</string>
     <string name="order_details">تفاصيل الطلب</string>
     <string name="package_menu">قائمة الباكجات</string>
+    <string name="cont_log">عفوا!. لايمكنك الدخول بهذا الرقم. هذ الرقم خاص بمقدمين الخدمة </string>
 
 </resources>

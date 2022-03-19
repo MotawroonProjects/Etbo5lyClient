@@ -227,5 +227,6 @@
     <string name="make_from_only">Make order from only one store</string>
     <string name="order_details">Order details</string>
     <string name="package_menu">Package menu</string>
+    <string name="cont_log">You cannot login by this number , this number is for services</string>
 
 </resources>
